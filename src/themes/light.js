@@ -114,9 +114,13 @@ export const LIGHT_THEME = {
   'background-primary': 'hsl(0, 0%, 100%)', // Pure white
   'background-secondary': 'var(--gray-50)',
   'background-tertiary': 'var(--gray-100)',
+  'background-quaternary': 'var(--gray-200)',
   'background-elevated': 'hsl(0, 0%, 100%)',
   'background-overlay': 'hsla(220, 5%, 10%, 0.50)',
   'background-inverse': 'var(--gray-900)',
+  'background-hover': 'var(--gray-100)',
+  'background-pressed': 'var(--gray-200)',
+  'background-selected': 'hsla(201, 80%, 32%, 0.08)',
 
   // ============================================
   // SEMANTIC COLORS - SURFACES (Cards, Panels)
