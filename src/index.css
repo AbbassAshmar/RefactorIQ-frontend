@@ -1,4 +1,4 @@
-/* ===== Global Reset & Base Styles ===== */
+@import "tailwindcss";
 
 *,
 *::before,
@@ -11,12 +11,35 @@
 :root {
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+
+
+  --heading-1: 42px;
+  --heading-1-mobile: 29px;
+  --heading-2: 35px;
+  --heading-2-mobile: 26px;
+  --heading-3: 29px;
+  --heading-3-mobile: 23px;
+  --heading-4: 25px;
+  --heading-4-mobile: 20px;
+  --heading-5: 21px;
+  --heading-5-mobile: 18px;
+  --heading-6: 17px;
+  --heading-6-mobile: 16px;
+  --body: 14px;
+  --body-mobile: 14px;
+  --small-1:12px;
+  --small-1-mobile:12px;
+  --small-2:10px;
+  --small-2-mobile:10px;
 }
 
 html,
@@ -25,6 +48,8 @@ body {
 }
 
 body {
+  font-family: var(--font-sans);
+  font-size: var(--body);
   background-color: var(--background-primary);
   color: var(--text-primary);
 }

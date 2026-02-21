@@ -30,7 +30,6 @@ export default function Home() {
 
       <nav style={{ marginTop: '2rem', display: 'flex', gap: '1rem' }}>
         <Link to="/login" style={{ color: 'var(--text-link)' }}>Login</Link>
-        <Link to="/register" style={{ color: 'var(--text-link)' }}>Register</Link>
       </nav>
     </div>
   );

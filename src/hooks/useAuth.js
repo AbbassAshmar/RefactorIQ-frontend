@@ -10,24 +10,33 @@ export function useCurrentUser(options = {}) {
 }
 
 
-export function useLogin() {
+export function useAdminLogin(options = {}) {
   const qc = useQueryClient();
 
   return useMutation({
-    mutationFn: authApi.login,
-    onSuccess: (data) => {
-      if (data?.access_token) {
-        localStorage.setItem('access_token', data.access_token);
-      }
+    mutationFn: authApi.adminLogin,
+    onSuccess: (...args) => {
       qc.invalidateQueries({ queryKey: ['auth', 'me'] });
+      options.onSuccess?.(...args);
     },
+    ...options,
   });
 }
 
 
-export function useRegister() {
+export function useGitHubLogin(options = {}) {
   return useMutation({
-    mutationFn: authApi.register,
+    mutationFn: authApi.githubAuthorize,
+    onSuccess: (response, ...rest) => {
+      const authorizeUrl = response?.data?.authorize_url;
+      if (authorizeUrl) {
+        window.location.assign(authorizeUrl);
+        return;
+      }
+
+      options.onSuccess?.(response, ...rest);
+    },
+    ...options,
   });
 }
 
@@ -38,7 +47,6 @@ export function useLogout() {
   return useMutation({
     mutationFn: authApi.logout,
     onSuccess: () => {
-      localStorage.removeItem('access_token');
       qc.clear();
     },
   });
