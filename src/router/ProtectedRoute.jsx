@@ -6,7 +6,14 @@ function normalizeRoles(roles) {
 }
 
 function roleHomePath(role) {
-    return '/login';
+    switch (role) {
+        case 'admin':
+            return '/admin/overview';
+        case 'client':
+            return '/dashboard/overview';
+        default:
+            return '/login';
+    }
 }
 
 export default function ProtectedRoute({ children, allowedRoles }) {

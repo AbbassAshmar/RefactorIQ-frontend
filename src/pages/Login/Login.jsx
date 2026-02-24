@@ -97,7 +97,7 @@ export default function Login() {
     const [password, setPassword] = useState('');
 
     const adminLogin = useAdminLogin({
-        onSuccess: () => navigate('/admin/dashboard'),
+        onSuccess: () => navigate('/admin/overview'),
     });
 
     const githubLogin = useGitHubLogin();
