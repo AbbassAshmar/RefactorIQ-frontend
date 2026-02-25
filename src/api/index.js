@@ -1,3 +1,13 @@
-export { default as apiClient } from './client';
-export { default as authApi } from './endpoints/auth';
-export { default as usersApi } from './endpoints/users';
+import apiClient from "./client";
+import authApi from "./endpoints/auth";
+import usersApi from "./endpoints/users";
+
+export { apiClient, authApi, usersApi };
+
+const api = {
+  client: apiClient,
+  auth: authApi,
+  users: usersApi,
+};
+
+export default api;

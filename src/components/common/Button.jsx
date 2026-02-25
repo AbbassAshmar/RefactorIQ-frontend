@@ -1,36 +1,32 @@
-/**
- * Placeholder — shared Button component.
- * Replace with a fully styled version later.
- */
-export default function Button({ children, variant = 'primary', ...props }) {
-  const baseStyles = {
-    padding: '0.5rem 1rem',
-    borderRadius: '6px',
-    border: 'none',
-    cursor: 'pointer',
-    fontWeight: 600,
-    fontSize: '0.875rem',
-    transition: 'background-color 150ms ease',
-  };
+import "./Button.css";
 
-  const variants = {
-    primary: {
-      backgroundColor: 'var(--brand-primary)',
-      color: 'var(--text-inverse)',
-    },
-    secondary: {
-      backgroundColor: 'var(--surface-secondary)',
-      color: 'var(--text-primary)',
-      border: '1px solid var(--border-default)',
-    },
-    ghost: {
-      backgroundColor: 'transparent',
-      color: 'var(--text-primary)',
-    },
-  };
+const VALID_VARIANTS = new Set(["primary", "secondary", "ghost"]);
+const VALID_SIZES = new Set(["sm", "md", "lg"]);
+
+export default function Button({
+  children,
+  variant = "primary",
+  size = "md",
+  fullWidth = false,
+  className = "",
+  type = "button",
+  ...props
+}) {
+  const resolvedVariant = VALID_VARIANTS.has(variant) ? variant : "primary";
+  const resolvedSize = VALID_SIZES.has(size) ? size : "md";
+
+  const classes = [
+    "app-button",
+    `app-button--${resolvedVariant}`,
+    `app-button--${resolvedSize}`,
+    fullWidth ? "app-button--full" : "",
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
-    <button style={{ ...baseStyles, ...variants[variant] }} {...props}>
+    <button type={type} className={classes} {...props}>
       {children}
     </button>
   );

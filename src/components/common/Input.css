@@ -1,0 +1,48 @@
+.app-input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  width: 100%;
+}
+
+.app-input__label {
+  color: var(--text-secondary);
+  font-size: 0.84rem;
+  font-weight: 500;
+}
+
+.app-input__control {
+  width: 100%;
+  border: 1px solid var(--border-default);
+  border-radius: 10px;
+  background: var(--surface-default);
+  color: var(--text-primary);
+  padding: 0.58rem 0.7rem;
+  font-size: 0.9rem;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.app-input__control::placeholder {
+  color: var(--text-tertiary);
+}
+
+.app-input__control:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--brand-primary-bg);
+}
+
+.app-input__control.is-error {
+  border-color: var(--error-border);
+}
+
+.app-input__hint {
+  color: var(--text-tertiary);
+  font-size: 0.76rem;
+}
+
+.app-input__hint.is-error {
+  color: var(--error-default);
+}

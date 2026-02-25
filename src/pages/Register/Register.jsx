@@ -1,100 +1,47 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { Button, Input } from "@/components";
+import "../auth.css";
 
 export default function Register() {
   return (
-    <div style={{ padding: '2rem', maxWidth: '400px', margin: '0 auto' }}>
-      <h1 style={{ color: 'var(--text-primary)', marginBottom: '1.5rem' }}>
-        Register
-      </h1>
+    <div className="auth-page">
+      <section className="auth-card" aria-labelledby="register-title">
+        <p className="auth-brand">RefactorIQ</p>
+        <h1 id="register-title" className="auth-title">
+          Create your account
+        </h1>
+        <p className="auth-subtitle">
+          Start tracking risky modules and refactor priorities.
+        </p>
 
-      <form onSubmit={(e) => e.preventDefault()}>
-        <div style={{ marginBottom: '1rem' }}>
-          <label
-            htmlFor="name"
-            style={{ display: 'block', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}
-          >
-            Full Name
-          </label>
-          <input
+        <form className="auth-form" onSubmit={(e) => e.preventDefault()}>
+          <Input
             id="name"
             type="text"
+            label="Full Name"
             placeholder="John Doe"
-            style={{
-              width: '100%',
-              padding: '0.5rem',
-              border: '1px solid var(--border-default)',
-              borderRadius: '6px',
-              backgroundColor: 'var(--surface-default)',
-              color: 'var(--text-primary)',
-            }}
           />
-        </div>
-
-        <div style={{ marginBottom: '1rem' }}>
-          <label
-            htmlFor="email"
-            style={{ display: 'block', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}
-          >
-            Email
-          </label>
-          <input
+          <Input
             id="email"
             type="email"
+            label="Email"
             placeholder="you@example.com"
-            style={{
-              width: '100%',
-              padding: '0.5rem',
-              border: '1px solid var(--border-default)',
-              borderRadius: '6px',
-              backgroundColor: 'var(--surface-default)',
-              color: 'var(--text-primary)',
-            }}
           />
-        </div>
-
-        <div style={{ marginBottom: '1.5rem' }}>
-          <label
-            htmlFor="password"
-            style={{ display: 'block', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}
-          >
-            Password
-          </label>
-          <input
+          <Input
             id="password"
             type="password"
+            label="Password"
             placeholder="••••••••"
-            style={{
-              width: '100%',
-              padding: '0.5rem',
-              border: '1px solid var(--border-default)',
-              borderRadius: '6px',
-              backgroundColor: 'var(--surface-default)',
-              color: 'var(--text-primary)',
-            }}
           />
-        </div>
+          <Button type="submit" fullWidth>
+            Create Account
+          </Button>
+        </form>
 
-        <button
-          type="submit"
-          style={{
-            width: '100%',
-            padding: '0.625rem',
-            backgroundColor: 'var(--brand-primary)',
-            color: 'var(--text-inverse)',
-            border: 'none',
-            borderRadius: '6px',
-            cursor: 'pointer',
-            fontWeight: 600,
-          }}
-        >
-          Create Account
-        </button>
-      </form>
-
-      <p style={{ marginTop: '1rem', color: 'var(--text-tertiary)', textAlign: 'center' }}>
-        Already have an account?{' '}
-        <Link to="/login" style={{ color: 'var(--text-link)' }}>Login</Link>
-      </p>
+        <p className="auth-switch">
+          Already have an account? <Link to="/login">Login</Link>
+        </p>
+      </section>
     </div>
   );
 }

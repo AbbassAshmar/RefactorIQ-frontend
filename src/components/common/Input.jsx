@@ -1,36 +1,32 @@
-/**
- * Placeholder — shared Input component.
- * Replace with a fully styled version later.
- */
-export default function Input({ label, id, ...props }) {
+import "./Input.css";
+
+export default function Input({
+  label,
+  id,
+  helpText,
+  error,
+  className = "",
+  ...props
+}) {
+  const inputClass = ["app-input__control", error ? "is-error" : "", className]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <div style={{ marginBottom: '1rem' }}>
+    <div className="app-input">
       {label && (
-        <label
-          htmlFor={id}
-          style={{
-            display: 'block',
-            color: 'var(--text-secondary)',
-            marginBottom: '0.25rem',
-            fontSize: '0.875rem',
-          }}
-        >
+        <label htmlFor={id} className="app-input__label">
           {label}
         </label>
       )}
-      <input
-        id={id}
-        style={{
-          width: '100%',
-          padding: '0.5rem',
-          border: '1px solid var(--border-default)',
-          borderRadius: '6px',
-          backgroundColor: 'var(--surface-default)',
-          color: 'var(--text-primary)',
-          fontSize: '0.875rem',
-        }}
-        {...props}
-      />
+
+      <input id={id} className={inputClass} {...props} />
+
+      {(error || helpText) && (
+        <p className={`app-input__hint ${error ? "is-error" : ""}`}>
+          {error || helpText}
+        </p>
+      )}
     </div>
   );
 }

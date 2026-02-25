@@ -1,0 +1,62 @@
+.app-button {
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+
+.app-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.app-button--sm {
+  padding: 0.4rem 0.7rem;
+  font-size: 0.82rem;
+}
+
+.app-button--md {
+  padding: 0.58rem 0.9rem;
+  font-size: 0.88rem;
+}
+
+.app-button--lg {
+  padding: 0.7rem 1.05rem;
+  font-size: 0.95rem;
+}
+
+.app-button--full {
+  width: 100%;
+}
+
+.app-button--primary {
+  background: var(--brand-primary);
+  color: var(--text-inverse);
+  border-color: var(--brand-primary);
+}
+
+.app-button--primary:hover:not(:disabled) {
+  background: var(--brand-primary-hover);
+  border-color: var(--brand-primary-hover);
+}
+
+.app-button--secondary {
+  background: var(--surface-secondary);
+  color: var(--text-primary);
+  border-color: var(--border-default);
+}
+
+.app-button--secondary:hover:not(:disabled) {
+  background: var(--surface-hover);
+}
+
+.app-button--ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border-color: transparent;
+}
+
+.app-button--ghost:hover:not(:disabled) {
+  background: var(--surface-secondary);
+}
