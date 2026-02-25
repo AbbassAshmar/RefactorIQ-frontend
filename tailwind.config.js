@@ -41,7 +41,7 @@ export default {
 				// BORDERS
 				// ============================================
 				border: {
-					DEFAULT: 'var(--border-default)',
+					default: 'var(--border-default)',
 					secondary: 'var(--border-secondary)',
 					tertiary: 'var(--border-tertiary)',
 					focus: 'var(--border-focus)',
