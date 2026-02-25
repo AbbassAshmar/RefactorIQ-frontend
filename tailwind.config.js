@@ -41,7 +41,7 @@ export default {
 				// BORDERS
 				// ============================================
 				border: {
-					default: 'var(--border-default)',
+					DEFAULT: 'var(--border-default)',
 					secondary: 'var(--border-secondary)',
 					tertiary: 'var(--border-tertiary)',
 					focus: 'var(--border-focus)',
@@ -64,28 +64,28 @@ export default {
 				// SEMANTIC STATES
 				// ============================================
 				success: {
-					default: 'var(--success-default)',
+					DEFAULT: 'var(--success-default)',
 					hover: 'var(--success-hover)',
 					text: 'var(--success-text)',
 					bg: 'var(--success-bg)',
 					border: 'var(--success-border)',
 				},
 				error: {
-					default: 'var(--error-default)',
+					DEFAULT: 'var(--error-default)',
 					hover: 'var(--error-hover)',
 					text: 'var(--error-text)',
 					bg: 'var(--error-bg)',
 					border: 'var(--error-border)',
 				},
 				warning: {
-					default: 'var(--warning-default)',
+					DEFAULT: 'var(--warning-default)',
 					hover: 'var(--warning-hover)',
 					text: 'var(--warning-text)',
 					bg: 'var(--warning-bg)',
 					border: 'var(--warning-border)',
 				},
 				info: {
-					default: 'var(--info-default)',
+					DEFAULT: 'var(--info-default)',
 					hover: 'var(--info-hover)',
 					text: 'var(--info-text)',
 					bg: 'var(--info-bg)',
@@ -97,17 +97,17 @@ export default {
 				// ============================================
 				accent: {
 					yellow: {
-						default: 'var(--accent-yellow)',
+						DEFAULT: 'var(--accent-yellow)',
 						bg: 'var(--accent-yellow-bg)',
 						text: 'var(--accent-yellow-text)',
 					},
 					mauve: {
-						default: 'var(--accent-mauve)',
+						DEFAULT: 'var(--accent-mauve)',
 						bg: 'var(--accent-mauve-bg)',
 						text: 'var(--accent-mauve-text)',
 					},
 					rose: {
-						default: 'var(--accent-rose)',
+						DEFAULT: 'var(--accent-rose)',
 						bg: 'var(--accent-rose-bg)',
 						text: 'var(--accent-rose-text)',
 					},

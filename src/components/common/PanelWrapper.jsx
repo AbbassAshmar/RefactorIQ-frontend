@@ -38,7 +38,7 @@ export default function PanelWrapper({ title, subtitle, description, children, c
     return (
         <section
             className={[
-                'flex flex-col rounded-md border border-border-default bg-background-secondary p-3 shadow-sm',
+                'flex flex-col rounded-md border border-border bg-background-secondary p-3 shadow-sm',
                 isMaximized
                     ? 'fixed inset-x-0 bottom-0 top-12 z-40 m-3 flex flex-col overflow-hidden'
                     : '',
@@ -71,7 +71,7 @@ export default function PanelWrapper({ title, subtitle, description, children, c
                     <button
                         type="button"
                         onClick={() => setIsMenuOpen((prev) => !prev)}
-                        className="inline-flex h-7 w-7 items-center justify-center rounded-md border border-border-default bg-background-secondary text-text-secondary transition-colors hover:bg-background-hover hover:text-text-primary"
+                        className="inline-flex h-7 w-7 items-center justify-center rounded-md border border-border bg-background-secondary text-text-secondary transition-colors hover:bg-background-hover hover:text-text-primary"
                         aria-label="Panel options"
                     >
                         <Ellipsis size={16} />
