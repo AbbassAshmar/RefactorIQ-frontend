@@ -1,21 +1,22 @@
 import { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { ChevronDown, ChevronRight, Plus, X } from 'lucide-react';
+import { Check } from 'lucide-react';
 
 /* ────────────────────────────────────────────────────────────────── */
 /*  Projects list (client only)                                      */
 /* ────────────────────────────────────────────────────────────────── */
 function ProjectsList({ projects, selectedProjectId, onSelectProject, onAddProject }) {
     return (
-        <div className="px-3 py-3 border-b border-border-default">
+        <div className="px-2 py-3 border-b border-border-default">
             {/* Header */}
-            <div className="flex items-center justify-between mb-2">
-                <span className="text-small-2 font-semibold uppercase tracking-wider text-text-tertiary">
+            <div className="flex items-center justify-between mb-2 mx-2.5">
+                <span className="text-body font-semibold tracking-wider text-text-tertiary">
                     Projects
                 </span>
                 <button
                     onClick={onAddProject}
-                    className="flex h-5 w-5 items-center justify-center rounded text-text-tertiary hover:bg-background-hover hover:text-text-primary transition-colors"
+                    className="flex items-center justify-center rounded text-text-tertiary hover:bg-background-hover hover:text-text-primary transition-colors"
                     aria-label="Add project"
                 >
                     <Plus size={12} strokeWidth={2.5} />
@@ -29,14 +30,17 @@ function ProjectsList({ projects, selectedProjectId, onSelectProject, onAddProje
                         <button
                             onClick={() => onSelectProject(project.id)}
                             className={`
-                                w-full text-left rounded-md px-2.5 py-1.5 text-small-1 truncate transition-colors
+                                w-full text-left rounded-md px-2.5 py-1.5 text-body truncate transition-colors flex items-center justify-between
                                 ${project.id === selectedProjectId
-                                    ? 'bg-background-selected text-text-brand font-semibold'
+                                    ? 'bg-none text-text-brand font-semibold'
                                     : 'text-text-secondary hover:bg-background-hover hover:text-text-primary'
                                 }
                             `}
                         >
-                            {project.name}
+                            <span className="truncate">{project.name}</span>
+                            {project.id === selectedProjectId && (
+                                <Check size={14} strokeWidth={2} className="shrink-0 ml-2" />
+                            )}
                         </button>
                     </li>
                 ))}
@@ -64,15 +68,15 @@ function NavSection({ section, basePath, defaultOpen = false }) {
     );
 
     return (
-        <div>
+        <div className="border-b border-border-default px-2 py-3">
             {/* Section header */}
             <button
                 onClick={() => setIsOpen((prev) => !prev)}
                 className={`
-                    flex w-full items-center gap-2.5 rounded-md px-2.5 py-2 text-small-1 font-semibold transition-colors
+                    flex w-full items-center gap-2.5 rounded-md px-2.5 py-2 text-body font-semibold transition-colors
                     ${hasActivePage
                         ? 'text-text-primary'
-                        : 'text-text-secondary hover:bg-background-hover hover:text-text-primary'
+                        : 'text-text-primary hover:bg-background-hover hover:text-text-primary'
                     }
                 `}
             >
@@ -86,24 +90,22 @@ function NavSection({ section, basePath, defaultOpen = false }) {
 
             {/* Pages list */}
             {isOpen && (
-                <ul className="mt-0.5 space-y-0.5 pl-4">
+                <ul className="mt-0.5 space-y-0.5">
                     {section.pages.map((page) => {
                         const fullPath = `${basePath}${page.path}`;
-                        const PageIcon = page.icon;
                         return (
                             <li key={page.key}>
                                 <NavLink
                                     to={fullPath}
                                     end
                                     className={({ isActive }) => `
-                                        flex items-center gap-2.5 rounded-md px-2.5 py-1.5 text-small-1 transition-colors
+                                        flex items-center gap-2.5 rounded-md px-2.5 py-1.5 text-body transition-colors
                                         ${isActive
                                             ? 'bg-background-selected text-text-brand font-medium'
                                             : 'text-text-secondary hover:bg-background-hover hover:text-text-primary'
                                         }
                                     `}
                                 >
-                                    <PageIcon size={14} strokeWidth={2} className="shrink-0" />
                                     <span className="truncate">{page.label}</span>
                                 </NavLink>
                             </li>
@@ -143,7 +145,7 @@ export default function Sidebar({
             {/* ── Sidebar panel ── */}
             <aside
                 className={`
-                    fixed top-12 left-0 z-30 h-[calc(100vh-3rem)] w-64
+                    fixed top-12 left-0 z-30 h-[calc(100vh-3rem)] w-80
                     border-r border-border-default bg-background-secondary
                     transform transition-transform duration-200 ease-in-out
                     ${isOpen ? 'translate-x-0' : '-translate-x-full'}
@@ -172,7 +174,7 @@ export default function Sidebar({
                 )}
 
                 {/* ── Navigation sections ── */}
-                <nav className="flex-1 overflow-y-auto px-2 py-3 space-y-1">
+                <nav className="flex-1 overflow-y-auto space-y-1">
                     {sections.map((section, idx) => (
                         <NavSection
                             key={section.key}

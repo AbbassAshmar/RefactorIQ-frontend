@@ -64,28 +64,28 @@ export default {
 				// SEMANTIC STATES
 				// ============================================
 				success: {
-					DEFAULT: 'var(--success-default)',
+					default: 'var(--success-default)',
 					hover: 'var(--success-hover)',
 					text: 'var(--success-text)',
 					bg: 'var(--success-bg)',
 					border: 'var(--success-border)',
 				},
 				error: {
-					DEFAULT: 'var(--error-default)',
+					default: 'var(--error-default)',
 					hover: 'var(--error-hover)',
 					text: 'var(--error-text)',
 					bg: 'var(--error-bg)',
 					border: 'var(--error-border)',
 				},
 				warning: {
-					DEFAULT: 'var(--warning-default)',
+					default: 'var(--warning-default)',
 					hover: 'var(--warning-hover)',
 					text: 'var(--warning-text)',
 					bg: 'var(--warning-bg)',
 					border: 'var(--warning-border)',
 				},
 				info: {
-					DEFAULT: 'var(--info-default)',
+					default: 'var(--info-default)',
 					hover: 'var(--info-hover)',
 					text: 'var(--info-text)',
 					bg: 'var(--info-bg)',
@@ -97,17 +97,17 @@ export default {
 				// ============================================
 				accent: {
 					yellow: {
-						DEFAULT: 'var(--accent-yellow)',
+						default: 'var(--accent-yellow)',
 						bg: 'var(--accent-yellow-bg)',
 						text: 'var(--accent-yellow-text)',
 					},
 					mauve: {
-						DEFAULT: 'var(--accent-mauve)',
+						default: 'var(--accent-mauve)',
 						bg: 'var(--accent-mauve-bg)',
 						text: 'var(--accent-mauve-text)',
 					},
 					rose: {
-						DEFAULT: 'var(--accent-rose)',
+						default: 'var(--accent-rose)',
 						bg: 'var(--accent-rose-bg)',
 						text: 'var(--accent-rose-text)',
 					},

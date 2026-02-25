@@ -120,7 +120,7 @@ export default function AuthenticatedNavbar({ onToggleSidebar }) {
                 {/* Burger icon */}
                 <button
                     onClick={onToggleSidebar}
-                    className="flex h-8 w-8 items-center justify-center rounded-md text-text-secondary hover:bg-background-hover hover:text-text-primary transition-colors"
+                    className="flex items-center justify-center rounded-md text-text-primary hover:bg-background-hover hover:text-text-primary transition-colors"
                     aria-label="Toggle sidebar"
                 >
                     <Menu size={18} strokeWidth={2} />
@@ -130,7 +130,7 @@ export default function AuthenticatedNavbar({ onToggleSidebar }) {
 
                 {/* Logo */}
                 <div className="flex items-center gap-2 select-none">
-                    <span className="text-body font-bold tracking-tight text-brand-text">
+                    <span className="text-h5 font-bold tracking-tight text-brand-text">
                         R<span className="text-text-primary">.</span>
                     </span>
                 </div>

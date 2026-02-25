@@ -65,22 +65,25 @@ body {
   min-height: 100vh;
 }
 
-a {
-  color: var(--text-link);
-  text-decoration: none;
-}
-a:hover {
-  color: var(--text-link-hover);
-}
-
 img {
   max-width: 100%;
   display: block;
 }
 
-input,
-button,
-textarea,
-select {
-  font: inherit;
+*::-webkit-scrollbar {
+  width: 5px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: var(--background-main);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--border-default);
+  border-radius: 8px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--border-secondary);
 }
