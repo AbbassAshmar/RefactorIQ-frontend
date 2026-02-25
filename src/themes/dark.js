@@ -109,24 +109,24 @@ export const DARK_THEME = {
   'text-link-hover': 'var(--blue-300)',
 
   // ============================================
-  // SEMANTIC COLORS - BACKGROUNDS
+  // SEMANTIC COLORS - BACKGROUNDS (Consolidated)
   // ============================================
-  'background-primary': 'var(--gray-950)',
-  'background-secondary': 'hsla(220, 5%, 98%, 0.03)', // Subtle white overlay
-  'background-tertiary': 'hsla(220, 5%, 98%, 0.06)',
-  'background-elevated': 'var(--gray-900)',
+  // Layout Layers
+  'background-primary': 'var(--gray-950)',    // Base App Background
+  'background-secondary': 'var(--gray-900)',  // Main Surfaces (Cards, Panels)
+  'background-tertiary': 'var(--gray-850)',   // Nested Surfaces
+  'background-quaternary': 'var(--gray-800)', // Deep nesting or subtle accents
+  
+  // Overlays & Special
+  'background-elevated': 'var(--gray-850)',   // for Modals/Popovers
   'background-overlay': 'hsla(220, 5%, 5%, 0.80)',
   'background-inverse': 'var(--gray-50)',
+  
+  // Interactive States (applied on top of backgrounds)
+  'background-hover': 'hsla(220, 5%, 98%, 0.05)',
+  'background-pressed': 'hsla(220, 5%, 98%, 0.10)',
+  'background-selected': 'hsla(201, 80%, 32%, 0.16)',
 
-  // ============================================
-  // SEMANTIC COLORS - SURFACES (Cards, Panels)
-  // ============================================
-  'surface-default': 'var(--gray-900)',
-  'surface-secondary': 'var(--gray-850)',
-  'surface-tertiary': 'var(--gray-800)',
-  'surface-hover': 'hsla(220, 5%, 98%, 0.08)',
-  'surface-pressed': 'hsla(220, 5%, 98%, 0.12)',
-  'surface-selected': 'hsla(201, 80%, 32%, 0.16)',
 
   // ============================================
   // SEMANTIC COLORS - BORDERS
