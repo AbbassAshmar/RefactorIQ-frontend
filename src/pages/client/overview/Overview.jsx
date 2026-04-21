@@ -7,8 +7,8 @@ export default function ClientOverview() {
     const projectId = searchParams.get('project_id') ?? 'proj_4f92c1e8';
 
     return (
-        <div className="p-3">
-            <div className="grid grid-cols-1 gap-3 xl:grid-cols-3">
+        <div className="p-6">
+            <div className="grid grid-cols-1 gap-6 xl:grid-cols-3">
                 <div className="xl:col-span-1">
                     <RiskTrendScorePanel projectId={projectId} />
                 </div>

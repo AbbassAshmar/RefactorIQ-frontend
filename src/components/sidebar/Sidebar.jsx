@@ -3,12 +3,9 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { ChevronDown, ChevronRight, Plus, X } from 'lucide-react';
 import { Check } from 'lucide-react';
 
-/* ────────────────────────────────────────────────────────────────── */
-/*  Projects list (client only)                                      */
-/* ────────────────────────────────────────────────────────────────── */
 function ProjectsList({ projects, selectedProjectId, onSelectProject, onAddProject }) {
     return (
-        <div className="px-2 py-3 border-b border-border-default">
+        <div className="px-2 py-3 border-b border-border">
             {/* Header */}
             <div className="flex items-center justify-between mb-2 mx-2.5">
                 <span className="text-body font-semibold tracking-wider text-text-tertiary">
@@ -55,9 +52,6 @@ function ProjectsList({ projects, selectedProjectId, onSelectProject, onAddProje
     );
 }
 
-/* ────────────────────────────────────────────────────────────────── */
-/*  Collapsible nav section                                          */
-/* ────────────────────────────────────────────────────────────────── */
 function NavSection({ section, basePath, defaultOpen = false }) {
     const [isOpen, setIsOpen] = useState(defaultOpen);
     const { pathname } = useLocation();
@@ -68,7 +62,7 @@ function NavSection({ section, basePath, defaultOpen = false }) {
     );
 
     return (
-        <div className="border-b border-border-default px-2 py-3">
+        <div className="border-b border-border px-2 py-3">
             {/* Section header */}
             <button
                 onClick={() => setIsOpen((prev) => !prev)}
@@ -117,9 +111,6 @@ function NavSection({ section, basePath, defaultOpen = false }) {
     );
 }
 
-/* ────────────────────────────────────────────────────────────────── */
-/*  Main Sidebar                                                     */
-/* ────────────────────────────────────────────────────────────────── */
 export default function Sidebar({
     isOpen,
     onClose,
@@ -146,7 +137,7 @@ export default function Sidebar({
             <aside
                 className={`
                     fixed top-12 left-0 z-30 h-[calc(100vh-3rem)] w-80
-                    border-r border-border-default bg-background-secondary
+                    border-r border-border bg-background-secondary
                     transform transition-transform duration-200 ease-in-out
                     ${isOpen ? 'translate-x-0' : '-translate-x-full'}
                     flex flex-col
@@ -186,7 +177,7 @@ export default function Sidebar({
                 </nav>
 
                 {/* ── Dock navigation footer ── */}
-                <div className="border-t border-border-default px-4 py-3">
+                <div className="border-t border-border px-4 py-3">
                     <span className="text-small-2 text-text-disabled select-none">
                         Dock navigation
                     </span>

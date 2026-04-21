@@ -41,10 +41,10 @@ function UserDropdown({ user, onClose }) {
     return (
         <div
             ref={dropdownRef}
-            className="absolute right-0 top-full mt-2 w-56 rounded-lg border border-border-default bg-background-elevated shadow-lg z-50"
+            className="absolute right-0 top-full mt-2 w-56 rounded-lg border border-border bg-background-elevated shadow-lg z-50"
         >
             {/* User info header */}
-            <div className="flex items-center gap-3 border-b border-border-default px-4 py-3">
+            <div className="flex items-center gap-3 border-b border-border px-4 py-3">
                 <UserAvatar name={fullName} />
                 <span className="truncate text-small-1 font-medium text-text-primary">
                     {fullName}
@@ -70,7 +70,7 @@ function UserDropdown({ user, onClose }) {
             </div>
 
             {/* Logout */}
-            <div className="border-t border-border-default py-1">
+            <div className="border-t border-border py-1">
                 <button
                     onClick={handleLogout}
                     className="flex w-full items-center gap-3 px-4 py-2 text-small-1 text-error hover:bg-background-hover transition-colors"
@@ -114,7 +114,7 @@ export default function AuthenticatedNavbar({ onToggleSidebar }) {
     const fullName = user?.username || user?.email || 'User';
 
     return (
-        <header className="sticky top-0 z-40 flex h-12 items-center justify-between border-b border-border-default bg-background-secondary px-4">
+        <header className="sticky top-0 z-40 flex h-12 items-center justify-between border-b border-border bg-background-secondary px-4">
             {/* ── Left section ── */}
             <div className="flex items-center gap-3">
                 {/* Burger icon */}

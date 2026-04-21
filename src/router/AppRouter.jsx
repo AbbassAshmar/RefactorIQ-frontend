@@ -10,6 +10,7 @@ import AdminLayout from '@/layouts/AdminLayout';
 import Login from '@/pages/Login/Login';
 
 /* ── Client pages ── */
+import Projects from '@/pages/client/Projects';
 import ClientOverview from '@/pages/client/Overview';
 import RepoExplorer from '@/pages/client/RepoExplorer';
 import Dependencies from '@/pages/client/Dependencies';
@@ -20,7 +21,6 @@ import RefactorSuggestions from '@/pages/client/RefactorSuggestions';
 import CommitHistory from '@/pages/client/CommitHistory';
 import FileEvolution from '@/pages/client/FileEvolution';
 import Analytics from '@/pages/client/Analytics';
-import Projects from '@/pages/client/Projects';
 
 /* ── Admin pages ── */
 import AdminOverview from '@/pages/admin/Overview';
@@ -52,6 +52,8 @@ export default function AppRouter() {
 						</ProtectedRoute>
 					)}
 				>
+					<Route path="/dashboard/projects" element={<Projects />} />
+
 					{/* Home */}
 					<Route path="/dashboard/overview" element={<ClientOverview />} />
 

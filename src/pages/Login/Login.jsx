@@ -12,8 +12,6 @@ function getErrorMessage(error, fallback) {
     );
 }
 
-/* ─── Tiny sub-components ───────────────────────────────────────── */
-
 function InputField({ id, label, type, value, onChange, placeholder, disabled, icon: Icon, autoComplete }) {
     return (
         <div className="space-y-2">
@@ -37,7 +35,7 @@ function InputField({ id, label, type, value, onChange, placeholder, disabled, i
                     disabled={disabled}
                     placeholder={placeholder}
                     className="
-                        w-full rounded-lg border border-border-default
+                        w-full rounded-lg border border-border
                         bg-background-primary
                         py-2.5 pl-10 pr-4
                         text-body text-text-primary
@@ -89,8 +87,6 @@ function Divider() {
     );
 }
 
-/* ─── Main Login Page ────────────────────────────────────────────── */
-
 export default function Login() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
@@ -126,7 +122,7 @@ export default function Login() {
                 className="
                     w-full max-w-[540px]
                     rounded-xl
-                    border border-border-default
+                    border border-border
                     bg-background-secondary
                     shadow-xl
                     overflow-hidden

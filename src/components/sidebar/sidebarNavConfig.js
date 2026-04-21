@@ -32,6 +32,7 @@ export const CLIENT_NAV_SECTIONS = [
         icon: Home,
         pages: [
             { key: 'overview', label: 'Overview', path: '/overview'},
+            { key: 'projects', label: 'Projects', path: '/projects'},
         ],
     },
     {

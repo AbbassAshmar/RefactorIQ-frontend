@@ -1,6 +1,6 @@
 export default function UnauthenticatedNavbar() {
     return (
-        <header className="sticky top-0 z-40 flex h-12 items-center border-b border-border-default bg-background-secondary px-4">
+        <header className="sticky top-0 z-40 flex h-12 items-center border-b border-border bg-background-secondary px-4">
             {/* Logo only */}
             <div className="flex items-center gap-2 select-none">
                 <span className="text-h5 font-bold tracking-tight text-brand-text">

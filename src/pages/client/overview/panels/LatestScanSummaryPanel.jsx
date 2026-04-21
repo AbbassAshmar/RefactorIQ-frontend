@@ -25,7 +25,7 @@ export default function LatestScanSummaryPanel({ projectId }) {
                     <p className="text-text-tertiary">Project: <span className="text-text-secondary">{projectId}</span></p>
                 </div>
 
-                <div className="grid flex-1 grid-cols-1 divide-y divide-border-default rounded-md border border-border-default sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-4">
+                <div className="grid flex-1 grid-cols-1 divide-y divide-border-default rounded-md border border-border sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-4">
                     {SEVERITY_CONFIG.map((item) => {
                         const details = summary[item.key];
 
