@@ -56,8 +56,7 @@ export const CLIENT_NAV_SECTIONS = [
         title: 'Scans',
         icon: ScanSearch,
         pages: [
-            { key: 'scans-list', label: 'Scans List', path: '/scans/list' },
-            { key: 'scans-dashboard', label: 'Scans Dashboard', path: '/scans/dashboard' },
+            { key: 'scans-records', label: 'Manage Scans', path: '/scans' },
         ],
     },
     {
@@ -67,31 +66,6 @@ export const CLIENT_NAV_SECTIONS = [
         pages: [
             { key: 'refactor-queue', label: 'Refactor Queue', path: '/refactoring/queue' },
             { key: 'refactor-suggestions', label: 'Refactor Suggestions', path: '/refactoring/suggestions' },
-        ],
-    },
-    {
-        key: 'history',
-        title: 'History',
-        icon: History,
-        pages: [
-            { key: 'commit-history', label: 'Commit History', path: '/history/commits' },
-            { key: 'file-evolution', label: 'File Evolution', path: '/history/file-evolution' },
-        ],
-    },
-    {
-        key: 'dashboard',
-        title: 'Dashboard',
-        icon: LayoutDashboard,
-        pages: [
-            { key: 'analytics', label: 'Analytics', path: '/dashboard/analytics' },
-        ],
-    },
-    {
-        key: 'projects-secondary',
-        title: 'Projects',
-        icon: FolderKanban,
-        pages: [
-            { key: 'projects', label: 'Projects', path: '/projects' },
         ],
     },
 ];

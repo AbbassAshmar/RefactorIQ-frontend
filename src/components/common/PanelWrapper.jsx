@@ -92,7 +92,7 @@ export default function PanelWrapper({ title, subtitle, description, children, c
                 </div>
             </header>
 
-            <div className={isMaximized ? 'min-h-0 flex-1' : ''}>{children}</div>
+            <div className="min-h-0 flex-1">{children}</div>
         </section>
     );
 }

@@ -1,16 +1,15 @@
 import { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { AuthenticatedNavbar } from '@/components/navbar';
 import { Sidebar, CLIENT_NAV_SECTIONS } from '@/components/sidebar';
-
-const DEMO_PROJECTS = [
-    { id: '1', name: 'refactoriq-frontend' },
-    { id: '2', name: 'refactoriq-backend' },
-];
+import { useSelectedProject, useSelectedScan } from '@/hooks';
 
 export default function ClientLayout() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const [selectedProjectId, setSelectedProjectId] = useState(DEMO_PROJECTS[0]?.id ?? null);
+    const navigate = useNavigate();
+    const { search } = useLocation();
+    const { projects, selectedProjectId, selectProject, isLoading: projectsLoading } = useSelectedProject();
+    useSelectedScan();
 
     function handleToggleSidebar() {
         setSidebarOpen((prev) => !prev);
@@ -21,12 +20,13 @@ export default function ClientLayout() {
     }
 
     function handleSelectProject(id) {
-        setSelectedProjectId(id);
-        // TODO: update app-level project context / query param
+        selectProject(id);
+        setSidebarOpen(false);
     }
 
     function handleAddProject() {
-        // TODO: open project creation modal
+        navigate(`/dashboard/projects${search}`);
+        setSidebarOpen(false);
     }
 
     return (
@@ -39,7 +39,8 @@ export default function ClientLayout() {
                 sections={CLIENT_NAV_SECTIONS}
                 basePath="/dashboard"
                 showProjects
-                projects={DEMO_PROJECTS}
+                projects={projects}
+                projectsLoading={projectsLoading}
                 selectedProjectId={selectedProjectId}
                 onSelectProject={handleSelectProject}
                 onAddProject={handleAddProject}

@@ -2,4 +2,7 @@ export { default as apiClient } from './client';
 export { default as authApi } from './endpoints/auth';
 export { default as githubApi } from './endpoints/github';
 export { default as projectsApi } from './endpoints/projects';
+export { default as scansApi } from './endpoints/scans';
+export { default as overviewApi } from './endpoints/overview';
+export { default as filesApi } from './endpoints/files';
 export { default as usersApi } from './endpoints/users';

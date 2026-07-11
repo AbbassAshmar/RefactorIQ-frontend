@@ -3,15 +3,24 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { ChevronDown, ChevronRight, Plus, X } from 'lucide-react';
 import { Check } from 'lucide-react';
 
-function ProjectsList({ projects, selectedProjectId, onSelectProject, onAddProject }) {
+function ProjectsList({ projects, projectsLoading, selectedProjectId, onSelectProject, onAddProject }) {
+    const [isOpen, setIsOpen] = useState(true);
+
     return (
         <div className="px-2 py-3 border-b border-border">
             {/* Header */}
             <div className="flex items-center justify-between mb-2 mx-2.5">
-                <span className="text-body font-semibold tracking-wider text-text-tertiary">
-                    Projects
-                </span>
                 <button
+                    type="button"
+                    onClick={() => setIsOpen((previous) => !previous)}
+                    aria-expanded={isOpen}
+                    className="flex min-w-0 flex-1 items-center gap-1.5 rounded text-left text-body font-semibold tracking-wider text-text-tertiary transition-colors hover:text-text-primary"
+                >
+                    Projects
+                    {isOpen ? <ChevronDown size={14} strokeWidth={2} /> : <ChevronRight size={14} strokeWidth={2} />}
+                </button>
+                <button
+                    type="button"
                     onClick={onAddProject}
                     className="flex items-center justify-center rounded text-text-tertiary hover:bg-background-hover hover:text-text-primary transition-colors"
                     aria-label="Add project"
@@ -21,40 +30,47 @@ function ProjectsList({ projects, selectedProjectId, onSelectProject, onAddProje
             </div>
 
             {/* List */}
-            <ul className="space-y-0.5">
-                {projects.map((project) => (
-                    <li key={project.id}>
-                        <button
-                            onClick={() => onSelectProject(project.id)}
-                            className={`
-                                w-full text-left rounded-md px-2.5 py-1.5 text-body truncate transition-colors flex items-center justify-between
-                                ${project.id === selectedProjectId
-                                    ? 'bg-none text-text-brand font-semibold'
-                                    : 'text-text-secondary hover:bg-background-hover hover:text-text-primary'
-                                }
-                            `}
-                        >
-                            <span className="truncate">{project.name}</span>
-                            {project.id === selectedProjectId && (
-                                <Check size={14} strokeWidth={2} className="shrink-0 ml-2" />
-                            )}
-                        </button>
-                    </li>
-                ))}
+            <div className={`grid overflow-hidden transition-[grid-template-rows,opacity] duration-200 ease-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
+                <div className="min-h-0">
+                    <ul className="space-y-0.5">
+                        {projectsLoading ? (
+                            <li className="px-2.5 py-2 text-small-2 text-text-disabled">Loading projects…</li>
+                        ) : projects.map((project) => (
+                            <li key={project.id}>
+                                <button
+                                    type="button"
+                                    onClick={() => onSelectProject(project.id)}
+                                    className={`
+                                        w-full text-left rounded-md px-2.5 py-1.5 text-body truncate transition-colors flex items-center justify-between
+                                        ${project.id === selectedProjectId
+                                            ? 'bg-none text-text-brand font-semibold'
+                                            : 'text-text-secondary hover:bg-background-hover hover:text-text-primary'
+                                        }
+                                    `}
+                                >
+                                    <span className="truncate">{project.name}</span>
+                                    {project.id === selectedProjectId && (
+                                        <Check size={14} strokeWidth={2} className="shrink-0 ml-2" />
+                                    )}
+                                </button>
+                            </li>
+                        ))}
 
-                {projects.length === 0 && (
-                    <li className="px-2.5 py-2 text-small-2 text-text-disabled italic">
-                        No projects yet
-                    </li>
-                )}
-            </ul>
+                        {!projectsLoading && projects.length === 0 && (
+                            <li className="px-2.5 py-2 text-small-2 text-text-disabled italic">
+                                No projects yet
+                            </li>
+                        )}
+                    </ul>
+                </div>
+            </div>
         </div>
     );
 }
 
 function NavSection({ section, basePath, defaultOpen = false }) {
     const [isOpen, setIsOpen] = useState(defaultOpen);
-    const { pathname } = useLocation();
+    const { pathname, search } = useLocation();
     const SectionIcon = section.icon;
 
     const hasActivePage = section.pages.some(
@@ -83,30 +99,32 @@ function NavSection({ section, basePath, defaultOpen = false }) {
             </button>
 
             {/* Pages list */}
-            {isOpen && (
-                <ul className="mt-0.5 space-y-0.5">
-                    {section.pages.map((page) => {
-                        const fullPath = `${basePath}${page.path}`;
-                        return (
-                            <li key={page.key}>
-                                <NavLink
-                                    to={fullPath}
-                                    end
-                                    className={({ isActive }) => `
-                                        flex items-center gap-2.5 rounded-md px-2.5 py-1.5 text-body transition-colors
-                                        ${isActive
-                                            ? 'bg-background-selected text-text-brand font-medium'
-                                            : 'text-text-secondary hover:bg-background-hover hover:text-text-primary'
-                                        }
-                                    `}
-                                >
-                                    <span className="truncate">{page.label}</span>
-                                </NavLink>
-                            </li>
-                        );
-                    })}
-                </ul>
-            )}
+            <div className={`grid overflow-hidden transition-[grid-template-rows,opacity] duration-200 ease-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
+                <div className="min-h-0">
+                    <ul className="mt-0.5 space-y-0.5">
+                        {section.pages.map((page) => {
+                            const fullPath = `${basePath}${page.path}`;
+                            return (
+                                <li key={page.key}>
+                                    <NavLink
+                                        to={`${fullPath}${search}`}
+                                        end
+                                        className={({ isActive }) => `
+                                            flex items-center gap-2.5 rounded-md px-2.5 py-1.5 text-body transition-colors
+                                            ${isActive
+                                                ? 'bg-background-selected text-text-brand font-medium'
+                                                : 'text-text-secondary hover:bg-background-hover hover:text-text-primary'
+                                            }
+                                        `}
+                                    >
+                                        <span className="truncate">{page.label}</span>
+                                    </NavLink>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </div>
+            </div>
         </div>
     );
 }
@@ -118,6 +136,7 @@ export default function Sidebar({
     basePath,
     showProjects = false,
     projects = [],
+    projectsLoading = false,
     selectedProjectId = null,
     onSelectProject = () => {},
     onAddProject = () => {},
@@ -158,6 +177,7 @@ export default function Sidebar({
                 {showProjects && (
                     <ProjectsList
                         projects={projects}
+                        projectsLoading={projectsLoading}
                         selectedProjectId={selectedProjectId}
                         onSelectProject={onSelectProject}
                         onAddProject={onAddProject}

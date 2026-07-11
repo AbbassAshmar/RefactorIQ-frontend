@@ -10,17 +10,13 @@ import AdminLayout from '@/layouts/AdminLayout';
 import Login from '@/pages/Login/Login';
 
 /* ── Client pages ── */
-import Projects from '@/pages/client/Projects';
+import Projects from '@/pages/client/projects/Projects';
 import ClientOverview from '@/pages/client/Overview';
-import RepoExplorer from '@/pages/client/RepoExplorer';
+import RepoExplorer from '@/pages/client/repoExplorer/RepoExplorer';
 import Dependencies from '@/pages/client/Dependencies';
-import ClientScansList from '@/pages/client/ScansList';
-import ScansDashboard from '@/pages/client/ScansDashboard';
+import ClientScans from '@/pages/client/scans/Scans';
 import RefactorQueue from '@/pages/client/RefactorQueue';
 import RefactorSuggestions from '@/pages/client/RefactorSuggestions';
-import CommitHistory from '@/pages/client/CommitHistory';
-import FileEvolution from '@/pages/client/FileEvolution';
-import Analytics from '@/pages/client/Analytics';
 
 /* ── Admin pages ── */
 import AdminOverview from '@/pages/admin/Overview';
@@ -64,22 +60,11 @@ export default function AppRouter() {
 					<Route path="/dashboard/architecture/dependencies" element={<Dependencies />} />
 
 					{/* Scans */}
-					<Route path="/dashboard/scans/list" element={<ClientScansList />} />
-					<Route path="/dashboard/scans/dashboard" element={<ScansDashboard />} />
+					<Route path="/dashboard/scans" element={<ClientScans />} />
 
 					{/* Refactoring */}
 					<Route path="/dashboard/refactoring/queue" element={<RefactorQueue />} />
 					<Route path="/dashboard/refactoring/suggestions" element={<RefactorSuggestions />} />
-
-					{/* History */}
-					<Route path="/dashboard/history/commits" element={<CommitHistory />} />
-					<Route path="/dashboard/history/file-evolution" element={<FileEvolution />} />
-
-					{/* Dashboard */}
-					<Route path="/dashboard/dashboard/analytics" element={<Analytics />} />
-
-					{/* Projects */}
-					<Route path="/dashboard/projects" element={<Projects />} />
 
 					{/* Default client redirect */}
 					<Route index element={<Navigate to="/dashboard/overview" replace />} />

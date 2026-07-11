@@ -5,6 +5,7 @@ import queryClient from '@/lib/queryClient';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import ThemeProvider from '@/context/ThemeProvider';
 import AuthProvider from '@/context/AuthProvider';
+import NotificationProvider from '@/context/NotificationProvider';
 import App from './App.jsx';
 import './index.css';
 
@@ -13,7 +14,9 @@ createRoot(document.getElementById('root')).render(
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <ThemeProvider>
-          <App />
+          <NotificationProvider>
+            <App />
+          </NotificationProvider>
         </ThemeProvider>
       </AuthProvider>
       <ReactQueryDevtools initialIsOpen={false} />
