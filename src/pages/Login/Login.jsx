@@ -1,16 +1,25 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  LogIn,
-  Github,
-  Mail,
-  Lock,
   AlertCircle,
+  Github,
   Loader2,
+  Lock,
+  LogIn,
+  Mail,
   ShieldCheck,
-  Users,
 } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useAdminLogin, useGitHubLogin } from "@/hooks";
+import Button from "@/components/common/Button";
+import TextField from "@/components/forms/TextField";
+
+const schema = z.object({
+  email: z.string().email("Enter a valid email address"),
+  password: z.string().min(8, "Password must be at least 8 characters"),
+});
 
 function getErrorMessage(error, fallback) {
   return (
@@ -21,106 +30,27 @@ function getErrorMessage(error, fallback) {
   );
 }
 
-function InputField({
-  id,
-  label,
-  type,
-  value,
-  onChange,
-  placeholder,
-  disabled,
-  icon: Icon,
-  autoComplete,
-}) {
-  return (
-    <div className="space-y-2">
-      <label
-        htmlFor={id}
-        className="block text-small-1 font-medium text-text-secondary ml-0.5"
-      >
-        {label}
-      </label>
-      <div className="relative group">
-        <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-text-tertiary transition-colors group-focus-within:text-brand-primary">
-          <Icon size={16} strokeWidth={2} />
-        </span>
-        <input
-          id={id}
-          type={type}
-          value={value}
-          onChange={onChange}
-          required
-          autoComplete={autoComplete}
-          disabled={disabled}
-          placeholder={placeholder}
-          className="
-                        w-full rounded-lg border border-border
-                        bg-background-primary
-                        py-2.5 pl-10 pr-4
-                        text-body text-text-primary
-                        outline-none
-                        transition-all duration-200
-                        placeholder:text-text-disabled
-                        hover:border-border-secondary
-                        focus:border-border-focus focus:ring-4 focus:ring-brand-primary/10
-                        disabled:opacity-50 disabled:cursor-not-allowed
-                    "
-        />
-      </div>
-    </div>
-  );
-}
-
 function ErrorBanner({ message }) {
   return (
-    <div className="flex items-start gap-3 rounded-lg border border-error-border bg-error-bg/50 px-4 py-3 text-small-1 text-error-text backdrop-blur-sm">
-      <AlertCircle size={16} className="mt-0.5 shrink-0" strokeWidth={2} />
-      <span className="font-medium">{message}</span>
-    </div>
-  );
-}
-
-function SectionLabel({ icon: Icon, title, description }) {
-  return (
-    <div className="flex items-center gap-4">
-      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-background-tertiary border border-border-tertiary text-text-secondary shadow-sm">
-        <Icon size={18} strokeWidth={2} />
-      </span>
-      <div className="space-y-0.5">
-        <p className="text-body font-bold text-text-primary tracking-tight">
-          {title}
-        </p>
-        <p className="text-small-1 text-text-tertiary leading-relaxed">
-          {description}
-        </p>
-      </div>
-    </div>
-  );
-}
-
-function Divider() {
-  return (
-    <div className="flex items-center gap-4 py-1">
-      <div className="h-px flex-1 bg-border-tertiary" />
-      <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-text-disabled">
-        or
-      </span>
-      <div className="h-px flex-1 bg-border-tertiary" />
+    <div className="flex items-start gap-3 rounded-xl border border-error-border bg-error-bg px-4 py-3 text-small-1 text-error-text">
+      <AlertCircle size={16} className="mt-0.5 shrink-0" />
+      <span>{message}</span>
     </div>
   );
 }
 
 export default function Login() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const form = useForm({
+    resolver: zodResolver(schema),
+    defaultValues: { email: "admin@refactoriq.com", password: "password123" },
+  });
 
   const adminLogin = useAdminLogin({
-    onSuccess: () => navigate("/admin/overview"),
+    onSuccess: () => navigate("/admin", { replace: true }),
   });
 
   const githubLogin = useGitHubLogin();
-
   const isLoading = adminLogin.isPending || githubLogin.isPending;
 
   const adminError = useMemo(
@@ -131,175 +61,126 @@ export default function Login() {
       ),
     [adminLogin.error],
   );
-
   const githubError = useMemo(
     () => getErrorMessage(githubLogin.error, "GitHub sign-in failed."),
     [githubLogin.error],
   );
 
-  const handleAdminSubmit = (e) => {
-    e.preventDefault();
-    adminLogin.mutate({ email: email.trim(), password });
-  };
+  function onSubmit(values) {
+    adminLogin.mutate({
+      email: values.email.trim(),
+      password: values.password,
+    });
+  }
 
   return (
-    <div className="min-h-screen bg-background-primary flex items-center justify-center px-6 py-12 md:py-16">
-      {/* Card Wrapper with Elevation */}
-      <div
-        className="
-                    w-full max-w-[540px]
-                    rounded-xl
-                    border border-border
-                    bg-background-secondary
-                    shadow-xl
-                    overflow-hidden
-                    transition-all duration-300
-                "
-      >
-        {/* Subtle Header Highlight */}
-        <div className="border-b border-border-tertiary bg-background-tertiary/30 px-8 py-7">
-          <div className="flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-primary shadow-lg shadow-brand-primary/20 text-text-primary">
-              <LogIn size={22} strokeWidth={2.5} />
+    <div className="min-h-screen bg-[radial-gradient(circle_at_top,rgba(16,100,145,0.16),transparent_38%),linear-gradient(180deg,var(--background-primary),var(--background-secondary))] px-4 py-10 lg:px-8">
+      <div className="mx-auto grid min-h-[calc(100vh-5rem)] max-w-6xl overflow-hidden rounded-3xl border border-border-default bg-background-secondary shadow-xl lg:grid-cols-[1.05fr_0.95fr]">
+        <section
+          className="flex flex-col justify-between p-8 lg:p-10"
+          style={{
+            background:
+              "linear-gradient(135deg, var(--brand-primary-bg), var(--background-secondary), var(--background-primary))",
+          }}
+        >
+          <div>
+            <div className="inline-flex items-center gap-2 rounded-full border border-border-default bg-background-primary px-3 py-1 text-small-1 font-semibold text-text-secondary">
+              <ShieldCheck size={14} /> Admin portal
             </div>
-            <div className="space-y-1">
-              <h1 className="text-h5 font-extrabold text-text-primary tracking-tight">
-                Login
-              </h1>
-              <p className="text-small-1 text-text-tertiary font-medium">
-                Sign in to manage your workspace
+            <h1 className="mt-6 text-h2 font-semibold text-text-primary lg:text-[3.4rem]">
+              RefactorIQ admin dashboard
+            </h1>
+            <p className="mt-4 max-w-xl text-body text-text-secondary">
+              A production-ready control center for users, products, orders,
+              categories, and system settings.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-4 sm:grid-cols-2">
+            <div className="rounded-2xl border border-border-default bg-background-primary p-5 shadow-sm">
+              <p className="text-small-1 text-text-tertiary">
+                Unified operations
+              </p>
+              <p className="mt-2 text-h5 font-semibold text-text-primary">
+                Manage the full storefront from one place.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-border-default bg-background-primary p-5 shadow-sm">
+              <p className="text-small-1 text-text-tertiary">Secure sessions</p>
+              <p className="mt-2 text-h5 font-semibold text-text-primary">
+                JWT-backed auth with protected routes.
               </p>
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* Card body */}
-        <div className="px-8 py-8 space-y-10">
-          {/* ── Admin section ── */}
-          <section className="space-y-5">
-            <SectionLabel
-              icon={ShieldCheck}
-              title="Admin Portal"
-              description="Access for verified staff members only"
-            />
+        <section className="flex items-center justify-center p-6 lg:p-10">
+          <div className="w-full max-w-md space-y-6">
+            <div>
+              <p className="text-small-1 uppercase tracking-[0.2em] text-text-tertiary">
+                Sign in
+              </p>
+              <h2 className="mt-2 text-h4 font-semibold text-text-primary">
+                Admin access
+              </h2>
+              <p className="mt-2 text-body text-text-secondary">
+                Use your admin credentials to continue.
+              </p>
+            </div>
 
-            <form onSubmit={handleAdminSubmit} className="space-y-5">
-              <div className="space-y-3">
-                <InputField
-                  id="email"
-                  label="Email Address"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="name@company.com"
-                  disabled={isLoading}
-                  icon={Mail}
-                  autoComplete="email"
-                />
+            <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
+              <TextField
+                label="Email"
+                id="email"
+                type="email"
+                icon={Mail}
+                autoComplete="email"
+                error={form.formState.errors.email?.message}
+                {...form.register("email")}
+              />
+              <TextField
+                label="Password"
+                id="password"
+                type="password"
+                icon={Lock}
+                autoComplete="current-password"
+                error={form.formState.errors.password?.message}
+                {...form.register("password")}
+              />
 
-                <InputField
-                  id="password"
-                  label="Password"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
-                  disabled={isLoading}
-                  icon={Lock}
-                  autoComplete="current-password"
-                />
-              </div>
+              {adminLogin.isError ? <ErrorBanner message={adminError} /> : null}
 
-              {adminLogin.isError && <ErrorBanner message={adminError} />}
-
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="
-                                    relative mt-2 flex w-full items-center justify-center gap-2
-                                    rounded-lg bg-brand-primary
-                                    px-4 py-3
-                                    text-body font-bold text-text-primary
-                                    shadow-md shadow-brand-primary/10
-                                    transition-all duration-200
-                                    hover:bg-brand-hover hover:-translate-y-0.5
-                                    active:bg-brand-pressed active:translate-y-0
-                                    disabled:cursor-not-allowed disabled:opacity-50 disabled:translate-y-0
-                                    focus:outline-none focus:ring-4 focus:ring-brand-primary/20
-                                "
-              >
+              <Button type="submit" fullWidth disabled={isLoading}>
                 {adminLogin.isPending ? (
                   <>
-                    <Loader2
-                      size={18}
-                      strokeWidth={2.5}
-                      className="animate-spin"
-                    />
-                    Authenticating...
+                    <Loader2 size={16} className="animate-spin" /> Signing in...
                   </>
                 ) : (
                   <>
-                    <LogIn size={18} strokeWidth={2.5} />
-                    Login as Admin
+                    <LogIn size={16} /> Sign in as admin
                   </>
                 )}
-              </button>
+              </Button>
             </form>
-          </section>
 
-          <Divider />
-
-          {/* ── Client / GitHub section ── */}
-          <section className="space-y-5">
-            <SectionLabel
-              icon={Users}
-              title="Client Access"
-              description="Fast, secure access via your GitHub account"
-            />
-
-            {githubLogin.isError && <ErrorBanner message={githubError} />}
-
-            <button
-              type="button"
-              onClick={() => githubLogin.mutate()}
-              disabled={isLoading}
-              className="
-                                group relative flex w-full items-center justify-center gap-3
-                                rounded-lg
-                                border border-border-secondary
-                                bg-background-tertiary
-                                px-4 py-3
-                                text-body font-bold text-text-primary
-                                shadow-sm
-                                transition-all duration-200
-                                hover:bg-background-hover hover:border-text-tertiary
-                                active:bg-background-pressed
-                                disabled:cursor-not-allowed disabled:opacity-50
-                                focus:outline-none focus:ring-4 focus:ring-border-focus/10
-                            "
-            >
-              {githubLogin.isPending ? (
-                <>
-                  <Loader2
-                    size={18}
-                    strokeWidth={2.5}
-                    className="animate-spin"
-                  />
-                  Connecting to GitHub...
-                </>
-              ) : (
-                <>
-                  <Github
-                    size={18}
-                    strokeWidth={2}
-                    className="transition-transform group-hover:scale-110"
-                  />
-                  Continue with GitHub
-                </>
-              )}
-            </button>
-          </section>
-        </div>
+            <div className="space-y-3 rounded-2xl border border-border-default bg-background-primary p-5">
+              <p className="text-small-1 font-semibold uppercase tracking-[0.18em] text-text-tertiary">
+                Alternative
+              </p>
+              {githubLogin.isError ? (
+                <ErrorBanner message={githubError} />
+              ) : null}
+              <Button
+                variant="secondary"
+                fullWidth
+                onClick={() => githubLogin.mutate()}
+                disabled={isLoading}
+              >
+                <Github size={16} /> Continue with GitHub
+              </Button>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   );

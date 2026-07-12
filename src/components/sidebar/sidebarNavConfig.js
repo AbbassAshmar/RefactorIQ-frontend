@@ -1,15 +1,11 @@
 import {
   Home,
-  Code,
-  Network,
-  ScanSearch,
   LayoutDashboard,
-  Repeat2,
-  History,
-  FolderKanban,
   Users,
-  Server,
-  GitBranch,
+  Package,
+  ShoppingCart,
+  Tags,
+  Settings,
 } from "lucide-react";
 
 /**
@@ -122,35 +118,49 @@ export const CLIENT_NAV_SECTIONS = [
 export const ADMIN_NAV_SECTIONS = [
   {
     key: "home",
-    title: "Home",
+    title: "Dashboard",
     icon: Home,
-    pages: [{ key: "overview", label: "Overview", path: "/overview" }],
+    pages: [
+      { key: "overview", label: "Overview", path: "/overview" },
+      { key: "analytics", label: "Analytics", path: "/overview" },
+    ],
   },
   {
     key: "users",
     title: "Users",
     icon: Users,
+    pages: [{ key: "users-list", label: "User Management", path: "/users" }],
+  },
+  {
+    key: "products",
+    title: "Products",
+    icon: Package,
+    pages: [{ key: "products-list", label: "Catalog", path: "/products" }],
+  },
+  {
+    key: "orders",
+    title: "Orders",
+    icon: ShoppingCart,
+    pages: [{ key: "orders-list", label: "All Orders", path: "/orders" }],
+  },
+  {
+    key: "categories",
+    title: "Categories",
+    icon: Tags,
     pages: [
-      { key: "users-overview", label: "Overview", path: "/users/overview" },
-      { key: "users-list", label: "List", path: "/users/list" },
+      {
+        key: "categories-list",
+        label: "Category Settings",
+        path: "/categories",
+      },
     ],
   },
   {
-    key: "scans",
-    title: "Scans",
-    icon: ScanSearch,
+    key: "settings",
+    title: "Settings",
+    icon: Settings,
     pages: [
-      { key: "scans-overview", label: "Overview", path: "/scans/overview" },
-      { key: "scans-list", label: "List", path: "/scans/list" },
-    ],
-  },
-  {
-    key: "repos",
-    title: "Repos",
-    icon: Server,
-    pages: [
-      { key: "repos-overview", label: "Overview", path: "/repos/overview" },
-      { key: "repos-list", label: "List", path: "/repos/list" },
+      { key: "settings-page", label: "Admin Profile", path: "/settings" },
     ],
   },
 ];

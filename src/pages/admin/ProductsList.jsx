@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { Edit2, Eye, Plus, Search, Trash2 } from "lucide-react";
+import { Edit2, Eye, Plus, Search, Upload, Trash2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,63 +11,66 @@ import FormDialog from "@/components/forms/FormDialog";
 import TextField from "@/components/forms/TextField";
 import SelectField from "@/components/forms/SelectField";
 import StatusBadge from "@/components/common/StatusBadge";
-import { useAdminUsers } from "@/hooks/useAdminData";
+import { useAdminProducts } from "@/hooks/useAdminData";
 
 const schema = z.object({
-  name: z.string().min(2, "Name is required"),
-  email: z.string().email("Valid email is required"),
-  role: z.string().min(1, "Role is required"),
-  status: z.string().min(1, "Status is required"),
+  name: z.string().min(2),
+  category: z.string().min(1),
+  price: z.coerce.number().positive(),
+  stock: z.coerce.number().int().nonnegative(),
+  status: z.string().min(1),
 });
 
-export default function UsersList() {
-  const { data } = useAdminUsers();
+export default function ProductsList() {
+  const { data = [] } = useAdminProducts();
   const [search, setSearch] = useState("");
-  const [selectedUser, setSelectedUser] = useState(null);
-  const [editingUser, setEditingUser] = useState(null);
+  const [editingProduct, setEditingProduct] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
-  const users = data?.items || [];
-
-  const filteredUsers = useMemo(() => {
+  const filtered = useMemo(() => {
     const term = search.trim().toLowerCase();
-    if (!term) return users;
-    return users.filter((user) =>
-      [user.name, user.email, user.role, user.status].some((value) =>
+    if (!term) return data;
+    return data.filter((product) =>
+      [product.name, product.category, product.status].some((value) =>
         String(value).toLowerCase().includes(term),
       ),
     );
-  }, [search, users]);
+  }, [data, search]);
 
   const columns = useMemo(
     () => [
       {
         accessorKey: "name",
-        header: "User",
+        header: "Product",
         cell: ({ row }) => (
           <div>
             <div className="font-semibold text-text-primary">
               {row.original.name}
             </div>
             <div className="text-small-1 text-text-secondary">
-              {row.original.email}
+              {row.original.category}
             </div>
           </div>
         ),
       },
-      { accessorKey: "role", header: "Role" },
+      {
+        accessorKey: "price",
+        header: "Price",
+        cell: ({ row }) => `$${row.original.price}`,
+      },
+      { accessorKey: "stock", header: "Stock" },
       {
         accessorKey: "status",
         header: "Status",
         cell: ({ row }) => <StatusBadge status={row.original.status} />,
       },
-      { accessorKey: "country", header: "Country" },
       {
         accessorKey: "actions",
         header: "Actions",
         cell: ({ row }) => (
           <div className="flex gap-2">
             <Link
-              to={`/admin/users/${row.original.id}`}
+              to={`/admin/products/${row.original.id}`}
               className="inline-flex items-center gap-1 rounded-lg border border-border-default px-3 py-2 text-small-1 text-text-secondary hover:bg-background-hover"
             >
               <Eye size={14} /> View
@@ -75,14 +78,14 @@ export default function UsersList() {
             <Button
               variant="secondary"
               size="sm"
-              onClick={() => setEditingUser(row.original)}
+              onClick={() => setEditingProduct(row.original)}
             >
               <Edit2 size={14} />
             </Button>
             <Button
               variant="secondary"
               size="sm"
-              onClick={() => setSelectedUser(row.original)}
+              onClick={() => setSelectedProduct(row.original)}
             >
               <Trash2 size={14} />
             </Button>
@@ -95,28 +98,24 @@ export default function UsersList() {
 
   const form = useForm({
     resolver: zodResolver(schema),
-    defaultValues: { name: "", email: "", role: "Manager", status: "Active" },
+    defaultValues: {
+      name: "",
+      category: "",
+      price: 0,
+      stock: 0,
+      status: "Published",
+    },
   });
-
-  function handleCreate() {
-    setEditingUser({});
-    form.reset({ name: "", email: "", role: "Manager", status: "Active" });
-  }
-
-  function submit() {
-    setEditingUser(null);
-    form.reset();
-  }
 
   return (
     <div className="space-y-6 p-4 lg:p-6">
       <div className="flex flex-col gap-4 rounded-2xl border border-border-default bg-background-secondary p-5 shadow-sm lg:flex-row lg:items-center lg:justify-between">
         <div>
           <h2 className="text-h4 font-semibold text-text-primary">
-            User management
+            Product catalog
           </h2>
           <p className="text-body text-text-secondary">
-            Search, edit, and manage platform users.
+            Maintain the storefront inventory and publishing state.
           </p>
         </div>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -128,67 +127,81 @@ export default function UsersList() {
             <input
               value={search}
               onChange={(event) => setSearch(event.target.value)}
-              placeholder="Search users"
+              placeholder="Search products"
               className="w-full rounded-xl border border-border-default bg-background-primary py-3 pl-9 pr-4 text-body text-text-primary outline-none focus:border-border-focus sm:w-72"
             />
           </div>
-          <Button onClick={handleCreate}>
-            <Plus size={16} /> Add user
+          <Button onClick={() => setEditingProduct({})}>
+            <Plus size={16} /> Add product
           </Button>
         </div>
       </div>
-
-      <DataTable columns={columns} data={filteredUsers} />
+      <DataTable columns={columns} data={filtered} />
 
       <FormDialog
-        open={Boolean(editingUser)}
-        title={editingUser?.id ? "Edit user" : "Add user"}
-        description="Update the account profile and access level."
-        onCancel={() => setEditingUser(null)}
-        onSubmit={form.handleSubmit(submit)}
+        open={Boolean(editingProduct)}
+        title={editingProduct?.id ? "Edit product" : "Add product"}
+        description="Update catalog data and upload product media."
+        onCancel={() => setEditingProduct(null)}
+        onSubmit={form.handleSubmit(() => setEditingProduct(null))}
+        submitLabel="Save product"
       >
         <TextField
           label="Name"
-          id="user-name"
+          id="product-name"
           {...form.register("name")}
           error={form.formState.errors.name?.message}
         />
         <TextField
-          label="Email"
-          id="user-email"
-          {...form.register("email")}
-          error={form.formState.errors.email?.message}
+          label="Category"
+          id="product-category"
+          {...form.register("category")}
+          error={form.formState.errors.category?.message}
+        />
+        <TextField
+          label="Price"
+          id="product-price"
+          type="number"
+          {...form.register("price")}
+          error={form.formState.errors.price?.message}
+        />
+        <TextField
+          label="Stock"
+          id="product-stock"
+          type="number"
+          {...form.register("stock")}
+          error={form.formState.errors.stock?.message}
         />
         <SelectField
-          label="Role"
-          id="user-role"
-          {...form.register("role")}
-          error={form.formState.errors.role?.message}
-        >
-          <option>Admin</option>
-          <option>Manager</option>
-          <option>Viewer</option>
-          <option>Support</option>
-        </SelectField>
-        <SelectField
           label="Status"
-          id="user-status"
+          id="product-status"
           {...form.register("status")}
           error={form.formState.errors.status?.message}
         >
-          <option>Active</option>
-          <option>Pending</option>
-          <option>Suspended</option>
+          <option>Published</option>
+          <option>Draft</option>
+          <option>Archived</option>
         </SelectField>
+        <div className="flex flex-col gap-1.5">
+          <label className="text-[0.84rem] font-medium text-[var(--text-secondary)]">
+            Images
+          </label>
+          <button
+            type="button"
+            className="inline-flex items-center justify-center gap-2 rounded-[10px] border border-dashed border-[var(--border-default)] bg-[var(--surface-default)] px-[0.7rem] py-[0.58rem] text-[0.9rem] text-[var(--text-secondary)]"
+          >
+            <Upload size={16} /> Upload images
+          </button>
+        </div>
       </FormDialog>
 
       <ConfirmDialog
-        open={Boolean(selectedUser)}
-        title="Delete user"
-        description={`Delete ${selectedUser?.name}? This action cannot be undone.`}
+        open={Boolean(selectedProduct)}
+        title="Delete product"
+        description={`Delete ${selectedProduct?.name}?`}
+        onConfirm={() => setSelectedProduct(null)}
+        onCancel={() => setSelectedProduct(null)}
         confirmLabel="Delete"
-        onConfirm={() => setSelectedUser(null)}
-        onCancel={() => setSelectedUser(null)}
       />
     </div>
   );
