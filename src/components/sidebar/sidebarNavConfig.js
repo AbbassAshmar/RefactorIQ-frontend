@@ -22,6 +22,7 @@ import {
  */
 
 export const CLIENT_NAV_SECTIONS = [
+<<<<<<< HEAD
   {
     key: "home",
     title: "Home",
@@ -113,6 +114,50 @@ export const CLIENT_NAV_SECTIONS = [
     icon: FolderKanban,
     pages: [{ key: "projects", label: "Projects", path: "/projects" }],
   },
+=======
+    {
+        key: 'home',
+        title: 'Home',
+        icon: Home,
+        pages: [
+            { key: 'overview', label: 'Overview', path: '/overview'},
+            { key: 'projects', label: 'Projects', path: '/projects'},
+        ],
+    },
+    {
+        key: 'code',
+        title: 'Code',
+        icon: Code,
+        pages: [
+            { key: 'repo-explorer', label: 'Repository Explorer', path: '/code/repo-explorer'},
+        ],
+    },
+    {
+        key: 'architecture',
+        title: 'Architecture',
+        icon: Network,
+        pages: [
+            { key: 'dependencies', label: 'Dependencies', path: '/architecture/dependencies' },
+        ],
+    },
+    {
+        key: 'scans',
+        title: 'Scans',
+        icon: ScanSearch,
+        pages: [
+            { key: 'scans-records', label: 'Manage Scans', path: '/scans' },
+        ],
+    },
+    {
+        key: 'refactoring',
+        title: 'Refactoring',
+        icon: Repeat2,
+        pages: [
+            { key: 'refactor-queue', label: 'Refactor Queue', path: '/refactoring/queue' },
+            { key: 'refactor-suggestions', label: 'Refactor Suggestions', path: '/refactoring/suggestions' },
+        ],
+    },
+>>>>>>> 56b665b1edd597772241faf38565098c2bb85e59
 ];
 
 export const ADMIN_NAV_SECTIONS = [

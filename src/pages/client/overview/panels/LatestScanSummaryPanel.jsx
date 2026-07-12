@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { PanelWrapper } from "@/components";
 import { latestScanSummaryResponse } from "@/pages/client/overview/dummy/latestScanSummaryResponse";
 
@@ -78,3 +79,7 @@ export default function LatestScanSummaryPanel({ projectId }) {
     </PanelWrapper>
   );
 }
+=======
+// Backwards-compatible alias for consumers that still import the old panel name.
+export { default } from './ScanSummaryPanel';
+>>>>>>> 56b665b1edd597772241faf38565098c2bb85e59
