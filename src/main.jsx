@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -6,38 +5,20 @@ import queryClient from "@/lib/queryClient";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import ThemeProvider from "@/context/ThemeProvider";
 import AuthProvider from "@/context/AuthProvider";
-import { ToastProvider } from "@/components/common/ToastContext";
+import NotificationProvider from "@/context/NotificationProvider";
 import App from "./App.jsx";
 import "./index.css";
-=======
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import { QueryClientProvider } from '@tanstack/react-query';
-import queryClient from '@/lib/queryClient';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import ThemeProvider from '@/context/ThemeProvider';
-import AuthProvider from '@/context/AuthProvider';
-import NotificationProvider from '@/context/NotificationProvider';
-import App from './App.jsx';
-import './index.css';
->>>>>>> 56b665b1edd597772241faf38565098c2bb85e59
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <ThemeProvider>
-<<<<<<< HEAD
-          <ToastProvider>
-            <App />
-          </ToastProvider>
-=======
+      <ThemeProvider>
+        <AuthProvider>
           <NotificationProvider>
             <App />
           </NotificationProvider>
->>>>>>> 56b665b1edd597772241faf38565098c2bb85e59
-        </ThemeProvider>
-      </AuthProvider>
+        </AuthProvider>
+      </ThemeProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   </StrictMode>,
