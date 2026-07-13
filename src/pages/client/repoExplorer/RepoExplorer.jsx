@@ -57,7 +57,7 @@ export default function RepoExplorer() {
             {activeView === 'repository' ? (
                 <div className="p-2">
                     {isSelectingScan ? (
-                        <div className="flex min-h-[30rem] items-center justify-center gap-2 rounded-md border border-border bg-background-secondary text-text-secondary"><LoaderCircle size={18} className="animate-spin" />Loading selected scan…</div>
+                        <div className="flex min-h-[30rem] items-center justify-center gap-2 rounded border border-border bg-background-secondary text-text-secondary"><LoaderCircle size={18} className="animate-spin" />Loading selected scan…</div>
                     ) : null}
                     {!isSelectingScan && !selectedScanId ? (
                         <NoRepositoryScanState
@@ -67,7 +67,7 @@ export default function RepoExplorer() {
                         />
                     ) : null}
                     {!isSelectingScan && selectedScanId && filesQuery.isError ? (
-                        <div className="flex min-h-[30rem] items-center justify-center rounded-md border border-error-border bg-error-bg p-6 text-error-text">Unable to load files for this scan.</div>
+                        <div className="flex min-h-[30rem] items-center justify-center rounded border border-error-border bg-error-bg p-6 text-error-text">Unable to load files for this scan.</div>
                     ) : null}
                     {!isSelectingScan && selectedScanId && !filesQuery.isError ? (
                         <div className="grid h-[calc(100vh-5rem)] min-h-[36rem] grid-cols-1 gap-2 lg:grid-cols-[20rem_minmax(0,1fr)]">

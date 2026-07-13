@@ -14,7 +14,7 @@ function ProjectsList({ projects, projectsLoading, selectedProjectId, onSelectPr
                     type="button"
                     onClick={() => setIsOpen((previous) => !previous)}
                     aria-expanded={isOpen}
-                    className="flex min-w-0 flex-1 items-center gap-1.5 rounded text-left text-body font-semibold tracking-wider text-text-tertiary transition-colors hover:text-text-primary"
+                    className="flex min-w-0 flex-1 items-center gap-1.5 rounded text-left text-body font-semibold tracking-wider text-text-tertiary transition-colors hover:text-text-primary hover:underline"
                 >
                     Projects
                     {isOpen ? <ChevronDown size={14} strokeWidth={2} /> : <ChevronRight size={14} strokeWidth={2} />}
@@ -22,7 +22,7 @@ function ProjectsList({ projects, projectsLoading, selectedProjectId, onSelectPr
                 <button
                     type="button"
                     onClick={onAddProject}
-                    className="flex items-center justify-center rounded text-text-tertiary hover:bg-background-hover hover:text-text-primary transition-colors"
+                    className="flex items-center justify-center rounded text-text-tertiary hover:bg-background-hover hover:text-text-primary hover:underline transition-colors"
                     aria-label="Add project"
                 >
                     <Plus size={12} strokeWidth={2.5} />
@@ -41,10 +41,10 @@ function ProjectsList({ projects, projectsLoading, selectedProjectId, onSelectPr
                                     type="button"
                                     onClick={() => onSelectProject(project.id)}
                                     className={`
-                                        w-full text-left rounded-md px-2.5 py-1.5 text-body truncate transition-colors flex items-center justify-between
+                                        w-full text-left rounded px-2.5 py-1.5 text-body truncate transition-colors flex items-center justify-between
                                         ${project.id === selectedProjectId
                                             ? 'bg-none text-text-brand font-semibold'
-                                            : 'text-text-secondary hover:bg-background-hover hover:text-text-primary'
+                                            : 'text-text-secondary hover:bg-background-hover hover:text-text-primary hover:underline'
                                         }
                                     `}
                                 >
@@ -83,10 +83,10 @@ function NavSection({ section, basePath, defaultOpen = false }) {
             <button
                 onClick={() => setIsOpen((prev) => !prev)}
                 className={`
-                    flex w-full items-center gap-2.5 rounded-md px-2.5 py-2 text-body font-semibold transition-colors
+                    flex w-full items-center gap-2.5 rounded px-2.5 py-2 text-body font-semibold transition-colors
                     ${hasActivePage
                         ? 'text-text-primary'
-                        : 'text-text-primary hover:bg-background-hover hover:text-text-primary'
+                        : 'text-text-primary hover:bg-background-hover hover:text-text-primary hover:underline'
                     }
                 `}
             >
@@ -110,10 +110,10 @@ function NavSection({ section, basePath, defaultOpen = false }) {
                                         to={`${fullPath}${search}`}
                                         end
                                         className={({ isActive }) => `
-                                            flex items-center gap-2.5 rounded-md px-2.5 py-1.5 text-body transition-colors
+                                            flex items-center gap-2.5 rounded px-2.5 py-1.5 text-body transition-colors
                                             ${isActive
                                                 ? 'bg-background-selected text-text-brand font-medium'
-                                                : 'text-text-secondary hover:bg-background-hover hover:text-text-primary'
+                                                : 'text-text-secondary hover:bg-background-hover hover:text-text-primary hover:underline'
                                             }
                                         `}
                                     >
@@ -166,7 +166,7 @@ export default function Sidebar({
                 <div className="flex items-center justify-end px-3 py-2 sm:hidden">
                     <button
                         onClick={onClose}
-                        className="flex h-7 w-7 items-center justify-center rounded-md text-text-secondary hover:bg-background-hover hover:text-text-primary transition-colors"
+                        className="flex h-7 w-7 items-center justify-center rounded text-text-secondary hover:bg-background-hover hover:text-text-primary hover:underline transition-colors"
                         aria-label="Close sidebar"
                     >
                         <X size={16} strokeWidth={2} />

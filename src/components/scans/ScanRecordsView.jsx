@@ -3,12 +3,26 @@ import { LoaderCircle, Plus } from 'lucide-react';
 import ConfirmationModal from '@/components/common/ConfirmationModal';
 import TablePanel from '@/components/common/TablePanel';
 import ScanTable, { ScanStatusBadge } from '@/components/scans/ScanTable';
+import ScansTimelinePanel from '@/components/scans/ScansTimelinePanel';
 import { formatScanDate } from '@/components/scans/scanTableUtils';
-import { useCreateScan, useScansList, useSelectedProject } from '@/hooks';
+import {
+    SCAN_SORT,
+    SCAN_TABLE_PAGE_SIZE,
+} from '@/utils/constants';
+import {
+    LIMIT_QUERY_KEY,
+    PAGE_QUERY_KEY,
+    PROJECT_QUERY_KEY,
+    SORT_QUERY_KEY,
+} from '@/utils/queryParams';
+import {
+    useCreateScan,
+    useScansList,
+    useScansOverTime,
+    useSelectedProject,
+} from '@/hooks';
 import useNotification from '@/hooks/useNotification';
 
-
-const PAGE_SIZE = 10;
 
 export default function ScanRecordsView() {
     const [page, setPage] = useState(1);
@@ -16,12 +30,15 @@ export default function ScanRecordsView() {
     const { selectedProjectId, selectedProject, isLoading: isLoadingProjects } = useSelectedProject();
     const { success, failure } = useNotification();
     const scansQuery = useScansList({
-        project_id: selectedProjectId,
-        sort: 'date_desc',
-        page,
-        limit: PAGE_SIZE,
+        [PROJECT_QUERY_KEY]: selectedProjectId || undefined,
+        [SORT_QUERY_KEY]: SCAN_SORT.DATE_DESCENDING,
+        [PAGE_QUERY_KEY]: page,
+        [LIMIT_QUERY_KEY]: SCAN_TABLE_PAGE_SIZE,
     }, {
-        enabled: Boolean(selectedProjectId),
+        enabled: !isLoadingProjects,
+    });
+    const timelineQuery = useScansOverTime(selectedProjectId, {
+        enabled: !isLoadingProjects,
     });
     const createScan = useCreateScan({
         onSuccess: () => {
@@ -76,14 +93,23 @@ export default function ScanRecordsView() {
 
     return (
         <>
+            <ScansTimelinePanel
+                query={timelineQuery}
+                subtitle={selectedProject
+                    ? `${selectedProject.name} · Last 14 days`
+                    : 'All your projects · Last 14 days'}
+                description="Daily scan volume across your projects, optionally filtered by the selected project."
+                emptyMessage="No scans were created for this project scope in the last 14 days."
+            />
             <TablePanel
                 title="Scan records"
+                className="mt-2"
                 actions={(
                     <button
                         type="button"
                         onClick={() => setIsConfirmationOpen(true)}
                         disabled={!selectedProjectId || createScan.isPending}
-                        className="inline-flex items-center gap-2 rounded-md bg-brand-primary px-3 py-2 text-body font-semibold text-brand-text transition-colors hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-50"
+                        className="inline-flex items-center gap-2 rounded border border-brand-primary px-2 py-1 text-body font-semibold text-brand-text transition-colors hover:bg-brand-hover hover:underline disabled:cursor-not-allowed disabled:opacity-50"
                     >
                         {createScan.isPending ? <LoaderCircle size={16} className="animate-spin" /> : <Plus size={16} />}
                         {createScan.isPending ? 'Starting…' : 'Scan now'}
@@ -98,7 +124,9 @@ export default function ScanRecordsView() {
                     totalCount={pagination?.total_count ?? 0}
                     onPageChange={setPage}
                     isLoading={isLoadingProjects || scansQuery.isLoading}
-                    emptyMessage={selectedProjectId ? 'No scans have been created for this project.' : 'Select a project to view scans.'}
+                    emptyMessage={selectedProjectId
+                        ? 'No scans have been created for this project.'
+                        : 'No scans have been created across your projects.'}
                 />
             </TablePanel>
             <ConfirmationModal

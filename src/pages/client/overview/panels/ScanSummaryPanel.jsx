@@ -24,7 +24,7 @@ export default function ScanSummaryPanel({ scanId }) {
                         <p>Total files: <span className="font-semibold text-text-primary">{payload.total_files.toLocaleString()}</span></p>
                         <p className="text-text-tertiary">Scan: <span className="font-mono text-text-secondary">{scanId.slice(0, 8)}</span></p>
                     </div>
-                    <div className="grid flex-1 grid-cols-1 divide-y divide-border rounded-md border border-border sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-4">
+                    <div className="grid flex-1 grid-cols-1 divide-y divide-border rounded border border-border sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-4">
                         {OVERVIEW_PRIORITY_BANDS.map((band) => (
                             <div key={band.key} className="flex min-h-24 flex-col justify-center px-3 py-2 text-center">
                                 <p className="mb-2 text-h5 font-medium text-text-primary">{band.label}</p>

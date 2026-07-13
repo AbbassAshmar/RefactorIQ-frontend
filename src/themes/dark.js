@@ -36,6 +36,8 @@ export const DARK_THEME = {
   'blue-800': 'hsl(201, 80%, 20%)',
   'blue-900': 'hsl(201, 80%, 16%)',
 
+  'blue-500-bg': 'hsla(201, 80%, 32%, 0.16)',
+
   // ============================================
   // BASE COLORS - ACCENT COLORS
   // ============================================
@@ -102,6 +104,15 @@ export const DARK_THEME = {
   'chart-risk-by-directory': 'hsl(201, 38%, 52%)',
   'chart-risk-trend-score': 'hsl(201, 44%, 58%)',
   'chart-risk-trend-score-fill': 'hsla(201, 44%, 58%, 0.14)',
+  'chart-admin-scans-timeline': 'hsl(205, 46%, 58%)',
+  'chart-admin-scans-timeline-fill': 'hsla(205, 46%, 58%, 0.16)',
+  'chart-admin-scan-duration': 'hsl(178, 34%, 51%)',
+  'chart-admin-scan-duration-hover': 'hsl(178, 38%, 58%)',
+  'chart-admin-status-pending': 'hsl(36, 68%, 61%)',
+  'chart-admin-status-running': 'hsl(204, 50%, 60%)',
+  'chart-admin-status-succeeded': 'hsl(147, 38%, 54%)',
+  'chart-admin-status-failed': 'hsl(3, 58%, 62%)',
+  'chart-admin-status-cancelled': 'hsl(220, 8%, 52%)',
 
   // Top architectures uses four distinct cool slate/teal steps.
   'chart-top-architectures-bar-1': 'hsl(220, 32%, 54%)',
@@ -154,7 +165,7 @@ export const DARK_THEME = {
   // SEMANTIC COLORS - BRAND / PRIMARY ACTIONS
   // ============================================
   'brand-primary': 'var(--blue-500)',
-  'brand-primary-hover': 'var(--blue-400)',
+  'brand-primary-hover': 'var(--blue-500-bg)',
   'brand-primary-pressed': 'var(--blue-600)',
   'brand-primary-bg': 'hsla(201, 80%, 32%, 0.16)',
   'brand-secondary': 'var(--blue-700)',

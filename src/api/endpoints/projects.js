@@ -1,4 +1,5 @@
 import apiClient from '@/api/client';
+import { ADMIN_PROJECTS_ENDPOINT } from '@/utils/constants';
 
 
 const projectsApi = {
@@ -7,6 +8,9 @@ const projectsApi = {
 
 	create: (payload) =>
 		apiClient.post('/projects/', payload).then((r) => r.data),
+
+	adminList: (params = {}) =>
+		apiClient.get(ADMIN_PROJECTS_ENDPOINT, { params }).then((response) => response.data),
 };
 
 export default projectsApi;

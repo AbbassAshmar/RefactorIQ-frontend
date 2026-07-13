@@ -215,7 +215,7 @@ export default function CreateProjectSection({
 
 	return (
 		<section
-			className="rounded-xl border border-border bg-background-secondary px-4 py-10 shadow-sm md:px-10"
+			className="rounded border border-border bg-background-secondary px-4 py-10 shadow-sm md:px-10"
 			style={{
 				backgroundImage: 'radial-gradient(circle at top, var(--brand-primary-bg), transparent 62%)',
 			}}
@@ -253,7 +253,7 @@ export default function CreateProjectSection({
 									onKeyDown={handleProjectNameKeyDown}
 									disabled={!canCreateProject || createProjectMutation.isPending}
 									placeholder="First Project"
-									className="w-full rounded-md border border-border bg-background-primary px-3 py-2.5 text-body text-text-primary outline-none transition-colors placeholder:text-text-tertiary focus:border-border-focus"
+									className="w-full rounded border border-border bg-background-primary px-3 py-2.5 text-body text-text-primary outline-none transition-colors placeholder:text-text-tertiary focus:border-border-focus"
 								/>
 
 								{errors.name ? (
@@ -265,7 +265,7 @@ export default function CreateProjectSection({
 								type="button"
 								onClick={handleExpand}
 								disabled={!projectName.trim() || !canCreateProject || createProjectMutation.isPending}
-								className="rounded-md bg-brand-primary px-5 py-2.5 text-body font-semibold text-text-inverse transition-colors hover:bg-brand-hover disabled:cursor-not-allowed disabled:bg-background-tertiary disabled:text-text-disabled"
+								className="rounded border border-brand-primary px-2 py-1 text-body font-semibold text-brand-text transition-colors hover:bg-brand-hover hover:underline disabled:cursor-not-allowed disabled:opacity-50"
 							>
 								Next
 							</button>
@@ -298,7 +298,7 @@ export default function CreateProjectSection({
 											value={selectedRepository}
 											onChange={handleRepositoryChange}
 											disabled={repositoriesQuery.isLoading || createProjectMutation.isPending}
-											className="w-full appearance-none rounded-md border border-border bg-background-primary py-2.5 pl-9 pr-9 text-body text-text-primary outline-none transition-colors focus:border-border-focus disabled:cursor-not-allowed disabled:text-text-disabled"
+											className="w-full appearance-none rounded border border-border bg-background-primary py-2.5 pl-9 pr-9 text-body text-text-primary outline-none transition-colors focus:border-border-focus disabled:cursor-not-allowed disabled:text-text-disabled"
 										>
 											<option value="">Select a repository</option>
 											{repositories.map((repo) => (
@@ -356,7 +356,7 @@ export default function CreateProjectSection({
 												}
 											}}
 											disabled={!selectedRepositoryData || branchesQuery.isLoading || createProjectMutation.isPending}
-											className="w-full appearance-none rounded-md border border-border bg-background-primary py-2.5 pl-9 pr-9 text-body text-text-primary outline-none transition-colors focus:border-border-focus disabled:cursor-not-allowed disabled:text-text-disabled"
+											className="w-full appearance-none rounded border border-border bg-background-primary py-2.5 pl-9 pr-9 text-body text-text-primary outline-none transition-colors focus:border-border-focus disabled:cursor-not-allowed disabled:text-text-disabled"
 										>
 											<option value="">Select a branch</option>
 											{branches.map((branch) => (
@@ -394,7 +394,7 @@ export default function CreateProjectSection({
 							<button
 								type="submit"
 								disabled={!canCreateProject || createProjectMutation.isPending}
-								className="w-full rounded-md bg-brand-primary px-4 py-2.5 text-body font-semibold text-text-inverse transition-colors hover:bg-brand-hover disabled:cursor-not-allowed disabled:bg-background-tertiary disabled:text-text-disabled"
+								className="w-full rounded border border-brand-primary px-2 py-1 text-body font-semibold text-brand-text transition-colors hover:bg-brand-hover hover:underline disabled:cursor-not-allowed disabled:opacity-50"
 							>
 								{createProjectMutation.isPending ? 'Adding...' : 'Add'}
 							</button>

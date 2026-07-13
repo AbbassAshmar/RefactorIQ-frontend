@@ -50,7 +50,7 @@ export default function ClientOverview() {
             {activeView === 'overview' ? (
                 <div className="p-2">
                     {isSelectingScan ? (
-                        <div className="flex min-h-[24rem] items-center justify-center gap-2 rounded-md border border-border bg-background-secondary text-body text-text-secondary">
+                        <div className="flex min-h-[24rem] items-center justify-center gap-2 rounded border border-border bg-background-secondary text-body text-text-secondary">
                             <LoaderCircle size={18} className="animate-spin" />
                             Loading selected scan…
                         </div>

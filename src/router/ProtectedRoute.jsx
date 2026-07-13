@@ -1,19 +1,9 @@
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '@/context/AuthProvider';
+import { roleHomePath } from '@/router/roleHomePath';
 
 function normalizeRoles(roles) {
     return roles.map((role) => role.toLowerCase());
-}
-
-function roleHomePath(role) {
-    switch (role) {
-        case 'admin':
-            return '/admin/overview';
-        case 'client':
-            return '/dashboard/overview';
-        default:
-            return '/login';
-    }
 }
 
 export default function ProtectedRoute({ children, allowedRoles }) {

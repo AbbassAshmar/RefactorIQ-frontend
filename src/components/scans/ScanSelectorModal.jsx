@@ -64,7 +64,7 @@ export default function ScanSelectorModal({ isOpen, onClose, onSelectScan, selec
                 aria-modal="true"
                 aria-labelledby="scan-selector-title"
                 onMouseDown={(event) => event.stopPropagation()}
-                className="flex max-h-[85vh] w-full max-w-5xl flex-col overflow-hidden rounded-md border border-border-secondary bg-background-elevated shadow-xl"
+                className="flex max-h-[85vh] w-full max-w-5xl flex-col overflow-hidden rounded border border-border-secondary bg-background-elevated shadow-xl"
             >
                 <header className="flex items-start justify-between gap-4 border-b border-border px-5 py-4">
                     <div>
@@ -73,7 +73,7 @@ export default function ScanSelectorModal({ isOpen, onClose, onSelectScan, selec
                             {selectedProject ? `Showing newest scans for ${selectedProject.name}.` : 'Choose a project first.'}
                         </p>
                     </div>
-                    <button type="button" onClick={onClose} className="rounded p-1 text-text-secondary hover:bg-background-hover hover:text-text-primary" aria-label="Close">
+                    <button type="button" onClick={onClose} className="rounded p-1 text-text-secondary hover:bg-background-hover hover:text-text-primary hover:underline" aria-label="Close">
                         <X size={18} />
                     </button>
                 </header>

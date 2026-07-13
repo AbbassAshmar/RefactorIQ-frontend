@@ -12,14 +12,15 @@ export function useCurrentUser(options = {}) {
 
 export function useAdminLogin(options = {}) {
 	const qc = useQueryClient();
+	const { onSuccess, ...mutationOptions } = options;
 
 	return useMutation({
+		...mutationOptions,
 		mutationFn: authApi.adminLogin,
-		onSuccess: (...args) => {
-			qc.invalidateQueries({ queryKey: ['auth', 'me'] });
-			options.onSuccess?.(...args);
+		onSuccess: async (...args) => {
+			await qc.refetchQueries({ queryKey: ['auth', 'me'], type: 'active' });
+			await onSuccess?.(...args);
 		},
-		...options,
 	});
 }
 
@@ -46,7 +47,7 @@ export function useLogout() {
 
 	return useMutation({
 		mutationFn: authApi.logout,
-		onSuccess: () => {
+		onSettled: () => {
 			qc.clear();
 		},
 	});

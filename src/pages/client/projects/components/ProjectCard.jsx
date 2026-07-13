@@ -162,7 +162,7 @@ function getThreatsMeta(threatsCount) {
 function StatItem({ value, label, className }) {
 	return (
 		<div className={[
-			'flex min-w-[78px] flex-col items-center rounded-md border px-3 py-2',
+			'flex min-w-[78px] flex-col items-center rounded border px-3 py-2',
 			className,
 		].join(' ')}>
 			<div className="text-body font-semibold">{value}</div>
@@ -173,7 +173,7 @@ function StatItem({ value, label, className }) {
 
 function InfoRow({ icon, label, value }) {
 	return (
-		<div className="flex items-center justify-between rounded-md bg-background-tertiary px-3 py-2 text-small-1">
+		<div className="flex items-center justify-between rounded bg-background-tertiary px-3 py-2 text-small-1">
 			<span className="flex items-center gap-1.5 text-text-secondary">
 				{icon}
 				{label}
@@ -234,7 +234,7 @@ export default function ProjectCard({ project, onDelete }) {
 		<article
 			onClick={handleToggleCard}
 			className={[
-				'relative cursor-pointer rounded-lg border bg-background-secondary transition-colors',
+				'relative cursor-pointer rounded border bg-background-secondary transition-colors',
 				isExpanded
 					? 'border-border-secondary border-l-2 border-l-brand-primary'
 					: 'border-border',
@@ -243,7 +243,7 @@ export default function ProjectCard({ project, onDelete }) {
 			<div className="flex flex-wrap items-center justify-between gap-3 px-4 py-3">
 				<div className="min-w-0 flex-1">
 					<div className="flex min-w-0 items-center gap-3">
-						<div className="flex h-9 w-9 items-center justify-center rounded-md border border-border bg-background-tertiary text-warning">
+						<div className="flex h-9 w-9 items-center justify-center rounded border border-border bg-background-tertiary text-warning">
 							<Globe2 size={16} />
 						</div>
 
@@ -282,7 +282,7 @@ export default function ProjectCard({ project, onDelete }) {
 							event.stopPropagation();
 							setIsExpanded((prev) => !prev);
 						}}
-						className="inline-flex items-center gap-1 rounded-md border border-border px-3 py-2 text-small-1 font-medium text-text-primary transition-colors hover:bg-background-hover"
+						className="inline-flex items-center gap-2 rounded border border-brand-primary px-2 py-1 text-body font-semibold text-brand-text transition-colors hover:bg-brand-hover hover:underline"
 					>
 						View Details
 						{isExpanded ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
@@ -296,19 +296,19 @@ export default function ProjectCard({ project, onDelete }) {
 								event.stopPropagation();
 								setIsMenuOpen((prev) => !prev);
 							}}
-							className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-border text-text-secondary transition-colors hover:bg-background-hover hover:text-text-primary"
+							className="inline-flex h-8 w-8 items-center justify-center rounded border border-brand-primary text-brand-text transition-colors hover:bg-brand-hover hover:underline"
 							aria-label="Project actions"
 						>
 							<EllipsisVertical size={15} />
 						</button>
 
 						{isMenuOpen ? (
-							<div className="absolute right-0 top-9 z-20 min-w-[140px] rounded-md border border-border-secondary bg-background-elevated p-1 shadow-md">
+							<div className="absolute right-0 top-9 z-20 min-w-[140px] rounded border border-border-secondary bg-background-elevated p-1 shadow-md">
 								<button
 									type="button"
 									onClick={handleDelete}
 									disabled={!onDelete}
-									className="flex w-full items-center gap-2 rounded-sm px-2 py-1.5 text-left text-small-1 text-error transition-colors hover:bg-error-bg disabled:cursor-not-allowed disabled:text-text-disabled"
+									className="flex w-full items-center gap-2 rounded border border-brand-primary px-2 py-1.5 text-left text-small-1 text-error transition-colors hover:bg-brand-hover hover:underline disabled:cursor-not-allowed disabled:opacity-50"
 								>
 									<Trash2 size={13} />
 									Delete
@@ -321,7 +321,7 @@ export default function ProjectCard({ project, onDelete }) {
 
 			{isExpanded ? (
 				<div className="grid gap-3 border-t border-border p-4 lg:grid-cols-2">
-					<section className="rounded-md border border-border bg-background-secondary p-3">
+					<section className="rounded border border-border bg-background-secondary p-3">
 						<h4 className="mb-2 text-small-1 font-semibold uppercase tracking-wide text-text-secondary">
 							Project Details
 						</h4>
@@ -333,7 +333,7 @@ export default function ProjectCard({ project, onDelete }) {
 						</div>
 					</section>
 
-					<section className="rounded-md border border-border bg-background-secondary p-3">
+					<section className="rounded border border-border bg-background-secondary p-3">
 						<h4 className="mb-2 text-small-1 font-semibold uppercase tracking-wide text-text-secondary">
 							Repository
 						</h4>

@@ -3,7 +3,7 @@ import RelatedFileList from '@/pages/client/repoExplorer/components/RelatedFileL
 
 export default function FileRelationshipsSection({ details, onSelectFile }) {
     return (
-        <section className="rounded-md border border-border bg-background-tertiary p-3">
+        <section className="rounded border border-border bg-background-tertiary p-3">
             <h3 className="text-body font-semibold text-text-primary">Related files</h3>
             <p className="mt-1 text-small-1 text-text-tertiary">Files connected through dependencies or change history.</p>
             <div className="mt-3 grid gap-4 lg:grid-cols-2">

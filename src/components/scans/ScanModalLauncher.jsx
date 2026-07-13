@@ -48,7 +48,7 @@ export default function ScanModalLauncher({ isOpen: controlledIsOpen, onOpenChan
                         onClick={() => setIsOpen(true)}
                         title="Change pinned scan"
                         aria-label="Change pinned scan"
-                        className="flex items-center justify-center rounded-br rounded-tl border-0 bg-transparent px-2 py-2 text-inherit hover:bg-background-hover hover:text-brand-hover"
+                        className="flex items-center justify-center rounded border border-brand-primary px-2 py-1 text-brand-text hover:bg-brand-hover hover:underline"
                     >
                         <Pin className="h-4 w-4 fill-current" />
                     </button>

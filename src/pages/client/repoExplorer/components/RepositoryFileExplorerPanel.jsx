@@ -40,7 +40,7 @@ export default function RepositoryFileExplorerPanel({ files, selectedFileId, onS
                         value={search}
                         onChange={(event) => setSearch(event.target.value)}
                         placeholder="Search files"
-                        className="w-full rounded-md border border-border bg-background-tertiary py-2 pl-8 pr-3 text-small-1 text-text-primary outline-none placeholder:text-text-tertiary focus:border-border-focus"
+                        className="w-full rounded border border-border bg-background-tertiary py-2 pl-8 pr-3 text-small-1 text-text-primary outline-none placeholder:text-text-tertiary focus:border-border-focus"
                     />
                 </label>
                 <div className="mt-2 flex flex-wrap gap-3 border-b border-border pb-2 text-small-2 text-text-secondary">

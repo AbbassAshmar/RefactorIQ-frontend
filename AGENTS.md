@@ -172,6 +172,14 @@ Use [tailwind.config.js](tailwind.config.js) for colors, fonts, font sizes, and 
 
 The theme includes semantic groups such as `text-*`, `background-*`, `border-*`, `brand-*`, `success-*`, `error-*`, `warning-*`, `info-*`, and `accent-*`. Use the token that expresses the design intent rather than hard-coding a hex value.
 
+### Buttons and corner radius
+
+- Use compact, outlined brand styling for standard action buttons: no default background, a `border-brand-primary` border, `text-brand-text` text, low horizontal and vertical padding, and `hover:bg-brand-hover` on hover.
+- Standard buttons must underline their text on hover (`hover:underline`) in addition to the hover background. Keep disabled controls visibly disabled with `disabled:cursor-not-allowed` and reduced opacity.
+- Use the low-radius `rounded` utility for panels, inputs, menus, and controls. Do not use `rounded-md` or larger rounded corners for ordinary UI elements.
+- Preserve `rounded-full` only where a circular treatment is intentional, such as avatars, status dots, or circular progress indicators.
+- Compact navigation, tab, tree, and icon-only controls may use their established spacing and transparent treatment, but should still use low-radius corners and visible hover/focus states.
+
 ### Required `DEFAULT` rule
 
 When a color is defined with `DEFAULT` in Tailwind, the framework automatically collapses it into the base name. **Never use `-default` in utility classes.**

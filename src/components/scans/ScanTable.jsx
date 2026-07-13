@@ -43,7 +43,7 @@ export default function ScanTable({
     });
 
     return (
-        <div className={`overflow-hidden rounded-md ${className}`}>
+        <div className={`overflow-hidden rounded ${className}`}>
             <div className="overflow-x-auto">
                 <table className="w-full border-collapse text-left text-body">
                     <thead className="border-b border-border text-small-1 uppercase tracking-wide text-text-tertiary">
@@ -103,7 +103,7 @@ export default function ScanTable({
                             type="button"
                             onClick={() => onPageChange(page - 1)}
                             disabled={page <= 1}
-                            className="inline-flex h-7 w-7 items-center justify-center rounded border border-border text-text-secondary hover:bg-background-hover disabled:cursor-not-allowed disabled:opacity-40"
+                            className="inline-flex h-7 w-7 items-center justify-center rounded border border-brand-primary text-brand-text hover:bg-brand-hover hover:underline disabled:cursor-not-allowed disabled:opacity-40"
                             aria-label="Previous page"
                         >
                             <ChevronLeft size={15} />
@@ -112,7 +112,7 @@ export default function ScanTable({
                             type="button"
                             onClick={() => onPageChange(page + 1)}
                             disabled={page >= pageCount}
-                            className="inline-flex h-7 w-7 items-center justify-center rounded border border-border text-text-secondary hover:bg-background-hover disabled:cursor-not-allowed disabled:opacity-40"
+                            className="inline-flex h-7 w-7 items-center justify-center rounded border border-brand-primary text-brand-text hover:bg-brand-hover hover:underline disabled:cursor-not-allowed disabled:opacity-40"
                             aria-label="Next page"
                         >
                             <ChevronRight size={15} />

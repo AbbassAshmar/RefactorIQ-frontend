@@ -11,3 +11,6 @@ export { AuthenticatedNavbar, UnauthenticatedNavbar } from './navbar';
 
 /* Sidebar */
 export { Sidebar, CLIENT_NAV_SECTIONS, ADMIN_NAV_SECTIONS } from './sidebar';
+
+/* Projects */
+export { AdminProjectModalLauncher, AdminProjectSelectorModal } from './projects';

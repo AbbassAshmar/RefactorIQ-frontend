@@ -38,7 +38,7 @@ export default function PanelWrapper({ title, subtitle, description, children, c
     return (
         <section
             className={[
-                'flex flex-col rounded-md border border-border bg-background-secondary p-3 shadow-sm',
+                'flex flex-col rounded border border-border bg-background-secondary p-3 shadow-sm',
                 isMaximized
                     ? 'fixed inset-x-0 bottom-0 top-12 z-40 m-3 flex flex-col overflow-hidden'
                     : '',
@@ -54,7 +54,7 @@ export default function PanelWrapper({ title, subtitle, description, children, c
                                 {description ? (
                                     <div className="group relative">
                                         <Info size={14} className="text-text-secondary" />
-                                        <div className="pointer-events-none absolute left-5 top-1/2 z-20 hidden w-56 -translate-y-1/2 rounded-md border border-border-secondary bg-background-elevated p-2 text-small-1 text-text-secondary shadow-md group-hover:block">
+                                        <div className="pointer-events-none absolute left-5 top-1/2 z-20 hidden w-56 -translate-y-1/2 rounded border border-border-secondary bg-background-elevated p-2 text-small-1 text-text-secondary shadow-md group-hover:block">
                                             {description}
                                         </div>
                                     </div>
@@ -71,18 +71,18 @@ export default function PanelWrapper({ title, subtitle, description, children, c
                     <button
                         type="button"
                         onClick={() => setIsMenuOpen((prev) => !prev)}
-                        className="inline-flex h-7 w-7 items-center justify-center rounded-md border border-border bg-background-secondary text-text-secondary transition-colors hover:bg-background-hover hover:text-text-primary"
+                        className="inline-flex h-7 w-7 items-center justify-center rounded border border-brand-primary text-brand-text transition-colors hover:bg-brand-hover hover:underline"
                         aria-label="Panel options"
                     >
                         <Ellipsis size={16} />
                     </button>
 
                     {isMenuOpen ? (
-                        <div className="absolute right-0 top-8 z-30 min-w-40 rounded-md border border-border-secondary bg-background-elevated p-1 shadow-md">
+                        <div className="absolute right-0 top-8 z-30 min-w-40 rounded border border-border-secondary bg-background-elevated p-1 shadow-md">
                             <button
                                 type="button"
                                 onClick={handleToggleMaximize}
-                                className="flex w-full items-center gap-2 rounded-sm px-2 py-1.5 text-left text-small-1 text-text-primary transition-colors hover:bg-background-hover"
+                                className="flex w-full items-center gap-2 rounded px-2 py-1.5 text-left text-brand-text transition-colors hover:bg-brand-hover hover:underline"
                             >
                                 {isMaximized ? <Minimize2 size={14} /> : <Maximize2 size={14} />}
                                 {isMaximized ? 'Minimize panel' : 'Maximize panel'}

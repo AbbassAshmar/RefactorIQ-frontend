@@ -43,7 +43,7 @@ export default function TopRefactorDriversPanel({ query }) {
             ) : null}
             {!query.isLoading && !query.isError && drivers.length > 0 ? (
                 <div className="flex min-h-[12rem] flex-col justify-center gap-5">
-                    <div className="flex h-8 w-full overflow-hidden rounded-md bg-background-tertiary" aria-label="Refactor driver distribution">
+                    <div className="flex h-8 w-full overflow-hidden rounded bg-background-tertiary" aria-label="Refactor driver distribution">
                         {drivers.map((driver) => (
                             <div
                                 key={driver.key}

@@ -19,7 +19,7 @@ export default function RefactorPriorityHero({ details }) {
     const partial = confidence < 0.7 || Number(decisionMetadata.upstream_error_count ?? 0) > 0 || Number(decisionMetadata.none_metric_count ?? 0) > 0;
 
     return (
-        <section className="grid gap-5 rounded-lg bg-background-tertiary p-4 md:grid-cols-[8rem_1fr]">
+        <section className="grid gap-5 rounded bg-background-tertiary p-4 md:grid-cols-[8rem_1fr]">
             <div className="text-center md:text-left">
                 <p className="text-small-1 font-semibold text-text-secondary">Refactor priority</p>
                 <p className="mt-1 text-h2 font-bold leading-none text-text-primary">{score.toFixed(2)}</p>

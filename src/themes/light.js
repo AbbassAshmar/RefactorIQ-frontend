@@ -102,6 +102,15 @@ export const LIGHT_THEME = {
   'chart-risk-by-directory': 'hsl(201, 38%, 43%)',
   'chart-risk-trend-score': 'hsl(201, 44%, 46%)',
   'chart-risk-trend-score-fill': 'hsla(201, 44%, 46%, 0.14)',
+  'chart-admin-scans-timeline': 'hsl(205, 46%, 45%)',
+  'chart-admin-scans-timeline-fill': 'hsla(205, 46%, 45%, 0.14)',
+  'chart-admin-scan-duration': 'hsl(178, 34%, 39%)',
+  'chart-admin-scan-duration-hover': 'hsl(178, 38%, 33%)',
+  'chart-admin-status-pending': 'hsl(36, 68%, 52%)',
+  'chart-admin-status-running': 'hsl(204, 50%, 48%)',
+  'chart-admin-status-succeeded': 'hsl(147, 38%, 42%)',
+  'chart-admin-status-failed': 'hsl(3, 58%, 54%)',
+  'chart-admin-status-cancelled': 'hsl(220, 8%, 58%)',
 
   // Top architectures uses four distinct cool slate/teal steps.
   'chart-top-architectures-bar-1': 'hsl(220, 32%, 45%)',

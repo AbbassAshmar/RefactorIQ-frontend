@@ -15,7 +15,7 @@ function FileRow({ file, selectedFileId, onSelectFile }) {
             type="button"
             onClick={() => onSelectFile(file.id)}
             title={file.file_path}
-            className={`flex w-full min-w-0 items-center gap-2 rounded px-1.5 py-1 text-left text-small-1 transition-colors ${selected ? 'bg-background-selected text-text-brand' : 'text-text-secondary hover:bg-background-hover hover:text-text-primary'}`}
+            className={`flex w-full min-w-0 items-center gap-2 rounded px-1.5 py-1 text-left text-small-1 transition-colors ${selected ? 'bg-background-selected text-text-brand' : 'text-text-secondary hover:bg-background-hover hover:text-text-primary hover:underline'}`}
         >
             <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${priorityDotClass[file.priority_band] ?? 'bg-text-disabled'}`} />
             <FileCode2 size={14} className="shrink-0" />
@@ -35,7 +35,7 @@ function FolderNode({ node, selectedFileId, collapsed, onToggle, onSelectFile })
                 type="button"
                 onClick={() => onToggle(node.path)}
                 aria-expanded={isExpanded}
-                className="flex w-full items-center gap-1.5 rounded px-1 py-1 text-left text-small-1 font-medium text-text-primary transition-colors hover:bg-background-hover"
+                className="flex w-full items-center gap-1.5 rounded px-1 py-1 text-left text-small-1 font-medium text-text-primary transition-colors hover:bg-background-hover hover:underline"
             >
                 {isExpanded ? <ChevronDown size={13} /> : <ChevronRight size={13} />}
                 <Folder size={14} className="text-text-secondary" />

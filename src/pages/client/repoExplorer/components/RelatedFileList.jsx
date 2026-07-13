@@ -12,7 +12,7 @@ export default function RelatedFileList({ title, files, onSelectFile, emptyMessa
                         key={`${file.relationship ?? 'related'}-${file.direction ?? ''}-${file.id}`}
                         type="button"
                         onClick={() => onSelectFile(file.id)}
-                        className="flex w-full items-center justify-between gap-2 py-2 text-left text-small-1 text-text-primary hover:text-text-brand"
+                        className="flex w-full items-center justify-between gap-2 py-2 text-left text-small-1 text-text-primary hover:text-text-brand hover:underline"
                     >
                         <span className="min-w-0 truncate font-mono">{file.file_path}</span>
                         <span className="flex shrink-0 items-center gap-1 text-text-tertiary">

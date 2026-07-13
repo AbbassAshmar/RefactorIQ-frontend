@@ -35,7 +35,7 @@ function NotificationItem({ notification, dismiss }) {
 
     return (
         <article
-            className={`pointer-events-auto rounded-sm border border-border border-t-2 ${style.border} bg-background-elevated px-3 py-3 shadow-lg`}
+            className={`pointer-events-auto rounded border border-border border-t-2 ${style.border} bg-background-elevated px-3 py-3 shadow-lg`}
             role="status"
         >
             <div className="flex items-start gap-2">
@@ -47,7 +47,7 @@ function NotificationItem({ notification, dismiss }) {
                 <button
                     type="button"
                     onClick={() => dismiss(notification.id)}
-                    className="shrink-0 rounded p-0.5 text-text-tertiary transition-colors hover:bg-background-hover hover:text-text-primary"
+                    className="shrink-0 rounded p-0.5 text-text-tertiary transition-colors hover:bg-background-hover hover:text-text-primary hover:underline"
                     aria-label="Dismiss notification"
                 >
                     <X size={15} />

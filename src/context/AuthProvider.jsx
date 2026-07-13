@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { useCurrentUser } from '@/hooks';
 
 const DEFAULT_USER = {
@@ -18,6 +18,7 @@ const AuthContext = createContext({
     isAuthenticated: false,
     isCheckingAuth: true,
     refreshUser: async () => {},
+    resetAuth: () => {},
 });
 
 function normalizeRole(role) {
@@ -63,7 +64,11 @@ export default function AuthProvider({ children }) {
 
     const role = normalizeRole(user?.role);
     const isAuthenticated = Boolean(user?.id);
-    const isCheckingAuth = !isHydrated || (isLoading && !isAuthenticated);
+    const isCheckingAuth = !isHydrated;
+    const resetAuth = useCallback(() => {
+        setUser(DEFAULT_USER);
+        setIsHydrated(true);
+    }, []);
 
     const value = useMemo(
         () => ({
@@ -72,8 +77,9 @@ export default function AuthProvider({ children }) {
             isAuthenticated,
             isCheckingAuth,
             refreshUser: refetch,
+            resetAuth,
         }),
-        [isAuthenticated, isCheckingAuth, refetch, role, user],
+        [isAuthenticated, isCheckingAuth, refetch, resetAuth, role, user],
     );
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

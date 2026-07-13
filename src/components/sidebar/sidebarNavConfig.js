@@ -93,8 +93,7 @@ export const ADMIN_NAV_SECTIONS = [
         title: 'Scans',
         icon: ScanSearch,
         pages: [
-            { key: 'scans-overview', label: 'Overview', path: '/scans/overview'},
-            { key: 'scans-list', label: 'List', path: '/scans/list'},
+            { key: 'scans-records', label: 'Records', path: '/scans'},
         ],
     },
     {

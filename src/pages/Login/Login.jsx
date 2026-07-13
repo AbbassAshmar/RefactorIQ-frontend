@@ -35,7 +35,7 @@ function InputField({ id, label, type, value, onChange, placeholder, disabled, i
                     disabled={disabled}
                     placeholder={placeholder}
                     className="
-                        w-full rounded-lg border border-border
+                        w-full rounded border border-border
                         bg-background-primary
                         py-2.5 pl-10 pr-4
                         text-body text-text-primary
@@ -54,7 +54,7 @@ function InputField({ id, label, type, value, onChange, placeholder, disabled, i
 
 function ErrorBanner({ message }) {
     return (
-        <div className="flex items-start gap-3 rounded-lg border border-error-border bg-error-bg/50 px-4 py-3 text-small-1 text-error-text backdrop-blur-sm">
+        <div className="flex items-start gap-3 rounded border border-error-border bg-error-bg/50 px-4 py-3 text-small-1 text-error-text backdrop-blur-sm">
             <AlertCircle size={16} className="mt-0.5 shrink-0" strokeWidth={2} />
             <span className="font-medium">{message}</span>
         </div>
@@ -64,7 +64,7 @@ function ErrorBanner({ message }) {
 function SectionLabel({ icon: Icon, title, description }) {
     return (
         <div className="flex items-center gap-4">
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-background-tertiary border border-border-tertiary text-text-secondary shadow-sm">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded bg-background-tertiary border border-border-tertiary text-text-secondary shadow-sm">
                 <Icon size={18} strokeWidth={2} />
             </span>
             <div className="space-y-0.5">
@@ -121,7 +121,7 @@ export default function Login() {
             <div
                 className="
                     w-full max-w-[540px]
-                    rounded-xl
+                    rounded
                     border border-border
                     bg-background-secondary
                     shadow-xl
@@ -132,7 +132,7 @@ export default function Login() {
                 {/* Subtle Header Highlight */}
                 <div className="border-b border-border-tertiary bg-background-tertiary/30 px-8 py-7">
                     <div className="flex items-center gap-4">
-                        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-primary shadow-lg shadow-brand-primary/20 text-text-primary">
+                        <div className="flex h-12 w-12 items-center justify-center rounded bg-brand-primary shadow-lg shadow-brand-primary/20 text-text-primary">
                             <LogIn size={22} strokeWidth={2.5} />
                         </div>
                         <div className="space-y-1">
@@ -191,14 +191,12 @@ export default function Login() {
                                 disabled={isLoading}
                                 className="
                                     relative mt-2 flex w-full items-center justify-center gap-2
-                                    rounded-lg bg-brand-primary
-                                    px-4 py-3
-                                    text-body font-bold text-text-primary
-                                    shadow-md shadow-brand-primary/10
-                                    transition-all duration-200
-                                    hover:bg-brand-hover hover:-translate-y-0.5
-                                    active:bg-brand-pressed active:translate-y-0
-                                    disabled:cursor-not-allowed disabled:opacity-50 disabled:translate-y-0
+                                    rounded border border-brand-primary
+                                    px-2 py-1
+                                    text-body font-semibold text-brand-text
+                                    transition-colors duration-200
+                                    hover:bg-brand-hover hover:underline
+                                    disabled:cursor-not-allowed disabled:opacity-50
                                     focus:outline-none focus:ring-4 focus:ring-brand-primary/20
                                 "
                             >
@@ -235,17 +233,13 @@ export default function Login() {
                             disabled={isLoading}
                             className="
                                 group relative flex w-full items-center justify-center gap-3
-                                rounded-lg
-                                border border-border-secondary
-                                bg-background-tertiary
-                                px-4 py-3
-                                text-body font-bold text-text-primary
-                                shadow-sm
-                                transition-all duration-200
-                                hover:bg-background-hover hover:border-text-tertiary
-                                active:bg-background-pressed
+                                rounded border border-[#1f2328]
+                                bg-[#1f2328] px-4 py-2.5
+                                text-body font-semibold text-white
+                                shadow-sm transition-colors duration-200
+                                hover:border-[#32383f] hover:bg-[#32383f]
                                 disabled:cursor-not-allowed disabled:opacity-50
-                                focus:outline-none focus:ring-4 focus:ring-border-focus/10
+                                focus:outline-none focus:ring-4 focus:ring-[#1f2328]/20
                             "
                         >
                             {githubLogin.isPending ? (

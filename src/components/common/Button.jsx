@@ -1,36 +1,9 @@
-/**
- * Placeholder — shared Button component.
- * Replace with a fully styled version later.
- */
-export default function Button({ children, variant = 'primary', ...props }) {
-  const baseStyles = {
-    padding: '0.5rem 1rem',
-    borderRadius: '6px',
-    border: 'none',
-    cursor: 'pointer',
-    fontWeight: 600,
-    fontSize: '0.875rem',
-    transition: 'background-color 150ms ease',
-  };
-
-  const variants = {
-    primary: {
-      backgroundColor: 'var(--brand-primary)',
-      color: 'var(--text-inverse)',
-    },
-    secondary: {
-      backgroundColor: 'var(--surface-secondary)',
-      color: 'var(--text-primary)',
-      border: '1px solid var(--border-default)',
-    },
-    ghost: {
-      backgroundColor: 'transparent',
-      color: 'var(--text-primary)',
-    },
-  };
-
+export default function Button({ children, className = '', ...props }) {
   return (
-    <button style={{ ...baseStyles, ...variants[variant] }} {...props}>
+    <button
+      className={`inline-flex items-center gap-2 rounded border border-brand-primary px-2 py-1 text-body font-semibold text-brand-text transition-colors hover:bg-brand-hover hover:underline disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
+      {...props}
+    >
       {children}
     </button>
   );

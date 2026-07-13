@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import ProtectedRoute from '@/router/ProtectedRoute';
+import { useAuth } from '@/context/AuthProvider';
+import { roleHomePath } from '@/router/roleHomePath';
 
 /* ── Layouts ── */
 import AuthLayout from '@/layouts/AuthLayout';
@@ -19,13 +21,40 @@ import RefactorQueue from '@/pages/client/RefactorQueue';
 import RefactorSuggestions from '@/pages/client/RefactorSuggestions';
 
 /* ── Admin pages ── */
-import AdminOverview from '@/pages/admin/Overview';
+import AdminOverview from '@/pages/admin/adminOverview/AdminOverview';
+import AdminScans from '@/pages/admin/adminScans/AdminScans';
 import UsersOverview from '@/pages/admin/UsersOverview';
 import UsersList from '@/pages/admin/UsersList';
-import AdminScansOverview from '@/pages/admin/ScansOverview';
-import AdminScansList from '@/pages/admin/ScansList';
 import ReposOverview from '@/pages/admin/ReposOverview';
 import ReposList from '@/pages/admin/ReposList';
+
+function RoleHomeRedirect() {
+	const { isCheckingAuth, isAuthenticated, role } = useAuth();
+
+	if (isCheckingAuth) {
+		return null;
+	}
+
+	if (!isAuthenticated) {
+		return <Navigate to="/login" replace />;
+	}
+
+	return <Navigate to={roleHomePath(role)} replace />;
+}
+
+function PublicOnlyRoute({ children }) {
+	const { isCheckingAuth, isAuthenticated, role } = useAuth();
+
+	if (isCheckingAuth) {
+		return null;
+	}
+
+	if (isAuthenticated) {
+		return <Navigate to={roleHomePath(role)} replace />;
+	}
+
+	return children;
+}
 
 export default function AppRouter() {
 	return (
@@ -35,7 +64,7 @@ export default function AppRouter() {
 				{/*  Unauthenticated routes (AuthLayout)      */}
 				{/* ────────────────────────────────────────── */}
 				<Route element={<AuthLayout />}>
-					<Route path="/login" element={<Login />} />
+					<Route path="/login" element={<PublicOnlyRoute><Login /></PublicOnlyRoute>} />
 				</Route>
 
 				{/* ────────────────────────────────────────── */}
@@ -89,8 +118,9 @@ export default function AppRouter() {
 					<Route path="/admin/users/list" element={<UsersList />} />
 
 					{/* Scans */}
-					<Route path="/admin/scans/overview" element={<AdminScansOverview />} />
-					<Route path="/admin/scans/list" element={<AdminScansList />} />
+					<Route path="/admin/scans" element={<AdminScans />} />
+					<Route path="/admin/scans/overview" element={<Navigate to="/admin/scans" replace />} />
+					<Route path="/admin/scans/list" element={<Navigate to="/admin/scans" replace />} />
 
 					{/* Repos */}
 					<Route path="/admin/repos/overview" element={<ReposOverview />} />
@@ -103,9 +133,9 @@ export default function AppRouter() {
 				{/* ────────────────────────────────────────── */}
 				{/*  Fallbacks                                 */}
 				{/* ────────────────────────────────────────── */}
-				<Route path="/home" element={<Navigate to="/dashboard/overview" replace />} />
-				<Route path="/" element={<Navigate to="/dashboard/overview" replace />} />
-				<Route path="*" element={<Navigate to="/dashboard/overview" replace />} />
+				<Route path="/home" element={<RoleHomeRedirect />} />
+				<Route path="/" element={<RoleHomeRedirect />} />
+				<Route path="*" element={<RoleHomeRedirect />} />
 			</Routes>
 		</BrowserRouter>
 	);

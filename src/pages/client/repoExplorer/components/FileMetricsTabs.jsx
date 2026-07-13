@@ -38,7 +38,7 @@ function ComplexityTab({ details }) {
                 <MetricStatCard label="Avg parameters" value={metrics.average_parameters_count} />
                 <MetricStatCard label="FIXME comments" value={metrics.count_of_fixme_comments} />
                 <MetricStatCard label="Empty except blocks" value={metrics.count_of_empty_except_blocks} />
-                <div className="flex items-center gap-3 rounded-md bg-background-tertiary px-3 py-3">
+                <div className="flex items-center gap-3 rounded bg-background-tertiary px-3 py-3">
                     <div className="grid h-12 w-12 place-items-center rounded-full" style={{ background: `conic-gradient(var(--info-default) ${coverage}%, var(--background-quaternary) 0)` }}>
                         <div className="grid h-9 w-9 place-items-center rounded-full bg-background-tertiary text-small-2 font-semibold text-text-primary">{Math.round(coverage)}%</div>
                     </div>
@@ -79,7 +79,7 @@ function ArchitectureTab({ details, onSelectFile }) {
                 <MetricStatCard label="Betweenness" value={metrics.betweenness_centrality} />
                 <MetricStatCard label="Instability" value={metrics.instability_index} />
             </div>
-            <div className="flex items-center justify-center gap-3 rounded-md border border-border bg-background-tertiary p-3 text-small-1 text-text-secondary">
+            <div className="flex items-center justify-center gap-3 rounded border border-border bg-background-tertiary p-3 text-small-1 text-text-secondary">
                 <span className="rounded bg-info-bg px-2 py-1 text-info-text">{metrics.fan_in ?? 0} incoming</span>
                 <ArrowRight size={15} />
                 <span className="flex items-center gap-1 font-mono text-text-primary"><Network size={15} />This file</span>
@@ -87,7 +87,7 @@ function ArchitectureTab({ details, onSelectFile }) {
                 <span className="rounded bg-warning-bg px-2 py-1 text-warning-text">{metrics.fan_out ?? 0} outgoing</span>
             </div>
             {cycles.map((cycle) => (
-                <div key={cycle.group_id} className="rounded-md border border-error-border bg-error-bg p-3">
+                <div key={cycle.group_id} className="rounded border border-error-border bg-error-bg p-3">
                     <p className="flex items-center gap-1.5 text-small-1 font-semibold text-error-text"><AlertTriangle size={14} />Circular dependency ({cycle.size} files)</p>
                     <div className="mt-2 flex flex-wrap items-center gap-1 text-small-1 text-error-text">
                         {cycle.members.map((member, index) => (
@@ -120,7 +120,7 @@ function DuplicationTab({ details, onSelectFile }) {
                 {matches.length === 0 ? <p className="text-small-1 text-text-tertiary">No duplicate matches found.</p> : null}
                 <div className="divide-y divide-border">
                     {matches.flatMap((match) => match.matched_files.map((file) => (
-                        <button key={`${match.match_type}-${match.start_line}-${file.id}`} type="button" onClick={() => onSelectFile(file.id)} className="flex w-full items-center justify-between gap-2 py-2 text-left text-small-1 hover:text-text-brand">
+                        <button key={`${match.match_type}-${match.start_line}-${file.id}`} type="button" onClick={() => onSelectFile(file.id)} className="flex w-full items-center justify-between gap-2 py-2 text-left text-small-1 hover:text-text-brand hover:underline">
                             <span className="min-w-0 truncate"><span className="capitalize">{match.match_type}</span>, lines {match.start_line ?? '—'}–{match.end_line ?? '—'} · <span className="font-mono">{file.file_path}</span></span>
                             <span className="shrink-0 text-text-tertiary">{match.max_similarity === null ? '—' : `${Math.round(match.max_similarity * 100)}%`}</span>
                         </button>
@@ -141,7 +141,7 @@ export default function FileMetricsTabs({ details, onSelectFile }) {
                     const active = tab.key === activeTab;
                     const warning = hasLayerErrors(details.errors, tab.layer);
                     return (
-                        <button key={tab.key} type="button" role="tab" aria-selected={active} onClick={() => setActiveTab(tab.key)} className={`relative flex items-center gap-1 px-3 py-2 text-small-1 font-semibold ${active ? 'text-text-primary after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:bg-brand-primary' : 'text-text-secondary hover:text-text-primary'}`}>
+                        <button key={tab.key} type="button" role="tab" aria-selected={active} onClick={() => setActiveTab(tab.key)} className={`relative flex items-center gap-1 px-3 py-2 text-small-1 font-semibold ${active ? 'text-text-primary after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:bg-brand-primary' : 'text-text-secondary hover:text-text-primary hover:underline'}`}>
                             {tab.label}
                             {warning ? <AlertTriangle size={12} className="text-warning" aria-label="Layer contains analysis errors" /> : null}
                         </button>

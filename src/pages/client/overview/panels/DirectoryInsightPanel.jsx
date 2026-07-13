@@ -20,7 +20,7 @@ export default function DirectoryInsightPanel({ query }) {
             {!query.isLoading && !query.isError && !insight ? <OverviewPanelEmpty message="No directory recommendation is available for this scan." /> : null}
             {!query.isLoading && !query.isError && insight ? (
                 <div className="flex min-h-[20rem] flex-col gap-4">
-                    <div className="rounded-md border border-brand-primary bg-brand-bg p-3">
+                    <div className="rounded border border-brand-primary bg-brand-bg p-3">
                         <div className="flex items-center gap-2 text-small-1 font-semibold uppercase tracking-wide text-brand-text">
                             <Target size={15} />
                             <span>Primary focus</span>

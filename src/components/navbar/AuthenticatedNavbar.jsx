@@ -15,6 +15,7 @@ function UserAvatar({ name }) {
 
 function UserDropdown({ user, onClose }) {
     const navigate = useNavigate();
+    const { resetAuth } = useAuth();
     const logout = useLogout();
     const dropdownRef = useRef(null);
 
@@ -31,6 +32,7 @@ function UserDropdown({ user, onClose }) {
     function handleLogout() {
         logout.mutate(undefined, {
             onSettled: () => {
+                resetAuth();
                 navigate('/login', { replace: true });
             },
         });
@@ -41,7 +43,7 @@ function UserDropdown({ user, onClose }) {
     return (
         <div
             ref={dropdownRef}
-            className="absolute right-0 top-full mt-2 w-56 rounded-lg border border-border bg-background-elevated shadow-lg z-50"
+            className="absolute right-0 top-full mt-2 w-56 rounded border border-border bg-background-elevated shadow-lg z-50"
         >
             {/* User info header */}
             <div className="flex items-center gap-3 border-b border-border px-4 py-3">
@@ -55,14 +57,14 @@ function UserDropdown({ user, onClose }) {
             <div className="py-1">
                 <button
                     onClick={() => { onClose(); }}
-                    className="flex w-full items-center gap-3 px-4 py-2 text-small-1 text-text-link hover:bg-background-hover transition-colors"
+                    className="flex w-full items-center gap-3 rounded px-2 py-1 text-small-1 text-text-link hover:bg-background-hover hover:underline transition-colors"
                 >
                     <User size={14} strokeWidth={2} />
                     Profile
                 </button>
                 <button
                     onClick={() => { onClose(); }}
-                    className="flex w-full items-center gap-3 px-4 py-2 text-small-1 text-text-link hover:bg-background-hover transition-colors"
+                    className="flex w-full items-center gap-3 rounded px-2 py-1 text-small-1 text-text-link hover:bg-background-hover hover:underline transition-colors"
                 >
                     <Settings size={14} strokeWidth={2} />
                     Settings
@@ -73,7 +75,7 @@ function UserDropdown({ user, onClose }) {
             <div className="border-t border-border py-1">
                 <button
                     onClick={handleLogout}
-                    className="flex w-full items-center gap-3 px-4 py-2 text-small-1 text-error hover:bg-background-hover transition-colors"
+                    className="flex w-full items-center gap-3 rounded px-2 py-1 text-small-1 text-error hover:bg-background-hover hover:underline transition-colors"
                 >
                     <LogOut size={14} strokeWidth={2} />
                     Log out
@@ -120,7 +122,7 @@ export default function AuthenticatedNavbar({ onToggleSidebar }) {
                 {/* Burger icon */}
                 <button
                     onClick={onToggleSidebar}
-                    className="flex items-center justify-center rounded-md text-text-primary hover:bg-background-hover hover:text-text-primary transition-colors"
+                    className="flex items-center justify-center rounded text-text-primary hover:bg-background-hover hover:text-text-primary hover:underline transition-colors"
                     aria-label="Toggle sidebar"
                 >
                     <Menu size={18} strokeWidth={2} />
@@ -147,7 +149,7 @@ export default function AuthenticatedNavbar({ onToggleSidebar }) {
 
                 <button
                     onClick={() => setShowDropdown((prev) => !prev)}
-                    className="flex items-center gap-2 rounded-md px-1 py-1 hover:bg-background-hover transition-colors"
+                    className="flex items-center gap-2 rounded px-1 py-1 hover:bg-background-hover hover:underline transition-colors"
                 >
                     <UserAvatar name={fullName} />
                     <span className="hidden sm:inline text-small-1 font-medium text-text-primary truncate max-w-[120px]">

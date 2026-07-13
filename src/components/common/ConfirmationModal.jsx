@@ -30,11 +30,11 @@ export default function ConfirmationModal({
                 aria-modal="true"
                 aria-labelledby="confirmation-modal-title"
                 onMouseDown={(event) => event.stopPropagation()}
-                className="w-full max-w-md rounded-md border border-border-secondary bg-background-elevated shadow-xl"
+                className="w-full max-w-md rounded border border-border-secondary bg-background-elevated shadow-xl"
             >
                 <header className="flex items-start justify-between gap-4 border-b border-border px-5 py-4">
                     <h2 id="confirmation-modal-title" className="text-h6 font-semibold text-text-primary">{title}</h2>
-                    <button type="button" onClick={onClose} className="rounded p-1 text-text-secondary hover:bg-background-hover hover:text-text-primary" aria-label="Close">
+                    <button type="button" onClick={onClose} className="rounded p-1 text-text-secondary hover:bg-background-hover hover:text-text-primary hover:underline" aria-label="Close">
                         <X size={18} />
                     </button>
                 </header>
@@ -44,7 +44,7 @@ export default function ConfirmationModal({
                         type="button"
                         onClick={onClose}
                         disabled={isConfirming}
-                        className="rounded-md border border-border px-3 py-2 text-body text-text-secondary transition-colors hover:bg-background-hover hover:text-text-primary disabled:opacity-50"
+                        className="rounded border border-border px-2 py-1 text-text-secondary font-semibold text-brand-text transition-colors hover:bg-brand-hover hover:underline disabled:cursor-not-allowed disabled:opacity-50"
                     >
                         {cancelLabel}
                     </button>
@@ -52,7 +52,7 @@ export default function ConfirmationModal({
                         type="button"
                         onClick={onConfirm}
                         disabled={isConfirming}
-                        className="rounded-md bg-brand-primary px-3 py-2 text-body font-semibold text-brand-text transition-colors hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-50"
+                        className="rounded border border-brand-primary px-2 py-1 text-body font-semibold text-brand-text transition-colors hover:bg-brand-hover hover:underline disabled:cursor-not-allowed disabled:opacity-50"
                     >
                         {isConfirming ? 'Starting…' : confirmLabel}
                     </button>
