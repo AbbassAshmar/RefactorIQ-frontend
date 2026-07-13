@@ -4,12 +4,14 @@ import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import SecurityCenterTabBar from '@/components/common/SecurityCenterTabBar';
 import { ScanModalLauncher } from '@/components/scans';
 import ArchitecturalHotspotPanel from '@/pages/client/overview/panels/ArchitecturalHotspotPanel';
+import DirectoryInsightPanel from '@/pages/client/overview/panels/DirectoryInsightPanel';
 import RiskByDirectoryPanel from '@/pages/client/overview/panels/RiskByDirectoryPanel';
 import RiskTrendScorePanel from '@/pages/client/overview/panels/RiskTrendScorePanel';
 import ScanSummaryPanel from '@/pages/client/overview/panels/ScanSummaryPanel';
+import TopRefactorDriversPanel from '@/pages/client/overview/panels/TopRefactorDriversPanel';
 import TopRefactorFilesPanel from '@/pages/client/overview/panels/TopRefactorFilesPanel';
 import NoScanSelectedState from '@/pages/client/overview/components/NoScanSelectedState';
-import { useRiskByDirectory, useSelectedProject, useSelectedScan, useTopRefactorFiles } from '@/hooks';
+import { useDirectoryInsight, useRiskByDirectory, useSelectedProject, useSelectedScan, useTopRefactorFiles } from '@/hooks';
 import { TAB_VIEW_QUERY_KEY } from '@/utils/queryParams';
 
 
@@ -27,6 +29,7 @@ export default function ClientOverview() {
     const activeView = searchParams.get(TAB_VIEW_QUERY_KEY) ?? 'overview';
     const topFilesQuery = useTopRefactorFiles(selectedScanId);
     const directoryRiskQuery = useRiskByDirectory(selectedScanId);
+    const directoryInsightQuery = useDirectoryInsight(selectedScanId);
     const topFiles = topFilesQuery.data?.data?.files ?? [];
 
     const isSelectingScan = isLoadingProjects || isSelectingLatest;
@@ -67,12 +70,16 @@ export default function ClientOverview() {
                             </div>
                             <div className="mt-2 grid grid-cols-1 gap-2 xl:grid-cols-3">
                                 <TopRefactorFilesPanel query={topFilesQuery} />
-                                <RiskByDirectoryPanel query={directoryRiskQuery} />
+                                <TopRefactorDriversPanel query={topFilesQuery} />
                                 <ArchitecturalHotspotPanel
                                     files={topFiles}
                                     isLoading={topFilesQuery.isLoading}
                                     isError={topFilesQuery.isError}
                                 />
+                            </div>
+                            <div className="mt-2 grid grid-cols-1 gap-2 xl:grid-cols-2">
+                                <RiskByDirectoryPanel query={directoryRiskQuery} />
+                                <DirectoryInsightPanel query={directoryInsightQuery} />
                             </div>
                         </>
                     ) : null}

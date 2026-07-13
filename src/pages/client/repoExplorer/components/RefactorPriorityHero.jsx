@@ -1,8 +1,8 @@
 const componentScores = [
-    { key: 'complexity_score', label: 'Complexity', color: 'bg-error-default' },
+    { key: 'complexity_score', label: 'Complexity', color: 'bg-error' },
     { key: 'history_score', label: 'History', color: 'bg-accent-mauve' },
-    { key: 'duplication_score', label: 'Duplication', color: 'bg-success-default' },
-    { key: 'architecture_score', label: 'Architecture', color: 'bg-warning-default' },
+    { key: 'duplication_score', label: 'Duplication', color: 'bg-success' },
+    { key: 'architecture_score', label: 'Architecture', color: 'bg-warning' },
 ];
 
 const priorityClass = {

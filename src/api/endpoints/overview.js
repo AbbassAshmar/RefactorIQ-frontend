@@ -13,6 +13,7 @@ const overviewApi = {
     scanSummary: (scanId) => getOverviewResource('/overview/scan-summary', scanId),
     topFiles: (scanId) => getOverviewResource('/overview/top-files', scanId),
     riskByDirectory: (scanId) => getOverviewResource('/overview/risk-by-directory', scanId),
+    directoryInsight: (scanId) => getOverviewResource('/overview/directory-insight', scanId),
 };
 
 export default overviewApi;

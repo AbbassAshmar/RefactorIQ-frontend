@@ -26,3 +26,7 @@ export function useTopRefactorFiles(scanId, options = {}) {
 export function useRiskByDirectory(scanId, options = {}) {
     return useOverviewResource('riskByDirectory', scanId, options);
 }
+
+export function useDirectoryInsight(scanId, options = {}) {
+    return useOverviewResource('directoryInsight', scanId, options);
+}

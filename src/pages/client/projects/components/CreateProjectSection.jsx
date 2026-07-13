@@ -257,7 +257,7 @@ export default function CreateProjectSection({
 								/>
 
 								{errors.name ? (
-									<p className="mt-1 text-small-1 text-error-default">{errors.name}</p>
+									<p className="mt-1 text-small-1 text-error">{errors.name}</p>
 								) : null}
 							</div>
 
@@ -322,13 +322,13 @@ export default function CreateProjectSection({
 									</div>
 
 									{repositoriesQuery.isError ? (
-										<p className="mt-1 text-small-1 text-error-default">
+										<p className="mt-1 text-small-1 text-error">
 											{getServerMessage(repositoriesQuery.error)}
 										</p>
 									) : null}
 
 									{errors.repository ? (
-										<p className="mt-1 text-small-1 text-error-default">{errors.repository}</p>
+										<p className="mt-1 text-small-1 text-error">{errors.repository}</p>
 									) : null}
 								</div>
 
@@ -380,13 +380,13 @@ export default function CreateProjectSection({
 									</div>
 
 									{branchesQuery.isError ? (
-										<p className="mt-1 text-small-1 text-error-default">
+										<p className="mt-1 text-small-1 text-error">
 											{getServerMessage(branchesQuery.error)}
 										</p>
 									) : null}
 
 									{errors.branch ? (
-										<p className="mt-1 text-small-1 text-error-default">{errors.branch}</p>
+										<p className="mt-1 text-small-1 text-error">{errors.branch}</p>
 									) : null}
 								</div>
 							</div>
@@ -402,11 +402,11 @@ export default function CreateProjectSection({
 					) : null}
 
 					{errors.form ? (
-						<p className="text-center text-small-1 text-error-default">{errors.form}</p>
+						<p className="text-center text-small-1 text-error">{errors.form}</p>
 					) : null}
 
 					{!canCreateProject ? (
-						<p className="text-center text-small-1 text-warning-default">
+						<p className="text-center text-small-1 text-warning">
 							You reached the maximum number of projects ({maxProjects}).
 						</p>
 					) : null}

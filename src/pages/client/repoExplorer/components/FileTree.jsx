@@ -2,10 +2,10 @@ import { ChevronDown, ChevronRight, FileCode2, Folder } from 'lucide-react';
 
 
 const priorityDotClass = {
-    critical: 'bg-error-default',
-    high: 'bg-error-default',
-    medium: 'bg-warning-default',
-    low: 'bg-success-default',
+    critical: 'bg-error',
+    high: 'bg-error',
+    medium: 'bg-warning',
+    low: 'bg-success',
 };
 
 function FileRow({ file, selectedFileId, onSelectFile }) {

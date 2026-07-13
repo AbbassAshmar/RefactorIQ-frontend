@@ -84,7 +84,7 @@ function UserDropdown({ user, onClose }) {
 }
 
 function VerticalDivider() {
-    return <div className="h-6 w-px bg-border-default shrink-0" />;
+    return <div className="h-6 w-px bg-border shrink-0" />;
 }
 
 function PageBadge({ label }) {

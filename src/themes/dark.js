@@ -18,7 +18,7 @@ export const DARK_THEME = {
   'gray-600': 'hsl(220, 5%, 40%)',
   'gray-700': 'hsl(220, 5%, 30%)',
   'gray-800': 'hsl(220, 5%, 20%)',
-  'gray-850': 'hsl(220, 5%, 15%)',
+  'gray-850': 'hsl(220, 5%, 13%)',
   'gray-900': 'hsl(220, 5%, 10%)',
   'gray-950': 'hsl(220, 5%, 5%)',
 
@@ -95,6 +95,19 @@ export const DARK_THEME = {
   'orange-500': 'hsl(33, 100%, 50%)',
   'orange-600': 'hsl(33, 100%, 45%)',
   'orange-700': 'hsl(33, 100%, 40%)',
+
+  // ============================================
+  // CHART COLORS - DESATURATED PROFESSIONAL PALETTE
+  // ============================================
+  'chart-risk-by-directory': 'hsl(201, 38%, 52%)',
+  'chart-risk-trend-score': 'hsl(201, 44%, 58%)',
+  'chart-risk-trend-score-fill': 'hsla(201, 44%, 58%, 0.14)',
+
+  // Top architectures uses four distinct cool slate/teal steps.
+  'chart-top-architectures-bar-1': 'hsl(220, 32%, 54%)',
+  'chart-top-architectures-bar-2': 'hsl(200, 30%, 50%)',
+  'chart-top-architectures-bar-3': 'hsl(175, 28%, 47%)',
+  'chart-top-architectures-bar-4': 'hsl(150, 27%, 44%)',
 
   // ============================================
   // SEMANTIC COLORS - TEXT

@@ -45,7 +45,7 @@ export default function FileDetailsPanel({ fileId, onSelectFile }) {
                     <RefactorPriorityHero details={details} />
                     <FileSummariesSection query={summaryQuery} />
                     <FileMetricsTabs details={details} onSelectFile={onSelectFile} />
-                    <FileRelationshipsSection details={details} onSelectFile={onSelectFile} />
+                    {/* <FileRelationshipsSection details={details} onSelectFile={onSelectFile} /> */}
                 </div>
             ) : null}
         </PanelWrapper>

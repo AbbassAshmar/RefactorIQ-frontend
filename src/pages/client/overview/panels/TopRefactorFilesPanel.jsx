@@ -1,14 +1,15 @@
 import { PanelWrapper } from '@/components';
 import ScanTable from '@/components/scans/ScanTable';
 import { OverviewPanelEmpty, OverviewPanelError, OverviewPanelLoading } from '@/pages/client/overview/components/OverviewPanelState';
+import { OVERVIEW_TOP_REFACTOR_FILE_COUNT } from '@/utils/constants';
 
 
 function priorityClass(priority) {
     return {
-        critical: 'text-error-default',
-        high: 'text-warning-default',
-        medium: 'text-info-default',
-        low: 'text-success-default',
+        critical: 'text-error',
+        high: 'text-warning',
+        medium: 'text-info',
+        low: 'text-success',
     }[priority] ?? 'text-text-secondary';
 }
 
@@ -36,11 +37,11 @@ const columns = [
 ];
 
 export default function TopRefactorFilesPanel({ query }) {
-    const files = query.data?.data?.files ?? [];
+    const files = (query.data?.data?.files ?? []).slice(0, OVERVIEW_TOP_REFACTOR_FILE_COUNT);
 
     return (
         <PanelWrapper
-            title="Top 10 files to refactor"
+            title="Top 5 files to refactor"
             description="Files with the highest refactor risk scores in the selected scan."
             className="h-full"
         >
@@ -51,11 +52,8 @@ export default function TopRefactorFilesPanel({ query }) {
                 <ScanTable
                     data={files}
                     columns={columns}
-                    page={1}
-                    pageCount={1}
-                    totalCount={files.length}
-                    onPageChange={() => {}}
-                    entityLabel="file"
+                    showFooter={false}
+                    compact
                     emptyMessage="No scored files are available for this scan."
                 />
             ) : null}

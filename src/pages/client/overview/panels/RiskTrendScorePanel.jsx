@@ -11,8 +11,11 @@ import {
 import { TrendingDown, TrendingUp } from 'lucide-react';
 import { Line } from 'react-chartjs-2';
 import { PanelWrapper } from '@/components';
+import { useTheme } from '@/context/ThemeProvider';
 import { useRiskTrend } from '@/hooks';
 import { OverviewPanelEmpty, OverviewPanelError, OverviewPanelLoading } from '@/pages/client/overview/components/OverviewPanelState';
+import { CHART_COLOR_VARS } from '@/utils/constants';
+import { resolveThemeColor } from '@/utils/themeColors';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend, Filler);
 
@@ -22,6 +25,7 @@ function formatTimestampLabel(timestamp) {
 }
 
 export default function RiskTrendScorePanel({ scanId }) {
+    const { themeColors } = useTheme();
     const query = useRiskTrend(scanId);
     const series = query.data?.data?.series ?? [];
     const latest = series.at(-1)?.average_score ?? 0;
@@ -43,7 +47,7 @@ export default function RiskTrendScorePanel({ scanId }) {
                 <div className="flex h-full flex-col gap-2">
                     <div className="flex items-end gap-2">
                         <p className="text-h4 font-bold leading-none text-text-primary">{latest.toFixed(1)}</p>
-                        <div className={`mb-0.5 inline-flex items-center gap-1 text-small-1 ${isUp ? 'text-error-default' : 'text-success-default'}`}>
+                        <div className={`mb-0.5 inline-flex items-center gap-1 text-small-1 ${isUp ? 'text-error' : 'text-success'}`}>
                             {isUp ? <TrendingUp size={14} /> : <TrendingDown size={14} />}
                             <span>{isUp ? '+' : '-'}{percentChange.toFixed(1)}%</span>
                         </div>
@@ -54,12 +58,12 @@ export default function RiskTrendScorePanel({ scanId }) {
                                 labels: series.map((item) => formatTimestampLabel(item.finished_at)),
                                 datasets: [{
                                     data: series.map((item) => item.average_score),
-                                    borderColor: 'var(--info-default)',
-                                    backgroundColor: 'hsla(201, 80%, 50%, 0.14)',
+                                    borderColor: resolveThemeColor(themeColors, CHART_COLOR_VARS.RISK_TREND_SCORE),
+                                    backgroundColor: resolveThemeColor(themeColors, CHART_COLOR_VARS.RISK_TREND_SCORE_FILL),
                                     borderWidth: 2,
                                     pointRadius: 3,
                                     pointHoverRadius: 4,
-                                    pointBackgroundColor: 'var(--info-default)',
+                                    pointBackgroundColor: resolveThemeColor(themeColors, CHART_COLOR_VARS.RISK_TREND_SCORE),
                                     tension: 0.35,
                                     fill: true,
                                 }],
@@ -69,8 +73,8 @@ export default function RiskTrendScorePanel({ scanId }) {
                                 maintainAspectRatio: false,
                                 plugins: { legend: { display: false } },
                                 scales: {
-                                    x: { grid: { color: 'var(--border-default)' }, ticks: { color: 'var(--text-tertiary)', font: { size: 10 } } },
-                                    y: { beginAtZero: true, max: 100, grid: { color: 'var(--border-default)' }, ticks: { color: 'var(--text-tertiary)', font: { size: 10 } } },
+                                    x: { grid: { color: resolveThemeColor(themeColors, CHART_COLOR_VARS.GRID) }, ticks: { color: resolveThemeColor(themeColors, CHART_COLOR_VARS.AXIS_LABEL), font: { size: 10 } } },
+                                    y: { beginAtZero: true, max: 100, grid: { color: resolveThemeColor(themeColors, CHART_COLOR_VARS.GRID) }, ticks: { color: resolveThemeColor(themeColors, CHART_COLOR_VARS.AXIS_LABEL), font: { size: 10 } } },
                                 },
                             }}
                         />

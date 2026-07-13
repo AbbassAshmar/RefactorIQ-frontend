@@ -143,7 +143,7 @@ export default function FileMetricsTabs({ details, onSelectFile }) {
                     return (
                         <button key={tab.key} type="button" role="tab" aria-selected={active} onClick={() => setActiveTab(tab.key)} className={`relative flex items-center gap-1 px-3 py-2 text-small-1 font-semibold ${active ? 'text-text-primary after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:bg-brand-primary' : 'text-text-secondary hover:text-text-primary'}`}>
                             {tab.label}
-                            {warning ? <AlertTriangle size={12} className="text-warning-default" aria-label="Layer contains analysis errors" /> : null}
+                            {warning ? <AlertTriangle size={12} className="text-warning" aria-label="Layer contains analysis errors" /> : null}
                         </button>
                     );
                 })}

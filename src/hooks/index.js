@@ -5,5 +5,5 @@ export { useScansList, useCreateScan } from './useScans';
 export { default as useSelectedProject } from './useSelectedProject';
 export { default as useSelectedScan } from './useSelectedScan';
 export { default as useNotification } from './useNotification';
-export { useRiskTrend, useScanSummary, useTopRefactorFiles, useRiskByDirectory } from './useOverview';
+export { useRiskTrend, useScanSummary, useTopRefactorFiles, useRiskByDirectory, useDirectoryInsight } from './useOverview';
 export { useScanFiles, useFileDetails } from './useFiles';

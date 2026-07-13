@@ -243,7 +243,7 @@ export default function ProjectCard({ project, onDelete }) {
 			<div className="flex flex-wrap items-center justify-between gap-3 px-4 py-3">
 				<div className="min-w-0 flex-1">
 					<div className="flex min-w-0 items-center gap-3">
-						<div className="flex h-9 w-9 items-center justify-center rounded-md border border-border bg-background-tertiary text-warning-default">
+						<div className="flex h-9 w-9 items-center justify-center rounded-md border border-border bg-background-tertiary text-warning">
 							<Globe2 size={16} />
 						</div>
 
@@ -308,7 +308,7 @@ export default function ProjectCard({ project, onDelete }) {
 									type="button"
 									onClick={handleDelete}
 									disabled={!onDelete}
-									className="flex w-full items-center gap-2 rounded-sm px-2 py-1.5 text-left text-small-1 text-error-default transition-colors hover:bg-error-bg disabled:cursor-not-allowed disabled:text-text-disabled"
+									className="flex w-full items-center gap-2 rounded-sm px-2 py-1.5 text-left text-small-1 text-error transition-colors hover:bg-error-bg disabled:cursor-not-allowed disabled:text-text-disabled"
 								>
 									<Trash2 size={13} />
 									Delete

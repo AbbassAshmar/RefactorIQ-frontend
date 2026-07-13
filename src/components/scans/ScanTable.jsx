@@ -31,12 +31,14 @@ export default function ScanTable({
     selectedRowId,
     className = '',
     entityLabel = 'scan',
+    showFooter = true,
+    compact = false,
 }) {
     const table = useReactTable({
         data,
         columns,
         getCoreRowModel: getCoreRowModel(),
-        manualPagination: true,
+        manualPagination: showFooter,
         pageCount,
     });
 
@@ -48,7 +50,7 @@ export default function ScanTable({
                         {table.getHeaderGroups().map((headerGroup) => (
                             <tr key={headerGroup.id}>
                                 {headerGroup.headers.map((header) => (
-                                    <th key={header.id} className="whitespace-nowrap px-4 py-2.5 font-semibold">
+                                    <th key={header.id} className={`whitespace-nowrap px-4 ${compact ? 'py-2' : 'py-2.5'} font-semibold`}>
                                         {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                                     </th>
                                 ))}
@@ -59,7 +61,7 @@ export default function ScanTable({
                         {isLoading ? (
                             [0, 1, 2, 3].map((row) => (
                                 <tr key={row} className="border-b border-border last:border-0">
-                                    <td colSpan={columns.length} className="px-4 py-3">
+                                    <td colSpan={columns.length} className={`px-4 ${compact ? 'py-2' : 'py-3'}`}>
                                         <div className="h-4 animate-pulse rounded bg-background-tertiary" />
                                     </td>
                                 </tr>
@@ -76,7 +78,7 @@ export default function ScanTable({
                                     ].join(' ')}
                                 >
                                     {row.getVisibleCells().map((cell) => (
-                                        <td key={cell.id} className="whitespace-nowrap px-4 py-3 text-text-secondary">
+                                        <td key={cell.id} className={`whitespace-nowrap px-4 ${compact ? 'py-2' : 'py-3'} text-text-secondary`}>
                                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                         </td>
                                     ))}
@@ -92,30 +94,32 @@ export default function ScanTable({
                     </tbody>
                 </table>
             </div>
-            <div className="flex items-center justify-between border-t border-border px-4 py-2.5 text-small-1 text-text-secondary">
-                <span>{totalCount ?? 0} {entityLabel}{totalCount === 1 ? '' : 's'}</span>
-                <div className="flex items-center gap-2">
-                    <span>Page {page} of {Math.max(pageCount, 1)}</span>
-                    <button
-                        type="button"
-                        onClick={() => onPageChange(page - 1)}
-                        disabled={page <= 1}
-                        className="inline-flex h-7 w-7 items-center justify-center rounded border border-border text-text-secondary hover:bg-background-hover disabled:cursor-not-allowed disabled:opacity-40"
-                        aria-label="Previous page"
-                    >
-                        <ChevronLeft size={15} />
-                    </button>
-                    <button
-                        type="button"
-                        onClick={() => onPageChange(page + 1)}
-                        disabled={page >= pageCount}
-                        className="inline-flex h-7 w-7 items-center justify-center rounded border border-border text-text-secondary hover:bg-background-hover disabled:cursor-not-allowed disabled:opacity-40"
-                        aria-label="Next page"
-                    >
-                        <ChevronRight size={15} />
-                    </button>
+            {showFooter ? (
+                <div className="flex items-center justify-between border-t border-border px-4 py-2.5 text-small-1 text-text-secondary">
+                    <span>{totalCount ?? 0} {entityLabel}{totalCount === 1 ? '' : 's'}</span>
+                    <div className="flex items-center gap-2">
+                        <span>Page {page} of {Math.max(pageCount, 1)}</span>
+                        <button
+                            type="button"
+                            onClick={() => onPageChange(page - 1)}
+                            disabled={page <= 1}
+                            className="inline-flex h-7 w-7 items-center justify-center rounded border border-border text-text-secondary hover:bg-background-hover disabled:cursor-not-allowed disabled:opacity-40"
+                            aria-label="Previous page"
+                        >
+                            <ChevronLeft size={15} />
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => onPageChange(page + 1)}
+                            disabled={page >= pageCount}
+                            className="inline-flex h-7 w-7 items-center justify-center rounded border border-border text-text-secondary hover:bg-background-hover disabled:cursor-not-allowed disabled:opacity-40"
+                            aria-label="Next page"
+                        >
+                            <ChevronRight size={15} />
+                        </button>
+                    </div>
                 </div>
-            </div>
+            ) : null}
         </div>
     );
 }

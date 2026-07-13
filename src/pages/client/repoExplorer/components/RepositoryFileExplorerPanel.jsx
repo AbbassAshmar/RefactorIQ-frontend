@@ -6,9 +6,9 @@ import { buildFileTree } from '@/pages/client/repoExplorer/utils/fileTree';
 
 
 const legend = [
-    { label: 'High', className: 'bg-error-default' },
-    { label: 'Medium', className: 'bg-warning-default' },
-    { label: 'Low', className: 'bg-success-default' },
+    { label: 'High', className: 'bg-error' },
+    { label: 'Medium', className: 'bg-warning' },
+    { label: 'Low', className: 'bg-success' },
 ];
 
 export default function RepositoryFileExplorerPanel({ files, selectedFileId, onSelectFile, isLoading, projectName }) {
