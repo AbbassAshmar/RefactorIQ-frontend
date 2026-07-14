@@ -18,15 +18,12 @@ import RepoExplorer from '@/pages/client/repoExplorer/RepoExplorer';
 import Dependencies from '@/pages/client/dependencies/DependenciesPage';
 import ClientScans from '@/pages/client/scans/Scans';
 import RefactorQueue from '@/pages/client/refactorQueue/RefactorQueue';
-import RefactorSuggestions from '@/pages/client/RefactorSuggestions';
 
 /* ── Admin pages ── */
 import AdminOverview from '@/pages/admin/adminOverview/AdminOverview';
 import AdminScans from '@/pages/admin/adminScans/AdminScans';
 import AdminUsers from '@/pages/admin/adminUsers/AdminUsers';
 import AdminProjects from '@/pages/admin/adminProjects/AdminProjects';
-import ReposOverview from '@/pages/admin/ReposOverview';
-import ReposList from '@/pages/admin/ReposList';
 
 function RoleHomeRedirect() {
 	const { isCheckingAuth, isAuthenticated, role } = useAuth();
@@ -93,7 +90,6 @@ export default function AppRouter() {
 
 					{/* Refactoring */}
 					<Route path="/dashboard/refactoring/queue" element={<RefactorQueue />} />
-					<Route path="/dashboard/refactoring/suggestions" element={<RefactorSuggestions />} />
 
 					{/* Default client redirect */}
 					<Route index element={<Navigate to="/dashboard/overview" replace />} />
@@ -115,19 +111,12 @@ export default function AppRouter() {
 
 					{/* Users */}
 					<Route path="/admin/users/overview" element={<AdminUsers />} />
-					<Route path="/admin/users/list" element={<AdminUsers />} />
 
 					{/* Projects */}
 					<Route path="/admin/projects" element={<AdminProjects />} />
 
 					{/* Scans */}
 					<Route path="/admin/scans" element={<AdminScans />} />
-					<Route path="/admin/scans/overview" element={<Navigate to="/admin/scans" replace />} />
-					<Route path="/admin/scans/list" element={<Navigate to="/admin/scans" replace />} />
-
-					{/* Repos */}
-					<Route path="/admin/repos/overview" element={<ReposOverview />} />
-					<Route path="/admin/repos/list" element={<ReposList />} />
 
 					{/* Default admin redirect */}
 					<Route path="/admin" element={<Navigate to="/admin/overview" replace />} />

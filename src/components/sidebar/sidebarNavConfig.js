@@ -65,7 +65,6 @@ export const CLIENT_NAV_SECTIONS = [
         icon: Repeat2,
         pages: [
             { key: 'refactor-queue', label: 'Refactor Queue', path: '/refactoring/queue' },
-            { key: 'refactor-suggestions', label: 'Refactor Suggestions', path: '/refactoring/suggestions' },
         ],
     },
 ];
@@ -84,8 +83,7 @@ export const ADMIN_NAV_SECTIONS = [
         title: 'Users',
         icon: Users,
         pages: [
-            { key: 'users-overview', label: 'Overview', path: '/users/overview'},
-            { key: 'users-list', label: 'List', path: '/users/list'},
+            { key: 'users-overview', label: 'Manage Users', path: '/users/overview'},
         ],
     },
     {
@@ -101,16 +99,7 @@ export const ADMIN_NAV_SECTIONS = [
         title: 'Scans',
         icon: ScanSearch,
         pages: [
-            { key: 'scans-records', label: 'Records', path: '/scans'},
-        ],
-    },
-    {
-        key: 'repos',
-        title: 'Repos',
-        icon: Server,
-        pages: [
-            { key: 'repos-overview', label: 'Overview', path: '/repos/overview'},
-            { key: 'repos-list', label: 'List', path: '/repos/list'},
+            { key: 'scans-records', label: 'Manage Scans', path: '/scans'},
         ],
     },
 ];
