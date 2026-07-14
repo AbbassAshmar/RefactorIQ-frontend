@@ -11,22 +11,53 @@ export const ROUTES = {
 export const ADMIN_ANALYTICS_ENDPOINTS = {
   KPIS: '/admin/analytics/kpis',
   SCANS_OVER_TIME: '/admin/analytics/scans-over-time',
+  USERS_OVER_TIME: '/admin/analytics/users-over-time',
   SCAN_STATUS_DISTRIBUTION: '/admin/analytics/scan-status-distribution',
   FAILED_SCANS: '/admin/analytics/failed-scans',
 };
 
 export const ADMIN_PROJECTS_ENDPOINT = '/admin/projects';
+export const ADMIN_PROJECTS_OVER_TIME_ENDPOINT = '/admin/projects/over-time';
 
 export const SCAN_ENDPOINTS = {
   LIST: '/scans',
   OVER_TIME: '/scans-over-time',
   ADMIN_LIST: '/admin/scans',
+  ANALYTICS_STATUS_COUNTS: '/scans/analytics/status-counts',
+  ANALYTICS_RISK_TREND: '/scans/analytics/risk-trend',
+  ANALYTICS_DURATION_TREND: '/scans/analytics/duration-trend',
 };
+
+export const FILE_ENDPOINTS = {
+  LIST: '/files',
+  DEPENDENCIES: '/files/dependencies',
+  CIRCULAR_DEPENDENCIES: '/files/circular-dependencies',
+  ANALYTICS_PRIORITY_DISTRIBUTION: '/files/analytics/priority-distribution',
+  ANALYTICS_ANALYZED_TREND: '/files/analytics/analyzed-trend',
+};
+
+export const FILES_QUERY_KEYS = {
+  ROOT: 'files',
+  LIST: 'list',
+  DETAILS: 'details',
+  DEPENDENCIES: 'dependencies',
+  CIRCULAR_DEPENDENCIES: 'circular-dependencies',
+  PRIORITY_DISTRIBUTION: 'priority-distribution',
+  ANALYZED_TREND: 'analyzed-trend',
+};
+
+export const CLIENT_ROUTES = {
+  REPOSITORY_EXPLORER: '/dashboard/code/repo-explorer',
+};
+
+export const DEPENDENCIES_PAGE_TAB = 'dependencies';
 
 export const ADMIN_OVERVIEW_QUERY_KEYS = {
   ROOT: 'admin-overview',
   KPIS: 'kpis',
   SCANS_OVER_TIME: 'scans-over-time',
+  PROJECTS_OVER_TIME: 'projects-over-time',
+  USERS_OVER_TIME: 'users-over-time',
   SCAN_STATUS_DISTRIBUTION: 'scan-status-distribution',
   FAILED_SCANS: 'failed-scans',
   PROJECTS: 'projects',
@@ -37,11 +68,15 @@ export const SCANS_QUERY_KEYS = {
   ROOT: 'scans',
   LIST: 'list',
   OVER_TIME: 'over-time',
+  STATUS_COUNTS: 'status-counts',
+  RISK_TREND: 'risk-trend',
+  DURATION_TREND: 'duration-trend',
 };
 
 export const ADMIN_OVERVIEW_TOP_PROJECT_LIMIT = 5;
 
 export const ADMIN_PROJECT_SORT = {
+  CREATED_AT: 'created_at',
   NAME: 'name',
   SCAN_COUNT: 'scan_count',
   SCAN_DURATION: 'scan_duration',
@@ -54,10 +89,15 @@ export const SCAN_SORT = {
 
 export const SCAN_PAGE_TABS = {
   RECORDS: 'records',
+  DASHBOARD: 'dashboard',
 };
 
 export const SCAN_TABLE_PAGE_SIZE = 10;
+export const ADMIN_USER_TABLE_PAGE_SIZE = 10;
+export const ADMIN_PROJECT_TABLE_PAGE_SIZE = 10;
 export const ADMIN_PROJECT_SELECTOR_PAGE_SIZE = 8;
+
+export const SEARCH_QUERY_KEY = 'q';
 
 export const SORT_ORDER = {
   ASCENDING: 'asc',
@@ -125,6 +165,16 @@ export const CHART_COLOR_VARS = {
   ADMIN_SCANS_TIMELINE_FILL: 'var(--chart-admin-scans-timeline-fill)',
   ADMIN_SCAN_DURATION: 'var(--chart-admin-scan-duration)',
   ADMIN_SCAN_DURATION_HOVER: 'var(--chart-admin-scan-duration-hover)',
+  SCANS_DURATION: 'var(--chart-scans-duration)',
+  SCANS_DURATION_FILL: 'var(--chart-scans-duration-fill)',
+  SCANS_FILES_ANALYZED: 'var(--chart-scans-files-analyzed)',
+  SCANS_FILES_ANALYZED_FILL: 'var(--chart-scans-files-analyzed-fill)',
+  SCANS_PRIORITY: {
+    critical: 'var(--chart-scans-priority-critical)',
+    high: 'var(--chart-scans-priority-high)',
+    medium: 'var(--chart-scans-priority-medium)',
+    low: 'var(--chart-scans-priority-low)',
+  },
   ADMIN_SCAN_STATUS: {
     [SCAN_STATUS.PENDING]: 'var(--chart-admin-status-pending)',
     [SCAN_STATUS.RUNNING]: 'var(--chart-admin-status-running)',
@@ -154,3 +204,14 @@ export const INSIGHT_PRIORITY_STYLES = {
   medium: 'border-warning-border bg-warning-bg text-warning-text',
   low: 'border-success-border bg-success-bg text-success-text',
 };
+export const REFACTOR_QUEUE_STATUS = Object.freeze({
+    PENDING: 'pending',
+    IN_PROGRESS: 'in_progress',
+    COMPLETED: 'completed',
+});
+
+export const REFACTOR_QUEUE_COLUMNS = Object.freeze([
+    { key: REFACTOR_QUEUE_STATUS.PENDING, label: 'Pending' },
+    { key: REFACTOR_QUEUE_STATUS.IN_PROGRESS, label: 'In progress' },
+    { key: REFACTOR_QUEUE_STATUS.COMPLETED, label: 'Completed' },
+]);

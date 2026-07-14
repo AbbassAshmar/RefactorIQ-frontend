@@ -1,6 +1,7 @@
 import { useSearchParams } from 'react-router-dom';
 import SecurityCenterTabBar from '@/components/common/SecurityCenterTabBar';
 import ScanRecordsView from '@/components/scans/ScanRecordsView';
+import ScansDashboardView from './dashboard/ScansDashboardView';
 import { TAB_VIEW_QUERY_KEY } from '@/utils/queryParams';
 import { SCAN_PAGE_TABS } from '@/utils/constants';
 
@@ -12,12 +13,18 @@ export default function Scans() {
     return (
         <div>
             <SecurityCenterTabBar
-                tabs={[{ key: SCAN_PAGE_TABS.RECORDS, label: 'Records' }]}
+                tabs={[
+                    { key: SCAN_PAGE_TABS.DASHBOARD, label: 'Dashboard' },
+                    { key: SCAN_PAGE_TABS.RECORDS, label: 'Records' },
+                ]}
                 queryKey={TAB_VIEW_QUERY_KEY}
-                defaultTab={SCAN_PAGE_TABS.RECORDS}
+                defaultTab={SCAN_PAGE_TABS.DASHBOARD}
             />
             {activeView === SCAN_PAGE_TABS.RECORDS ? (
-                <div className="p-4"><ScanRecordsView /></div>
+                <div className="p-2"><ScanRecordsView /></div>
+            ) : null}
+            {activeView === SCAN_PAGE_TABS.DASHBOARD ? (
+                <div className="p-2"><ScansDashboardView /></div>
             ) : null}
         </div>
     );

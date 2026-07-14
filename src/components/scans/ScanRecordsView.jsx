@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { LoaderCircle, Plus } from 'lucide-react';
 import ConfirmationModal from '@/components/common/ConfirmationModal';
+import RefreshButton from '@/components/common/RefreshButton';
 import TablePanel from '@/components/common/TablePanel';
 import ScanTable, { ScanStatusBadge } from '@/components/scans/ScanTable';
 import ScansTimelinePanel from '@/components/scans/ScansTimelinePanel';
@@ -105,15 +106,22 @@ export default function ScanRecordsView() {
                 title="Scan records"
                 className="mt-2"
                 actions={(
-                    <button
-                        type="button"
-                        onClick={() => setIsConfirmationOpen(true)}
-                        disabled={!selectedProjectId || createScan.isPending}
-                        className="inline-flex items-center gap-2 rounded border border-brand-primary px-2 py-1 text-body font-semibold text-brand-text transition-colors hover:bg-brand-hover hover:underline disabled:cursor-not-allowed disabled:opacity-50"
-                    >
-                        {createScan.isPending ? <LoaderCircle size={16} className="animate-spin" /> : <Plus size={16} />}
-                        {createScan.isPending ? 'Starting…' : 'Scan now'}
-                    </button>
+                    <div className="flex items-center gap-4">
+                        <RefreshButton
+                            label="refresh"
+                            onClick={() => scansQuery.refetch()}
+                            isRefreshing={scansQuery.isFetching}
+                        />
+                        <button
+                            type="button"
+                            onClick={() => setIsConfirmationOpen(true)}
+                            disabled={!selectedProjectId || createScan.isPending}
+                            className="inline-flex items-center gap-2 border-0 bg-transparent px-0 py-1 text-body font-semibold text-brand-text transition-colors hover:underline disabled:cursor-not-allowed disabled:opacity-50"
+                        >
+                            {createScan.isPending ? <LoaderCircle size={16} className="animate-spin" /> : <Plus size={16} />}
+                            {createScan.isPending ? 'Starting…' : 'Scan now'}
+                        </button>
+                    </div>
                 )}
             >
                 <ScanTable

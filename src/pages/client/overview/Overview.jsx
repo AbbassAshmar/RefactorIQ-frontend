@@ -20,7 +20,7 @@ export default function ClientOverview() {
     const location = useLocation();
     const navigate = useNavigate();
     const [isScanSelectorOpen, setIsScanSelectorOpen] = useState(false);
-    const { isLoading: isLoadingProjects } = useSelectedProject();
+    const { selectedProjectId, isLoading: isLoadingProjects } = useSelectedProject();
     const {
         selectedScanId,
         isSelectingLatest,
@@ -69,12 +69,13 @@ export default function ClientOverview() {
                                 <ScanSummaryPanel scanId={selectedScanId} />
                             </div>
                             <div className="mt-2 grid grid-cols-1 gap-2 xl:grid-cols-3">
-                                <TopRefactorFilesPanel query={topFilesQuery} />
+                                <TopRefactorFilesPanel query={topFilesQuery} projectId={selectedProjectId} />
                                 <TopRefactorDriversPanel query={topFilesQuery} />
                                 <ArchitecturalHotspotPanel
                                     files={topFiles}
                                     isLoading={topFilesQuery.isLoading}
                                     isError={topFilesQuery.isError}
+                                    projectId={selectedProjectId}
                                 />
                             </div>
                             <div className="mt-2 grid grid-cols-1 gap-2 xl:grid-cols-2">

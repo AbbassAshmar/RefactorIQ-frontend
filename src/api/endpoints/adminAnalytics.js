@@ -12,6 +12,9 @@ const adminAnalyticsApi = {
             params: { [PROJECT_QUERY_KEY]: projectId || undefined },
         }).then((response) => response.data),
 
+    usersOverTime: () =>
+        apiClient.get(ADMIN_ANALYTICS_ENDPOINTS.USERS_OVER_TIME).then((response) => response.data),
+
     scanStatusDistribution: () =>
         apiClient.get(ADMIN_ANALYTICS_ENDPOINTS.SCAN_STATUS_DISTRIBUTION).then((response) => response.data),
 

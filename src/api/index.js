@@ -7,3 +7,4 @@ export { default as overviewApi } from './endpoints/overview';
 export { default as filesApi } from './endpoints/files';
 export { default as usersApi } from './endpoints/users';
 export { default as adminAnalyticsApi } from './endpoints/adminAnalytics';
+export { default as refactorQueueApi } from './endpoints/refactorQueue';

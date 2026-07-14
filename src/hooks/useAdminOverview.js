@@ -26,6 +26,17 @@ export function useAdminScansOverTime(projectId = null, options = {}) {
     });
 }
 
+export function useAdminUsersOverTime(options = {}) {
+    return useQuery({
+        queryKey: [
+            ADMIN_OVERVIEW_QUERY_KEYS.ROOT,
+            ADMIN_OVERVIEW_QUERY_KEYS.USERS_OVER_TIME,
+        ],
+        queryFn: adminAnalyticsApi.usersOverTime,
+        ...options,
+    });
+}
+
 export function useAdminScanStatusDistribution(options = {}) {
     return useQuery({
         queryKey: [

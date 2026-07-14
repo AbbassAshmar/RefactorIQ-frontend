@@ -7,42 +7,53 @@ import {
 	Clock3,
 	EllipsisVertical,
 	FolderGit2,
+	FolderKanban,
 	GitBranch,
 	Globe2,
 	Trash2,
 	UserRound,
 } from 'lucide-react';
+import { SCAN_STATUS, SCAN_STATUS_LABELS } from '@/utils/constants';
 
 
 const STATUS_TONES = {
-	running: {
-		label: 'running',
+	[SCAN_STATUS.RUNNING]: {
+		label: SCAN_STATUS_LABELS[SCAN_STATUS.RUNNING],
 		className: 'border-warning-border bg-warning-bg text-warning-text',
+		borderClassName: 'border-l-warning',
+		iconClassName: 'text-warning',
 	},
-	pending: {
-		label: 'pending',
+	[SCAN_STATUS.PENDING]: {
+		label: SCAN_STATUS_LABELS[SCAN_STATUS.PENDING],
 		className: 'border-info-border bg-info-bg text-info-text',
+		borderClassName: 'border-l-info',
+		iconClassName: 'text-info',
 	},
-	succeeded: {
-		label: 'succeeded',
+	[SCAN_STATUS.SUCCEEDED]: {
+		label: SCAN_STATUS_LABELS[SCAN_STATUS.SUCCEEDED],
 		className: 'border-success-border bg-success-bg text-success-text',
+		borderClassName: 'border-l-success',
+		iconClassName: 'text-success',
 	},
-	success: {
-		label: 'succeeded',
-		className: 'border-success-border bg-success-bg text-success-text',
-	},
-	completed: {
-		label: 'succeeded',
-		className: 'border-success-border bg-success-bg text-success-text',
-	},
-	failed: {
-		label: 'failed',
+	[SCAN_STATUS.FAILED]: {
+		label: SCAN_STATUS_LABELS[SCAN_STATUS.FAILED],
 		className: 'border-error-border bg-error-bg text-error-text',
+		borderClassName: 'border-l-error',
+		iconClassName: 'text-error',
 	},
-	error: {
-		label: 'failed',
-		className: 'border-error-border bg-error-bg text-error-text',
+	[SCAN_STATUS.CANCELLED]: {
+		label: SCAN_STATUS_LABELS[SCAN_STATUS.CANCELLED],
+		className: 'border-warning-border bg-warning-bg text-warning-text',
+		borderClassName: 'border-l-warning',
+		iconClassName: 'text-warning',
 	},
+};
+
+const NO_SCAN_TONE = {
+	label: 'Not scanned',
+	className: 'border-border bg-background-tertiary text-text-secondary',
+	borderClassName: 'border-l-border',
+	iconClassName: 'text-text-secondary',
 };
 
 function formatRelativeDate(value) {
@@ -95,82 +106,6 @@ function formatDateTime(value) {
 	return date.toLocaleString();
 }
 
-function getRiskMeta(score) {
-	if (typeof score !== 'number') {
-		return {
-			label: 'Risk',
-			value: '--',
-			className: 'border-border bg-background-tertiary text-text-secondary',
-		};
-	}
-
-	if (score >= 75) {
-		return {
-			label: 'Critical Risk',
-			value: `${score}%`,
-			className: 'border-error-border bg-error-bg text-error-text',
-		};
-	}
-
-	if (score >= 50) {
-		return {
-			label: 'High Risk',
-			value: `${score}%`,
-			className: 'border-warning-border bg-warning-bg text-warning-text',
-		};
-	}
-
-	if (score >= 25) {
-		return {
-			label: 'Medium Risk',
-			value: `${score}%`,
-			className: 'border-info-border bg-info-bg text-info-text',
-		};
-	}
-
-	return {
-		label: 'Low Risk',
-		value: `${score}%`,
-		className: 'border-success-border bg-success-bg text-success-text',
-	};
-}
-
-function getThreatsMeta(threatsCount) {
-	if (typeof threatsCount !== 'number') {
-		return {
-			label: 'Threats',
-			value: '--',
-			className: 'border-border bg-background-tertiary text-text-secondary',
-		};
-	}
-
-	if (threatsCount > 0) {
-		return {
-			label: 'Threats',
-			value: String(threatsCount),
-			className: 'border-error-border bg-error-bg text-error-text',
-		};
-	}
-
-	return {
-		label: 'Threats',
-		value: String(threatsCount),
-		className: 'border-success-border bg-success-bg text-success-text',
-	};
-}
-
-function StatItem({ value, label, className }) {
-	return (
-		<div className={[
-			'flex min-w-[78px] flex-col items-center rounded border px-3 py-2',
-			className,
-		].join(' ')}>
-			<div className="text-body font-semibold">{value}</div>
-			<div className="text-[10px] uppercase tracking-wide text-text-secondary">{label}</div>
-		</div>
-	);
-}
-
 function InfoRow({ icon, label, value }) {
 	return (
 		<div className="flex items-center justify-between rounded bg-background-tertiary px-3 py-2 text-small-1">
@@ -190,10 +125,8 @@ export default function ProjectCard({ project, onDelete }) {
 	const menuRef = useRef(null);
 	const menuButtonRef = useRef(null);
 
-	const statusKey = (project?.status ?? 'running').toLowerCase();
-	const statusTone = STATUS_TONES[statusKey] || STATUS_TONES.running;
-	const riskMeta = getRiskMeta(project?.risk_score);
-	const threatsMeta = getThreatsMeta(project?.threats_count);
+	const statusKey = typeof project?.status === 'string' ? project.status.toLowerCase() : '';
+	const statusTone = STATUS_TONES[statusKey] || NO_SCAN_TONE;
 
 	useEffect(() => {
 		if (!isMenuOpen) {
@@ -237,14 +170,17 @@ export default function ProjectCard({ project, onDelete }) {
 				'relative cursor-pointer rounded border bg-background-secondary transition-colors',
 				isExpanded
 					? 'border-border-secondary border-l-2 border-l-brand-primary'
-					: 'border-border',
+					: ['border-border', statusTone.borderClassName].join(' '),
 			].join(' ')}
 		>
 			<div className="flex flex-wrap items-center justify-between gap-3 px-4 py-3">
 				<div className="min-w-0 flex-1">
 					<div className="flex min-w-0 items-center gap-3">
-						<div className="flex h-9 w-9 items-center justify-center rounded border border-border bg-background-tertiary text-warning">
-							<Globe2 size={16} />
+						<div className={[
+							'flex h-9 w-9 items-center justify-center rounded border border-border bg-background-tertiary',
+							statusTone.iconClassName,
+						].join(' ')}>
+							<FolderKanban size={16} />
 						</div>
 
 						<div className="min-w-0">
@@ -273,9 +209,6 @@ export default function ProjectCard({ project, onDelete }) {
 				</div>
 
 				<div className="flex items-center gap-2" data-no-toggle>
-					<StatItem value={riskMeta.value} label={riskMeta.label} className={riskMeta.className} />
-					<StatItem value={threatsMeta.value} label={threatsMeta.label} className={threatsMeta.className} />
-
 					<button
 						type="button"
 						onClick={(event) => {

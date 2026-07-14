@@ -34,7 +34,7 @@ export default function SecurityCenterTabBar({
     }
 
     return (
-        <div className={`flex min-w-0 items-center justify-between ${isSubTab ? 'border-b' : 'border-b-2'} border-border`}> 
+        <div className={`flex min-w-0 items-center justify-between ${isSubTab ? 'border-b' : 'border-b-2'} border-border`}>
             <div className="flex min-w-0" role="tablist" aria-label="Page views">
                 {tabs.map((tab) => {
                     const active = tab.key === activeTab;
@@ -52,7 +52,7 @@ export default function SecurityCenterTabBar({
                                 'hover:bg-background-hover hover:underline',
                                 'after:pointer-events-none after:absolute after:inset-x-0 after:bg-transparent after:content-[\'\']',
                                 isSubTab ? 'after:bottom-[-1px] after:h-px' : 'after:bottom-[-2px] after:h-0.5',
-                                active ? 'after:bg-brand-primary' : '',
+                                active ? 'after:z-10 after:bg-brand-primary' : '',
                             ].join(' ')}
                         >
                             {tab.label}

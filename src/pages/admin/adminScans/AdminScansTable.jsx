@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import TablePanel from '@/components/common/TablePanel';
+import RefreshButton from '@/components/common/RefreshButton';
 import ScanTable, { ScanStatusBadge } from '@/components/scans/ScanTable';
 import { formatScanDate } from '@/components/scans/scanTableUtils';
 import { useAdminScansList } from '@/hooks';
@@ -90,6 +91,13 @@ export default function AdminScansTable({ projectId }) {
     return (
         <TablePanel
             title="Scan records"
+            actions={(
+                <RefreshButton
+                    label="refresh"
+                    onClick={() => scansQuery.refetch()}
+                    isRefreshing={scansQuery.isFetching}
+                />
+            )}
             toolbar={(
                 <p className="text-small-1 text-text-secondary">
                     {projectId

@@ -1,24 +1,22 @@
 import { useMemo, useState } from 'react';
 import { ChevronDown, FolderGit2, GitBranch, Loader2 } from 'lucide-react';
 import { useCreateProject, useGithubRepositories, useRepositoryBranches } from '@/hooks';
+import { SCAN_STATUS } from '@/utils/constants';
 
 
 const STATUS_CLASS_MAP = {
-	running: 'border-warning-border bg-warning-bg text-warning-text',
-	pending: 'border-info-border bg-info-bg text-info-text',
-	succeeded: 'border-success-border bg-success-bg text-success-text',
-	success: 'border-success-border bg-success-bg text-success-text',
-	completed: 'border-success-border bg-success-bg text-success-text',
-	failed: 'border-error-border bg-error-bg text-error-text',
-	error: 'border-error-border bg-error-bg text-error-text',
+	[SCAN_STATUS.RUNNING]: 'border-warning-border bg-warning-bg text-warning-text',
+	[SCAN_STATUS.PENDING]: 'border-info-border bg-info-bg text-info-text',
+	[SCAN_STATUS.SUCCEEDED]: 'border-success-border bg-success-bg text-success-text',
+	[SCAN_STATUS.FAILED]: 'border-error-border bg-error-bg text-error-text',
+	[SCAN_STATUS.CANCELLED]: 'border-warning-border bg-warning-bg text-warning-text',
 };
 
-function getStatusBadgeClasses(status) {
-	if (!status) {
-		return STATUS_CLASS_MAP.running;
-	}
+const NO_SCAN_STATUS_CLASS = 'border-border bg-background-tertiary text-text-secondary';
 
-	return STATUS_CLASS_MAP[status.toLowerCase()] || STATUS_CLASS_MAP.running;
+function getStatusBadgeClasses(status) {
+	const statusKey = typeof status === 'string' ? status.toLowerCase() : '';
+	return STATUS_CLASS_MAP[statusKey] || NO_SCAN_STATUS_CLASS;
 }
 
 function getServerMessage(error) {
@@ -211,7 +209,7 @@ export default function CreateProjectSection({
 		}));
 	}
 
-	const currentProjectStatus = currentProject?.status ?? 'running';
+	const currentProjectStatus = currentProject?.status;
 
 	return (
 		<section

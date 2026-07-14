@@ -11,7 +11,7 @@ const legend = [
     { label: 'Low', className: 'bg-success' },
 ];
 
-export default function RepositoryFileExplorerPanel({ files, selectedFileId, onSelectFile, isLoading, projectName }) {
+export default function RepositoryFileExplorerPanel({ files, selectedFileId, onSelectFile, isLoading, projectName, projectId }) {
     const [search, setSearch] = useState('');
     const [collapsed, setCollapsed] = useState(() => new Set());
     const filteredFiles = useMemo(() => {
@@ -58,6 +58,7 @@ export default function RepositoryFileExplorerPanel({ files, selectedFileId, onS
                             collapsed={visibleCollapsed}
                             onToggle={toggleFolder}
                             onSelectFile={onSelectFile}
+                            projectId={projectId}
                         />
                     ) : null}
                 </div>

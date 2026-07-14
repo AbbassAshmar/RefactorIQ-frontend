@@ -23,6 +23,33 @@ export function useScansOverTime(projectId = null, options = {}) {
     });
 }
 
+export function useScanStatusCounts(projectId = null, options = {}) {
+    return useQuery({
+        queryKey: [SCANS_QUERY_KEYS.ROOT, SCANS_QUERY_KEYS.STATUS_COUNTS, projectId],
+        queryFn: () => scansApi.statusCounts(projectId),
+        enabled: Boolean(projectId),
+        ...options,
+    });
+}
+
+export function useScanRiskTrend(projectId = null, options = {}) {
+    return useQuery({
+        queryKey: [SCANS_QUERY_KEYS.ROOT, SCANS_QUERY_KEYS.RISK_TREND, projectId],
+        queryFn: () => scansApi.riskTrend(projectId),
+        enabled: Boolean(projectId),
+        ...options,
+    });
+}
+
+export function useScanDurationTrend(projectId = null, options = {}) {
+    return useQuery({
+        queryKey: [SCANS_QUERY_KEYS.ROOT, SCANS_QUERY_KEYS.DURATION_TREND, projectId],
+        queryFn: () => scansApi.durationTrend(projectId),
+        enabled: Boolean(projectId),
+        ...options,
+    });
+}
+
 export function useAdminScansList(params = {}, options = {}) {
     return useQuery({
         queryKey: [
@@ -43,12 +70,7 @@ export function useCreateScan(options = {}) {
     return useMutation({
         mutationFn: scansApi.create,
         onSuccess: (...args) => {
-            queryClient.invalidateQueries({
-                queryKey: [SCANS_QUERY_KEYS.ROOT, SCANS_QUERY_KEYS.LIST],
-            });
-            queryClient.invalidateQueries({
-                queryKey: [SCANS_QUERY_KEYS.ROOT, SCANS_QUERY_KEYS.OVER_TIME],
-            });
+            queryClient.invalidateQueries({ queryKey: [SCANS_QUERY_KEYS.ROOT] });
             onSuccess?.(...args);
         },
         ...restOptions,

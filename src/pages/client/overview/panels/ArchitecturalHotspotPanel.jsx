@@ -1,9 +1,10 @@
 import { GitBranch, Network } from 'lucide-react';
 import { PanelWrapper } from '@/components';
+import AddToRefactorQueueButton from '@/components/refactorQueue/AddToRefactorQueueButton';
 import { OverviewPanelEmpty } from '@/pages/client/overview/components/OverviewPanelState';
 
 
-export default function ArchitecturalHotspotPanel({ files, isLoading, isError }) {
+export default function ArchitecturalHotspotPanel({ files, isLoading, isError, projectId }) {
     const hotspot = files.reduce((current, file) => {
         const currentScore = (current?.fan_in ?? 0) + (current?.fan_out ?? 0);
         const fileScore = (file.fan_in ?? 0) + (file.fan_out ?? 0);
@@ -25,7 +26,7 @@ export default function ArchitecturalHotspotPanel({ files, isLoading, isError })
                         <div className="rounded bg-brand-bg p-2 text-brand-primary"><Network size={20} /></div>
                         <div className="min-w-0">
                             <p className="text-small-1 uppercase tracking-wide text-text-tertiary">Highest connectivity</p>
-                            <p className="mt-1 truncate font-mono text-body font-semibold text-text-primary">{hotspot.file_path}</p>
+                            <div className="mt-1 flex min-w-0 items-center gap-1"><p className="min-w-0 truncate font-mono text-body font-semibold text-text-primary" title={hotspot.file_path}>{hotspot.file_path}</p><AddToRefactorQueueButton projectId={projectId} filePath={hotspot.file_path} /></div>
                         </div>
                     </div>
                     <div className="grid grid-cols-2 gap-2">

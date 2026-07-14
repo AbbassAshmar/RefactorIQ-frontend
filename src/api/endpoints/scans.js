@@ -12,6 +12,18 @@ const scansApi = {
             params: { [PROJECT_QUERY_KEY]: projectId || undefined },
         }).then((response) => response.data),
 
+    statusCounts: (projectId) => apiClient.get(SCAN_ENDPOINTS.ANALYTICS_STATUS_COUNTS, {
+        params: { [PROJECT_QUERY_KEY]: projectId },
+    }).then((response) => response.data),
+
+    riskTrend: (projectId) => apiClient.get(SCAN_ENDPOINTS.ANALYTICS_RISK_TREND, {
+        params: { [PROJECT_QUERY_KEY]: projectId },
+    }).then((response) => response.data),
+
+    durationTrend: (projectId) => apiClient.get(SCAN_ENDPOINTS.ANALYTICS_DURATION_TREND, {
+        params: { [PROJECT_QUERY_KEY]: projectId },
+    }).then((response) => response.data),
+
     adminList: (params = {}) =>
         apiClient.get(SCAN_ENDPOINTS.ADMIN_LIST, { params }).then((response) => response.data),
 

@@ -1,4 +1,5 @@
 import { PanelWrapper } from '@/components';
+import AddToRefactorQueueButton from '@/components/refactorQueue/AddToRefactorQueueButton';
 import ScanTable from '@/components/scans/ScanTable';
 import { OverviewPanelEmpty, OverviewPanelError, OverviewPanelLoading } from '@/pages/client/overview/components/OverviewPanelState';
 import { OVERVIEW_TOP_REFACTOR_FILE_COUNT } from '@/utils/constants';
@@ -17,7 +18,7 @@ const columns = [
     {
         accessorKey: 'file_path',
         header: 'File',
-        cell: ({ getValue }) => <span className="font-mono text-small-1 text-text-primary">{getValue()}</span>,
+        cell: ({ getValue, row }) => <span className="flex min-w-0 items-center gap-1"><span className="min-w-0 truncate font-mono text-small-1 text-text-primary" title={getValue()}>{getValue()}</span><AddToRefactorQueueButton projectId={row.original.project_id} filePath={getValue()} /></span>,
     },
     {
         accessorKey: 'risk_score',
@@ -36,7 +37,7 @@ const columns = [
     },
 ];
 
-export default function TopRefactorFilesPanel({ query }) {
+export default function TopRefactorFilesPanel({ query, projectId }) {
     const files = (query.data?.data?.files ?? []).slice(0, OVERVIEW_TOP_REFACTOR_FILE_COUNT);
 
     return (
@@ -51,7 +52,7 @@ export default function TopRefactorFilesPanel({ query }) {
             {!query.isLoading && !query.isError && files.length > 0 ? (
                 <ScanTable
                     data={files}
-                    columns={columns}
+                    columns={columns.map((column) => column.accessorKey === 'file_path' ? ({ ...column, cell: ({ getValue }) => <span className="flex min-w-0 items-center gap-1"><span className="min-w-0 truncate font-mono text-small-1 text-text-primary" title={getValue()}>{getValue()}</span><AddToRefactorQueueButton projectId={projectId} filePath={getValue()} /></span> }) : column)}
                     showFooter={false}
                     compact
                     emptyMessage="No scored files are available for this scan."

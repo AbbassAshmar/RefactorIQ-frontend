@@ -13,18 +13,18 @@ import Login from '@/pages/Login/Login';
 
 /* ── Client pages ── */
 import Projects from '@/pages/client/projects/Projects';
-import ClientOverview from '@/pages/client/Overview';
+import ClientOverview from '@/pages/client/overview/Overview';
 import RepoExplorer from '@/pages/client/repoExplorer/RepoExplorer';
-import Dependencies from '@/pages/client/Dependencies';
+import Dependencies from '@/pages/client/dependencies/DependenciesPage';
 import ClientScans from '@/pages/client/scans/Scans';
-import RefactorQueue from '@/pages/client/RefactorQueue';
+import RefactorQueue from '@/pages/client/refactorQueue/RefactorQueue';
 import RefactorSuggestions from '@/pages/client/RefactorSuggestions';
 
 /* ── Admin pages ── */
 import AdminOverview from '@/pages/admin/adminOverview/AdminOverview';
 import AdminScans from '@/pages/admin/adminScans/AdminScans';
-import UsersOverview from '@/pages/admin/UsersOverview';
-import UsersList from '@/pages/admin/UsersList';
+import AdminUsers from '@/pages/admin/adminUsers/AdminUsers';
+import AdminProjects from '@/pages/admin/adminProjects/AdminProjects';
 import ReposOverview from '@/pages/admin/ReposOverview';
 import ReposList from '@/pages/admin/ReposList';
 
@@ -114,8 +114,11 @@ export default function AppRouter() {
 					<Route path="/admin/overview" element={<AdminOverview />} />
 
 					{/* Users */}
-					<Route path="/admin/users/overview" element={<UsersOverview />} />
-					<Route path="/admin/users/list" element={<UsersList />} />
+					<Route path="/admin/users/overview" element={<AdminUsers />} />
+					<Route path="/admin/users/list" element={<AdminUsers />} />
+
+					{/* Projects */}
+					<Route path="/admin/projects" element={<AdminProjects />} />
 
 					{/* Scans */}
 					<Route path="/admin/scans" element={<AdminScans />} />

@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { projectsApi } from '@/api';
 import { ADMIN_OVERVIEW_QUERY_KEYS } from '@/utils/constants';
 
@@ -18,6 +18,16 @@ export function useAdminProjects(params = {}, options = {}) {
 	return useQuery({
 		queryKey: [ADMIN_OVERVIEW_QUERY_KEYS.ROOT, ADMIN_OVERVIEW_QUERY_KEYS.PROJECTS, params],
 		queryFn: () => projectsApi.adminList(params),
+		placeholderData: keepPreviousData,
+		...options,
+	});
+}
+
+
+export function useAdminProjectsOverTime(options = {}) {
+	return useQuery({
+		queryKey: [ADMIN_OVERVIEW_QUERY_KEYS.ROOT, ADMIN_OVERVIEW_QUERY_KEYS.PROJECTS_OVER_TIME],
+		queryFn: projectsApi.adminOverTime,
 		...options,
 	});
 }

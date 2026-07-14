@@ -89,6 +89,14 @@ export const ADMIN_NAV_SECTIONS = [
         ],
     },
     {
+        key: 'projects',
+        title: 'Projects',
+        icon: FolderKanban,
+        pages: [
+            { key: 'projects-records', label: 'Manage Projects', path: '/projects'},
+        ],
+    },
+    {
         key: 'scans',
         title: 'Scans',
         icon: ScanSearch,
