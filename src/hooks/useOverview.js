@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { overviewApi } from '@/api';
+import { OVERVIEW_QUERY_KEYS } from '@/utils/constants';
 
 
 function useOverviewResource(resource, scanId, options = {}) {
     return useQuery({
-        queryKey: ['overview', resource, scanId],
+        queryKey: [OVERVIEW_QUERY_KEYS.ROOT, resource, scanId],
         queryFn: () => overviewApi[resource](scanId),
         enabled: Boolean(scanId),
         ...options,

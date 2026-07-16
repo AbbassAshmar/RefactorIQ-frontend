@@ -241,7 +241,7 @@ export default function ProjectCard({ project, onDelete }) {
 									type="button"
 									onClick={handleDelete}
 									disabled={!onDelete}
-									className="flex w-full items-center gap-2 rounded border border-brand-primary px-2 py-1.5 text-left text-small-1 text-error transition-colors hover:bg-brand-hover hover:underline disabled:cursor-not-allowed disabled:opacity-50"
+									className="flex w-full items-center gap-2 rounded px-2 py-1.5 text-left text-small-1 text-error transition-colors hover:bg-background-hover hover:underline disabled:cursor-not-allowed disabled:opacity-50"
 								>
 									<Trash2 size={13} />
 									Delete

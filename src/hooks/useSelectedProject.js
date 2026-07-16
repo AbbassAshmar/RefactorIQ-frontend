@@ -16,14 +16,18 @@ export default function useSelectedProject() {
     const selectedProjectId = selectedProject?.id ?? null;
 
     useEffect(() => {
-        if (projectsQuery.isLoading || projects.length === 0) return;
+        if (projectsQuery.isLoading) return;
         if (selectedProject) return;
 
         setSearchParams((previous) => {
             const next = new URLSearchParams(previous);
-            next.set(PROJECT_QUERY_KEY, projects[0].id);
             next.delete(SCAN_QUERY_KEY);
             next.delete(FILE_QUERY_KEY);
+            if (projects.length > 0) {
+                next.set(PROJECT_QUERY_KEY, projects[0].id);
+            } else {
+                next.delete(PROJECT_QUERY_KEY);
+            }
             return next;
         }, { replace: true });
     }, [projects, projectsQuery.isLoading, selectedProject, setSearchParams]);

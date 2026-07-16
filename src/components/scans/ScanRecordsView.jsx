@@ -141,6 +141,7 @@ export default function ScanRecordsView() {
                 isOpen={isConfirmationOpen}
                 title="Start an instant scan?"
                 confirmLabel="Scan now"
+                confirmingLabel="Starting…"
                 onClose={() => setIsConfirmationOpen(false)}
                 onConfirm={startScan}
                 isConfirming={createScan.isPending}

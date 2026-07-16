@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { DragDropProvider } from '@dnd-kit/react';
 import { useDroppable } from '@dnd-kit/react';
 import { isSortable, useSortable } from '@dnd-kit/react/sortable';
+import { OptimisticSortingPlugin } from '@dnd-kit/dom/sortable';
 import { LoaderCircle, Trash2 } from 'lucide-react';
 import ConfirmationModal from '@/components/common/ConfirmationModal';
 import SecurityCenterTabBar from '@/components/common/SecurityCenterTabBar';
@@ -24,8 +25,19 @@ function moveLocalItem(groups, fromStatus, fromIndex, toStatus, toIndex) {
     return next;
 }
 
+const reactManagedSortablePlugins = (plugins) => plugins.filter((plugin) => plugin !== OptimisticSortingPlugin);
+
 function SortableQueueCard({ item, index, onDelete }) {
-    const { ref } = useSortable({ id: item.id, index, group: item.status, type: 'item', accept: 'item' });
+    const { ref } = useSortable({
+        id: item.id,
+        index,
+        group: item.status,
+        type: 'item',
+        accept: 'item',
+        // The optimistic plugin reparents DOM nodes directly, which conflicts with
+        // React when a card moves between these independently rendered columns.
+        plugins: reactManagedSortablePlugins,
+    });
     const pathParts = item.file_path.replaceAll('\\', '/').split('/');
     const fileName = pathParts.at(-1) || item.file_path;
     const directory = pathParts.slice(0, -1).join('/');

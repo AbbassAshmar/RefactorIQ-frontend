@@ -18,6 +18,15 @@ export const ADMIN_ANALYTICS_ENDPOINTS = {
 
 export const ADMIN_PROJECTS_ENDPOINT = '/admin/projects';
 export const ADMIN_PROJECTS_OVER_TIME_ENDPOINT = '/admin/projects/over-time';
+export const PROJECT_ENDPOINTS = {
+  LIST: '/projects/',
+  DETAIL: '/projects',
+};
+
+export const PROJECTS_QUERY_KEYS = {
+  ROOT: 'projects',
+  LIST: 'list',
+};
 
 export const SCAN_ENDPOINTS = {
   LIST: '/scans',
@@ -71,6 +80,14 @@ export const SCANS_QUERY_KEYS = {
   STATUS_COUNTS: 'status-counts',
   RISK_TREND: 'risk-trend',
   DURATION_TREND: 'duration-trend',
+};
+
+export const OVERVIEW_QUERY_KEYS = {
+  ROOT: 'overview',
+};
+
+export const REFACTOR_QUEUE_QUERY_KEYS = {
+  ROOT: 'refactor-queue',
 };
 
 export const ADMIN_OVERVIEW_TOP_PROJECT_LIMIT = 5;

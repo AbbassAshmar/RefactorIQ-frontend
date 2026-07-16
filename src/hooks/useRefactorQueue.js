@@ -1,8 +1,9 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { refactorQueueApi } from '@/api';
+import { REFACTOR_QUEUE_QUERY_KEYS } from '@/utils/constants';
 
 
-export const REFACTOR_QUEUE_QUERY_KEY = ['refactor-queue'];
+export const REFACTOR_QUEUE_QUERY_KEY = [REFACTOR_QUEUE_QUERY_KEYS.ROOT];
 
 export function useRefactorQueue(projectId, options = {}) {
     return useQuery({

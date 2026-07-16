@@ -3,6 +3,7 @@ export { useGithubRepositories, useRepositoryBranches } from './useGithub';
 export {
     useProjectsList,
     useCreateProject,
+    useDeleteProject,
     useAdminProjects,
     useAdminProjectsOverTime,
 } from './useProjects';

@@ -5,6 +5,7 @@ export default function YourProjectsSection({
 	projects = [],
 	isLoading = false,
 	maxProjects = 5,
+	onDelete,
 }) {
 	const safeProjects = Array.isArray(projects) ? projects : [];
 	const countText = `${safeProjects.length}/${maxProjects}`;
@@ -40,7 +41,7 @@ export default function YourProjectsSection({
 
 				{!isLoading
 					? safeProjects.map((project) => (
-						<ProjectCard key={project.id} project={project} />
+							<ProjectCard key={project.id} project={project} onDelete={onDelete} />
 					))
 					: null}
 			</div>
