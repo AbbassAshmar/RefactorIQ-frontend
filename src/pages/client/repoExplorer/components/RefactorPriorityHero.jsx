@@ -6,6 +6,7 @@ const componentScores = [
 ];
 
 const priorityClass = {
+    critical: 'bg-error-bg text-error-text',
     high: 'bg-error-bg text-error-text',
     medium: 'bg-warning-bg text-warning-text',
     low: 'bg-success-bg text-success-text',

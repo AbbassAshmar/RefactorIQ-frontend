@@ -10,7 +10,7 @@ export const latestScanSummaryResponse = {
                 count: 47,
                 percentage: 2.55,
                 score_range: {
-                    min: 80,
+                    min: 70,
                     max: 100,
                 },
             },
@@ -18,16 +18,16 @@ export const latestScanSummaryResponse = {
                 count: 163,
                 percentage: 8.85,
                 score_range: {
-                    min: 60,
-                    max: 79,
+                    min: 55,
+                    max: 69,
                 },
             },
             medium: {
                 count: 624,
                 percentage: 33.88,
                 score_range: {
-                    min: 30,
-                    max: 59,
+                    min: 31,
+                    max: 54,
                 },
             },
             low: {
@@ -35,7 +35,7 @@ export const latestScanSummaryResponse = {
                 percentage: 54.72,
                 score_range: {
                     min: 0,
-                    max: 29,
+                    max: 30,
                 },
             },
         },
@@ -43,10 +43,10 @@ export const latestScanSummaryResponse = {
     metadata: {
         generated_at: '2026-02-25T14:12:33Z',
         thresholds: {
-            critical: '>= 80',
-            high: '60-79',
-            medium: '30-59',
-            low: '0-29',
+            critical: '>= 70',
+            high: '55-69',
+            medium: '31-54',
+            low: '0-30',
         },
     },
 };

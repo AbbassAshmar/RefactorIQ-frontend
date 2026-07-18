@@ -21,6 +21,7 @@ const NODE_WIDTH = 250;
 const NODE_HEIGHT = 76;
 
 const priorityStyles = {
+    critical: { dot: 'bg-error', text: 'text-error-text' },
     high: { dot: 'bg-error', text: 'text-error-text' },
     medium: { dot: 'bg-warning', text: 'text-warning-text' },
     low: { dot: 'bg-success', text: 'text-success-text' },
@@ -134,7 +135,7 @@ function layoutGraph(files, relationships, circularGroups, onOpenFile, focusedFi
 
 function minimapNodeColor(node) {
     if (node.data.isCircular) return 'var(--error-default)';
-    if (node.data.priorityBand === 'high') return 'var(--error-default)';
+    if (node.data.priorityBand === 'critical' || node.data.priorityBand === 'high') return 'var(--error-default)';
     if (node.data.priorityBand === 'medium') return 'var(--warning-default)';
     if (node.data.priorityBand === 'low') return 'var(--success-default)';
     return 'var(--text-tertiary)';
